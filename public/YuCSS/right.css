@@ -1,0 +1,83 @@
+.right_main{
+	border:1px solid #ddd;
+	margin-top: 10px;
+}
+.right_main ul li{
+	display: block;
+	width: 100%;
+	display: block;
+	padding: 6px 0;
+	vertical-align: middle;
+}
+.r_li_other{
+	display: block;
+	width: 100%;
+	padding: 6px 0;
+	vertical-align: middle;
+	margin:0;
+}
+ul.r_ul_lg{
+	width: 100%;
+	display: block;
+}
+ul.r_ul_md{
+	width: 100%;
+	display: block;
+}
+ul.r_ul_sm{
+	width: 100%;
+	display: block;
+}
+.r_li_lg .icon{
+	margin-left: 10px;
+}
+.r_li_md .icon{
+	margin-left: 30px;
+}
+.r_li_sm .icon{
+	margin-left: 50px;
+}
+.r_li_xs .icon{
+	margin-left: 60px;
+}
+// ul.r_ul_lg li{
+// 	border-bottom:1px solid #ddd;
+// }
+// ul.r_ul_md{
+// 	border-bottom:1px solid #ddd;
+// }
+// ul.r_ul_sm{
+// 	border-bottom:1px solid #ddd;
+// }
+ul.r_ul_lg .icon{
+	display: inline-block;
+	color: #a3a3a3;
+	font-size: 12px;
+	margin-right: 10px;
+	cursor: pointer;
+}
+ul.r_ul_md .icon{
+	display: inline-block;
+	color: #a3a3a3;
+	font-size: 12px;
+	margin-right: 10px;
+	cursor: pointer;
+}
+ul.r_ul_sm .icon{
+	display: inline-block;
+	color: #a3a3a3;
+	font-size: 12px;
+	margin-right: 10px;
+	cursor: pointer;
+}
+ul.r_ul_xs .icon{
+	display: inline-block;
+	color: #a3a3a3;
+	font-size: 12px;
+	margin-right: 10px;
+	cursor: pointer;
+	vertical-align: top;
+}
+input.check_box{
+	outline: none;
+}

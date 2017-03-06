@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>本站用户</title>
+	<meta name="viewport" name="width=device-width,initial-scale=1.0">
+	<link rel="stylesheet" type="text/css" href="./../../bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="./../../YuCSS/style.css">
+	<link rel="stylesheet" type="text/css" href="./../../YuCSS/userIn.css">
+	<link rel="stylesheet" type="text/css" href="./../../YuCSS/right.css">
+</head>
+<body>
+	<div class="wrap">
+		<div class="container-fluid" style="background-color: #666;">
+			<div class="ch_nav">
+				<img src="./../../img/LOGO_index.png" width="35">
+				<span class="logo"><a href="{:url('/manageindex')}" id="logo_txt">CHOGGTEN</a></span>
+				<ul class="fast_key list-inline" style="display: inline-block;">
+						<li>
+						<a href="{:url('/manageindex')}" style="background-color: #4C9Ed9;">
+							<span class="iconfont" title="">&#xe61d;</span>
+						</a>
+						<a href="{:url('/userout')}" style="background-color: orange;">
+							<span class="iconfont" title="">&#xe637;</span>
+						</a>
+						<a href="{:url('/userIn')}">
+							<span class="iconfont" title="">&#xe613;</span>
+						</a>
+						 
+					</li>
+				</ul>
+				<a href="#" class="user">
+					<span class="iconfont" style="color: orange;font-size: 28px;">&#xe632;</span>
+					<span class="txt">欢迎,{$username}</span>
+					<span class="txt2 glyphicon glyphicon-chevron-down"></span>
+				</a>
+				<ul class="user_login list-unstyled" style="display: none;">
+					<li>
+						<a href="{:url('adminforcon/change_Pwd')}">
+							<span class="glyphicon glyphicon-lock"></span>
+							<span>修改密码</span>
+						</a>
+					</li>
+					<li>
+						<a href="{:url('Adminforcon/out_login')}">
+							<span class="glyphicon glyphicon-off"></span>
+							<span>退出</span>
+						</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div class="">
+			<div class="ch_main">
+				<div class="row">
+						<div class="col-md-2 col-sm-12 col-xs-12">
+							 
+					
+                 	 <ul class="ul_nav list-unstyled">
+              
+               {volist name="menu" id="vo"}
+              <li class="ul_one_li" style="border-bottom:transparent;">
+                <a href="#" class="ul_one_a">
+                  <span class="iconfont1 icon1">&#xe61f;</span>
+                  <span>{$vo[0]['module_name']}</span>
+                </a>
+                <ul class="list-unstyled ul_one"  >
+                   {volist name=":SidType($vo[0]['module_code'],$roleId)" id="k"}
+                  <li class="ul_two_li">
+                    <a href="#" class="ul_two_a">
+                      <span class="glyphicon glyphicon-collapse-down"></span>
+                      <span>{$k[0]['module_name']}</span>
+                    </a>
+                    <ul class="list-unstyled ul_two"   >
+                       {volist name=":SidType($k[0]['module_code'],$roleId)" id = "kk"}
+                      <li class="ul_three_li">
+                        <a href="{:url($kk[0]['module_url'])}">
+                        <span class="glyphicon glyphicon-collapse-up"></span>
+                        <span>{$kk[0]['module_name']}</span> 
+                        </a>
+                      </li>
+                       {/volist}
+                     
+                    </ul>
+                  </li>
+                  {/volist}
+                
+                </ul>
+              </li>
+              {/volist}
+            </ul>
+					</div>
+					<div class="col-md-9 col-sm-9 col-xs-12">
+						
+						<div class="right">
+							<div class="right_top">
+								<ul class="nav nav-tabs" role="tablist">
+									<li role="presentation" class="active"><a href="javascript:void(0);" id="Role">角色管理</a></li>
+									<li role="presentation"><a href="javascript:void(0);" id="addRole">添加角色</a></li>
+									<li role="presentation"><a href="javascript:void(0);" id="setRight" style="display: none;">权限设置</a></li>
+									<li role="presentation"><a href="javascript:void(0);" id="editRole" style="display: none;">编辑角色</a></li>
+								</ul>
+							</div>
+							 
+							<div class="right_table">
+								<table border="1" borderColor="#eee">
+									<tr>
+										<th>ID</th>
+										<th>角色名称</th>
+										<th>角色描述</th>
+										<th>状态</th>
+										<th>权限ID</th>
+										<th colspan="3">操作</th>
+										 
+									</tr>
+									{volist name="role" id="vo" key="k"}
+									<tr>
+										<td class="s1">{$k}</td>
+										<td class="name s2">{$vo.name}</td>
+										<td class="desc s3">{$vo.remark}</td>
+										<td>{$vo.status}</td>
+										<td class="s4">{$vo.role_id}</td>
+										<td>
+											<button class="operate_right btn-sm btn-sm-orange">权限设置</button>
+										</td>
+										<td>
+											<button class="operate_edit btn-sm btn-sm-blue" >编辑</button>
+										</td>
+										<td>
+											<button class="operate_del btn-sm btn-sm-blue" onclick="location.reload();" >删除</button>
+										</td>
+									</tr>
+									 {/volist}
+								</table>
+							</div>
+							<div class="add_Role role_form" style="display: none;">
+								<form action="{:url('Adminforcon/userout_add_role')}" method="post" >
+									<div class="item">
+										<label>角色名称&nbsp;&nbsp;</label>
+										<input type="text" name="role_name" id="role_name" onblur="dis_role();">
+									</div>
+									<div class="item">
+										<label>角色描述&nbsp;&nbsp;</label>
+
+										<textarea cols="50" rows="6" name="contents"></textarea>
+									</div>
+									<div class="item state">
+										<label>状态&nbsp;&nbsp;</label>
+										<input type="radio" name="status" value="1" style="width: 30px;">开启
+										<input type="radio" name="status"  value="0"  style="width: 30px;">禁用
+									</div>
+									<div class="item">
+									    <span id="info"></span>
+										<label style="visibility: hidden;">状态&nbsp;&nbsp;</label>
+										<button type="submit" class="btn btn-info">添加</button>
+									</div>
+								</form>
+							</div>
+
+							<!--  权限设置-->
+							<div   class="add_right" style="display: none;">
+								<div style="margin-top: 20px;">管理员名称：<span id="manager_name" style="color: #4C9Ed9;"></span></div>
+								<div id="set_P"  class="right_main">
+
+							<!--	<ul class="list-unstyled r_ul_lg">
+
+									<li class="r_li_lg">
+										<div class="r_li_other">
+										<span class="glyphicon glyphicon-play icon icon_lg"></span>
+										<input type="checkbox" name="" class="check_box check_lg">
+										<span>内容管理</span>
+										</div>
+							
+										<ul class="list-unstyled r_ul_md" style="display: none;">
+											<li class="r_li_md">
+												<div class="r_li_other">
+												<span class="glyphicon glyphicon-play icon icon_md"></span>
+												<input type="checkbox" name="" class="check_box check_sm">
+												<span>所有留言</span>
+												</div>
+												<ul class="list-unstyled r_ul_sm" style="display: none;">
+													<li class="r_li_sm">
+														<span class="glyphicon glyphicon-play icon"></span>
+														<input type="checkbox" name="" class="check_box">
+														<span>删除留言</span>
+													</li>
+												</ul>
+											</li>  
+										 
+										</ul>
+									</li>
+									 
+								</ul> -->
+							</div>
+							</div>
+							<!-- end of 权限设置 -->
+							
+							<!-- 编辑角色 -->
+							<div class="edit_role role_form" style="display: none;">
+								<form method="post" >
+									<div class="item">
+										<label>角色名称&nbsp;&nbsp;</label>
+										<input type="text" name="role_name" id="edit_name">
+									</div>
+									<div class="item">
+										<label>角色描述&nbsp;&nbsp;</label>
+
+										<textarea cols="50" rows="6" name="contents" id="edit_desc"></textarea>
+									</div>
+									<div class="item state">
+										<label>状态&nbsp;&nbsp;</label>
+										<input type="radio" name="status" value="1" style="width: 30px;" checked="checked">开启
+										<input type="radio" name="status"  value="0"  style="width: 30px;">禁用
+									</div>
+									<div class="item">
+									    <span id="info"></span>
+										<label style="visibility: hidden;">状态&nbsp;&nbsp;</label>
+										<button type="submit" class="btn btn-info">添加</button>
+									</div>
+								</form>
+							</div>
+							<!-- end of 编辑角色 -->
+						</div>
+
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- 脚本语言 -->
+	<script src="./../../js/jquery.min.js"></script>
+	<script src="./../../bootstrap/js/bootstrap.min.js"></script>
+	<script type="text/javascript">
+	    function  dis_role(){
+	         $.post("{:url('Adminforcon/dis_form_role')}",{
+         
+           role_name:$('#role_name').val()
+        
+         },
+              function(data){
+                if (data=='用户名可用'){
+                   $('#info').html("<font color=green>"+data+"</font>");
+                }else{
+                   $('#info').html("<font color=red>"+data+"</font>");
+                   }
+              
+              }
+           );
+	    }
+		$(document).ready(function() {
+			 
+			$('.user').click(function() {
+				$('.user_login').toggle();
+			});
+			$('.ul_one_a').click(function() {
+				$(this).parent().find('.ul_one').toggle();
+			});
+			$('.ul_two_a').click(function() {
+				$(this).parent().find('.ul_two').toggle();
+			});
+			$('#addRole').click(function() {
+				 $('.add_Role').show();
+				 $('.right_table').hide();
+				 $('#editRole').hide();
+				 $('.add_right').hide();
+				 $('#setRight').hide();
+				 $('.edit_role').hide();
+				 $(this).parent().siblings().removeClass('active');
+				 $(this).parent().addClass('active');
+			})
+			$('#Role').click(function() {
+				 $('.add_Role').hide();
+				 $('.add_right').hide();
+				 $('#setRight').hide();
+				 $('#editRole').hide();
+				 $('.add_Role').hide();
+				 $('.edit_role').hide();
+				 $('.right_table').show();
+				 $(this).parent().siblings().removeClass('active');
+				 $(this).parent().addClass('active');
+			});
+			/*
+			$('.operate_right').click(function(){
+				$('.nav-tabs li').removeClass('active');
+				$('#setRight').parent('li').addClass('active');
+				$('#setRight').show();
+				$('.add_right').show();
+				$('.add_Role').hide();
+				$('.right_table').hide();
+				var name = $(this).parent().parent().find('.name').text();
+				var right_id = $(this).parent().parent().find('.s4').text();
+				$('#manager_name').html(name);
+				alert(right_id);
+			});
+			*/
+			// $('.operate_edit').click(function(){
+			// 	$('.nav-tabs li').removeClass('active');
+			// 	$('#setRight').parent('li').addClass('active');
+			// 	$('#setRight').show();
+			// 	$('.add_right').show();
+			// 	$('.add_Role').hide();
+			// 	$('.right_table').hide();
+			// });
+			$('.operate_edit').click(function(){
+				$('.nav-tabs li').removeClass('active');
+				$('#editRole').parent('li').addClass('active');
+				$('#editRole').show();
+				$('#setRight').hide();
+				$('.add_right').hide();
+				$('.add_Role').hide();
+				$('.right_table').hide();
+				$('.edit_role').show();
+				var name = $(this).parent().parent().find('.name').text();
+				var desc = $(this).parent().parent().find('.desc').text();
+				$('#edit_name').val(name);
+				$('#edit_desc').val(desc);
+			});
+			$('.check_lg').click(function(){
+				var flag = $(this).attr("checked");
+				if(flag == 'checked'){
+					$(this).parent('.r_li_other').parent('.r_li_lg').find('.check_box').removeAttr('checked');
+				}
+				else{
+					$(this).parent('.r_li_other').parent('.r_li_lg').find('.check_box').attr('checked','checked');
+				}
+				
+			});
+			// $('.check_md').click(function(){
+			// 	if($(this).attr('checked') == 'checked'){
+			// 		$(this).parent('.r_li_other').parent('.r_li_md').find('.check_box').removeAttr('checked');
+			// 	}else{
+			// 		$(this).parent('.r_li_other').parent('.r_li_md').find('.check_box').attr('checked','checked');
+			// 	}
+				
+			// });
+
+			var len_lg = $('.r_li_lg').length;
+			for(var i =0;i<len_lg;i++){
+				//判断ul li 下面是否有子元素
+				//注意：这个2与子元素的个数有关
+				if($('.r_li_lg').eq(i).children().length == 3){
+					$('.r_li_lg').eq(i).css("border-bottom","1px solid #ddd");
+				}else{
+					$('.r_li_lg').eq(i).css("border-bottom","transparent");
+				}
+			}
+
+			var len_md = $('.r_li_md').length;
+			 
+			for(var i = 0;i<len_md;i++){
+				if($('.r_li_md').eq(i).children().length==3){
+					$('.r_li_md').eq(i).css("border-bottom","1px solid #ddd");
+				}else{
+					$('.r_li_md').eq(i).css("border-bottom","transparent");
+				}
+
+			}
+
+			var len_sm = $('.r_li_md').length;
+			 
+			for(var i = 0;i<len_sm;i++){
+				if($('.r_li_sm').eq(i).children().length==3){
+					$('.r_li_sm').eq(i).css("border-bottom","1px solid #ddd");
+				}else{
+					$('.r_li_sm').eq(i).css("border-bottom","transparent");
+				}
+
+			}
+
+			var len_xs = $('.r_li_xs').length;
+			 
+			for(var i = 0;i<len_xs;i++){
+				if($('.r_li_xs').eq(i).children().length==3){
+					$('.r_li_xs').eq(i).css("border-bottom","1px solid #ddd");
+				}else{
+					$('.r_li_xs').eq(i).css("border-bottom","transparent");
+				}
+
+			}
+
+			var len_other = $('.r_li_other').length;
+			 
+			for(var i = 0;i<len_other;i++){
+				// if($('.r_li_other').eq(i).children().length==3){
+				// 	$('.r_li_other').eq(i).css("border-bottom","1px solid #ddd");
+				// }else{
+				// 	$('.r_li_other').eq(i).css("border-bottom","transparent");
+				// }
+				$('.r_li_other').eq(i).css("border-bottom","1px solid #ddd");
+
+			}
+
+			$('.icon_lg').click(function(){
+				$(this).parent('.r_li_other').parent('.r_li_lg').find('.r_ul_md').toggle();
+
+			});
+			$('.icon_md').click(function(){
+				$(this).parent('.r_li_other').parent('.r_li_md').find('.r_ul_sm').toggle();
+			});
+			$('.icon_xs').click(function(){
+				$(this).parent('.r_li_other').parent('.r_li_sm').find('.r_ul_xs').toggle();
+			});
+			//删除
+			 $('.operate_del').click(function(){
+      		var value = $(this).parent().parent().children('.s2').text();
+      		var value2 = $(this).parent().parent().children('.s4').text();
+      		$.post("{:url('Adminforcon/dis_the_role_status')}",{
+              name:value,
+              roleid:value2
+		  },function(data){
+               if(data=='非法操作'){
+                 alert(data);
+               }
+		  });
+      	});
+			 var right = [];
+              //权限设置
+      	    $('.operate_right').click(function(){
+      	    	$('.nav-tabs li').removeClass('active');
+				$('#setRight').parent('li').addClass('active');
+				$('#setRight').show();
+				$('.add_right').show();
+				$('.add_Role').hide();
+				$('.right_table').hide();
+				var name = $(this).parent().parent().find('.name').text();
+				var role_id = $(this).parent().parent().find('.s4').text();
+				$('#manager_name').html(name); 
+      			$.post("{:url('Adminforcon/set_the_role_privilege')}",{
+                  
+                 role_id:role_id
+		  },function(data){ 
+                // $('#set_P').html('{volist name="menu"  id="vo"}-->{$vo[0]['module_name']}<br/>{volist name=":SetRole($vo[0]['module_code'])" id="v"}->{$v['module_name']}<br/>{volist name=":SetRole($v['module_code'])" id="vv"}>{$vv['module_name']}<br/>{/volist}{/volist}{/volist}');
+                $('#set_P').html('<ul class="list-unstyled r_ul_lg">{volist name="menu"  id="vo"}<li class="r_li_lg"><div class="r_li_other"><span class="glyphicon glyphicon-play icon icon_lg"></span><input type="checkbox"  id="1" class="check_box check_lg  "><span>{$vo[0]['module_name']}</span></div><ul class="list-unstyled r_ul_md">{volist name=":SetRole($vo[0]['module_code'])" id="v"}<li class="r_li_md"><div class="r_li_other"><span class="glyphicon glyphicon-play icon icon_md"></span><input type="checkbox" id="2" class="check_box check_sm"><span>{$v['module_name']}</span></div><ul class="list-unstyled r_ul_sm">{volist name=":SetRole($v['module_code'])" id="vv"}<li class="r_li_sm"><span class="glyphicon glyphicon-play icon"></span><input type="checkbox" id="3"  class="check_box"><span>{$vv['module_name']}</span></li>{/volist}</ul></li>{/volist}</ul></li>{/volist}</ul>');
+            	 
+            $('.icon_lg').click(function(){
+				$(this).parent('.r_li_other').parent('.r_li_lg').find('.r_ul_md').toggle();
+
+			});
+			$('.icon_md').click(function(){
+				$(this).parent('.r_li_other').parent('.r_li_md').find('.r_ul_sm').toggle();
+			});
+			$('.icon_xs').click(function(){
+				$(this).parent('.r_li_other').parent('.r_li_sm').find('.r_ul_xs').toggle();
+			});
+			var len_lg = $('.r_li_lg').length;
+			for(var i =0;i<len_lg;i++){
+				//判断ul li 下面是否有子元素
+				//注意：这个2与子元素的个数有关
+				if($('.r_li_lg').eq(i).children().length == 3){
+					$('.r_li_lg').eq(i).css("border-bottom","1px solid #ddd");
+				}else{
+					$('.r_li_lg').eq(i).css("border-bottom","transparent");
+				}
+			}
+
+			var len_md = $('.r_li_md').length;
+			 
+			for(var i = 0;i<len_md;i++){
+				if($('.r_li_md').eq(i).children().length==3){
+					$('.r_li_md').eq(i).css("border-bottom","1px solid #ddd");
+				}else{
+					$('.r_li_md').eq(i).css("border-bottom","transparent");
+				}
+
+			}
+
+			var len_sm = $('.r_li_md').length;
+			 
+			for(var i = 0;i<len_sm;i++){
+				if($('.r_li_sm').eq(i).children().length==3){
+					$('.r_li_sm').eq(i).css("border-bottom","1px solid #ddd");
+				}else{
+					$('.r_li_sm').eq(i).css("border-bottom","transparent");
+				}
+
+			}
+
+			var len_xs = $('.r_li_xs').length;
+			 
+			for(var i = 0;i<len_xs;i++){
+				if($('.r_li_xs').eq(i).children().length==3){
+					$('.r_li_xs').eq(i).css("border-bottom","1px solid #ddd");
+				}else{
+					$('.r_li_xs').eq(i).css("border-bottom","transparent");
+				}
+
+			}
+
+			var len_other = $('.r_li_other').length;
+			 
+			for(var i = 0;i<len_other;i++){
+				// if($('.r_li_other').eq(i).children().length==3){
+				// 	$('.r_li_other').eq(i).css("border-bottom","1px solid #ddd");
+				// }else{
+				// 	$('.r_li_other').eq(i).css("border-bottom","transparent");
+				// }
+				$('.r_li_other').eq(i).css("border-bottom","1px solid #ddd");
+
+			}
+
+			$('.check_lg').click(function(){
+				// $(this).prop('checked',false);
+				var flag = $(this).attr('checked');
+				//alert(flag);
+				if(flag == 'checked'){
+					$(this).parent('.r_li_other').parent('.r_li_lg').find('.check_box').attr('checked',false);
+					$(this).attr('checked',false);
+				}
+				else{
+					$(this).parent('.r_li_other').parent('.r_li_lg').find('.check_box').attr("checked",true);
+					$(this).attr("checked",true);
+					//$(this).prop('checked',true);
+				}
+				
+			});
+
+		  });
+      	});
+
+
+			
+
+
+		})
+	</script>
+</body>
+</html>
+	<!--	<ul class="list-unstyled r_ul_lg">
+									{volist name="menu"  id="vo"}
+									<li class="r_li_lg">
+										<div class="r_li_other">
+										<span class="glyphicon glyphicon-play icon icon_lg"></span>
+										<input type="checkbox" name="" class="check_box check_lg">
+										<span>{$vo[0]['module_name']}</span>
+										</div>
+							
+										<ul class="list-unstyled r_ul_md" style="display: none;">
+											{volist name=":SetRole($vo[0]['module_code'])" id="v"}
+											<li class="r_li_md">
+												<div class="r_li_other">
+												<span class="glyphicon glyphicon-play icon icon_md"></span>
+												<input type="checkbox" name="" class="check_box check_sm">
+												<span>{$v['module_name']}</span>
+												</div>
+												<ul class="list-unstyled r_ul_sm" style="display: none;">
+													{volist name=":SetRole($v['module_code'])" id="vv"}
+													<li class="r_li_sm">
+														<span class="glyphicon glyphicon-play icon"></span>
+														<input type="checkbox" name="" class="check_box">
+														<span>{$vv['module_name']}</span>
+													</li>
+													{/volist}
+												</ul>
+											</li>  
+										 	{/volist}
+										</ul>
+									</li>
+									 {/volist}
+								</ul> -->

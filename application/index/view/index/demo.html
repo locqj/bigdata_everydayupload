@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>爱诺信主页</title>
+	<meta name="viewport" content="width=device-width,initial-scale=1.0">
+	<link rel="stylesheet" type="text/css" href="./../../bootstrap/css/bootstrap.min.css">
+	
+	<link rel="stylesheet" type="text/css" href="./../../css/global.css">
+	<link rel="stylesheet" type="text/css" href="./../../css/nav.css">
+	<link rel="stylesheet" type="text/css" href="./../../css/index.css">
+	<link rel="stylesheet" type="text/css" href="./../../css/homeAn.css">
+	
+</head>
+<body style="overflow-y:scroll">
+	<div id="wrap">
+
+		<!-- 头部 -->
+		<nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="margin: 0;">
+			<div class="container-fluid">
+				<!-- Brand and toggle get grouped for better mobile display -->
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand" href="{:url('/index')}"><img src="./../../img/LOGO_index.png">&nbsp;CHOGGE</a>
+				</div>
+
+				<!-- 导航 -->
+				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+					<ul class="nav navbar-nav navbar-right" style="margin-right: 60px;">
+						<li><a href="http://blog.565tech.com/">博客</a></li>
+						<li><a href="#">文档</a></li>
+						<li><a href="#">Demo</a></li>
+						<li><a href="#">产品</a></li>
+						<!-- <li><a href="{:url('/aboutme')}">关于</a></li> -->
+						<li><a href="{:url('/login')}">登录</a></li>
+					</ul>
+				</div><!-- /.navbar-collapse -->
+
+			</div><!-- /.container-fluid -->
+		</nav>
+		<!-- end of nav -->
+		<button class="alert" style="width: 100px;height:30px;margin-top:100px;position: fixed">点击</button>
+		<!-- 示例展示 -->
+		<div id="demo" style="margin-bottom: 30px;">
+			<div class="chartdemo demo1">
+				
+				<div class="step_item">
+					<span class="step_title">NO.1  &nbsp;
+					朴氏人口迁徙图</span>
+					<div id="chart1" class="chart"></div>
+					<span class="step_text">
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;利用大数据，对拥有的LBS（基于地理位置的服务）大数据进行计算分析，采用的可视化呈现方式，动态、即时、直观地展现朴氏人口大迁徙的轨迹与迁入人口的来源和迁出人口的去向等特征。
+					</span>
+				</div>
+			</div>
+			<div class="chartdemo demo2">
+				
+				<div class="step_item">
+						<span class="step_title">NO.2 &nbsp;本年商场顾客男女人数统计</span>
+						<div id="chart2" class="chart"></div>
+						<span class="step_text">
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;用折线将各个数据点标志连接起来，直观的展现了数据的变化趋势。柱形的高度，清晰的表现了数据的大小。时间区域可缩放，从而能自由关注商场顾客男女人数统计的信息。
+						</span>
+					</div>
+			</div>
+			<div class="chartdemo demo3">
+				
+				<div class="step_item">
+						<span class="step_title">NO.3  &nbsp;全国宏观经济指标</span>
+						<div id="chart3" class="chart" style="height:420px"></div>
+						<span class="step_text">
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;连续的时序数据，将时间格式化，展现了不同年份的全国宏观经济指标。柱状图表现了不同城市的数据量，饼图表现了不同产业相对于总数的百分比等关系。
+						</span>
+					</div>
+			</div>
+			<div class="chartdemo demo4" >
+				
+				<div class="step_item">
+						<span class="step_title">NO.4  &nbsp;力导向布局关系图</span>
+						<div id="chart4" class="chart" style="height:440px;"></div>
+						<span class="step_text">
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;关系图展现了节点以及节点之间的关系数据。节点受到的向中心的引力因子。该值越大节点越往中心点靠拢。系统中的每个节点间存在某种库仑斥力。同时，节点之间的边产生类似弹簧的胡克引力。
+
+						</span>
+					</div>
+			</div>
+
+		</div>
+	
+		<!-- 结束示例展示 -->
+		
+		
+		<!-- 联系我们 -->
+		<div class="container-fluid" style="background-color: #63AADE;">
+			<div class="contact_me">
+				 <span class="contact_email">联系我们 : chogge@565tech.com</span>
+				<!--  <span class="contact_tel">电话：18852963680</span> -->
+				 <span class="contact_addr">地址：常熟市同济科技广场24楼</span>
+				 <span class="contact_indent">©爱诺信物联科技有限公司 | 苏ICP备13035478号-4</span>
+			</div>
+		</div>
+	</div>
+
+	<!-- 脚本语言 -->
+	<script type="text/javascript" src='./../../js/echarts.min.js'></script>
+	<script src="./../../js/jquery.min.js"></script>
+	<script src="./../../bootstrap/js/bootstrap.min.js"></script>
+	<!-- <script src="js/getClientHeight.js"></script> -->
+	<!-- <script src="./../../js/animation.js"></script> -->
+	
+	<script src="https://cdn.static.runoob.com/libs/jquery/1.10.2/jquery.min.js"></script>
+
+	<script type="text/javascript" src='http://gallery.echartsjs.com/dep/echarts/map/js/china.js'></script>
+	<!-- <script type="text/javascript" src='./../../js/config.js'></script> -->
+	<script src='./../../js/indexchart.js'></script>
+</body>
+</html>

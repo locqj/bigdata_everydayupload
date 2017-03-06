@@ -1,0 +1,108 @@
+/*=============================导航*/
+.navbar{
+	background:#4C9ED6;
+	border-radius: 0px;
+	font-family: serif;
+	font-size: 16px;
+	padding:5px 0;
+	font-family: '微软雅黑','Helvetica';
+}
+.navbar-default,.navbar-collapse{
+	border-color:transparent;
+}
+.navbar-default .navbar-brand{
+	color: #FFF;
+}
+.navbar-default .navbar-nav>li>a{
+	color: #FFF;
+	outline: none;
+	font-family: '微软雅黑','Helvetica';
+}
+.navbar-default .navbar-nav>li>a.active{
+	border-bottom: 1px solid #ddd;
+	background: transparent;
+	outline: none;
+}
+.navbar-default .navbar-nav>li>a:hover{
+	color: #ddd;
+	background: #4C9ED6;
+	outline: none;
+}
+.navbar-default .navbar-nav>li>a:visited{
+	color: #FFF;
+	background-color: #4C9ED6;
+}
+.navbar-default .navbar-nav>.open>a:hover,
+.navbar-default .navbar-nav>.open>a:focus,
+.navbar-default .navbar-nav>.open>a:visited{
+	background-color:#4C9ED6;
+	color: #FFF;
+}
+.dropdown-menu>li>a{
+	border-bottom: 1px dotted #e5e5e5;
+	padding-top: 8px;
+	outline: none;
+	background:#FFF;
+}
+.navbar-default .navbar-toggle .icon-bar{
+	color: #FFF;
+	background: #FFF;
+}
+.dropdown-menu>li:last-child >a{
+	border-bottom: transparent;
+}
+.navbar-default .navbar-toggle{
+	border-color: #FFF;
+}
+.navbar-default .navbar-toggle:focus,
+.navbar-default .navbar-toggle:visited,
+.navbar-default .navbar-toggle:hover{
+	border-color: #FFF;
+	background:#2BBDEA;
+	color: #FFF;
+}
+.nav_logo{
+	display: inline-block;
+	width: 30px;
+}
+
+a.navbar-brand{
+	display: inline-block;
+	outline: none;
+}
+.navbar-brand img{
+	display: inline-block;
+	width: 28px;
+	vertical-align: middle;
+	margin-top: -8px;
+}
+.navbar-default .navbar-brand:hover,
+.navbar-default .navbar-brand:focus{
+	color: #FFF;
+}
+
+/*==================联系我们*/
+.contact_me{
+	padding: 30px 0;
+	color: #D9EAF4;
+	text-align: center;
+}
+.contact_me span{
+	text-align: center;
+}
+.contact_me span.contact_email,
+.contact_me span.contact_tel{
+	display: inline-block;
+}
+.contact_me span.contact_addr,
+.contact_me span.contact_indent{
+	display: block;
+	margin-top: 6px;
+}
+@media screen and (max-width:768px) {
+	.contact_me span.contact_email,
+	.contact_me span.contact_tel{
+		display: block;
+		margin-top: 5px;
+	}
+}

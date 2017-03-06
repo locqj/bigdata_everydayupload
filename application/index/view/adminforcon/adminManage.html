@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>本站用户</title>
+	<meta name="viewport" name="width=device-width,initial-scale=1.0">
+	<link rel="stylesheet" type="text/css" href="./../../bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="./../../YuCSS/style.css">
+	<link rel="stylesheet" type="text/css" href="./../../YuCSS/userIn.css">
+</head>
+<body>
+	<div class="wrap">
+		<div class="container-fluid" style="background-color: #666;">
+			<div class="ch_nav">
+				<img src="./../../img/LOGO_index.png" width="35">
+				<span class="logo"><a href="{:url('/manageindex')}" id="logo_txt">CHOGGTEN</a></span>
+				<ul class="fast_key list-inline" style="display: inline-block;">
+					<li>
+						<a href="{:url('/manageindex')}" style="background-color: #4C9Ed9;">
+							<span class="iconfont" title="">&#xe61d;</span>
+						</a>
+						<a href="{:url('/userout')}" style="background-color: orange;">
+							<span class="iconfont" title="">&#xe637;</span>
+						</a>
+						<a href="{:url('/userIn')}">
+							<span class="iconfont" title="">&#xe613;</span>
+						</a>
+						 
+					</li>
+				</ul>
+				<a href="#" class="user">
+					<span class="iconfont" style="color: orange;font-size: 28px;">&#xe632;</span>
+					<span class="txt">欢迎,{$username}</span>
+					<span class="txt2 glyphicon glyphicon-chevron-down"></span>
+				</a>
+				<ul class="user_login list-unstyled" style="display: none;">
+					<li>
+						<a href="{:url('Adminforcon/change_Pwd')}">
+							<span class="glyphicon glyphicon-lock"></span>
+							<span>修改密码</span>
+						</a>
+					</li>
+					<li>
+						<a href="{:url('Adminforcon/out_login')}">
+							<span class="glyphicon glyphicon-off"></span>
+							<span>退出</span>
+						</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div class="">
+			<div class="ch_main">
+				<div class="row">
+					<div class="col-md-2 col-sm-12 col-xs-12">
+							 
+					
+                     	 <ul class="ul_nav list-unstyled">
+              
+               {volist name="menu" id="vo"}
+              <li class="ul_one_li" style="border-bottom:transparent;">
+                <a href="#" class="ul_one_a">
+                  <span class="iconfont1 icon1">&#xe61f;</span>
+                  <span>{$vo[0]['module_name']}</span>
+                </a>
+                <ul class="list-unstyled ul_one" >
+                   {volist name=":SidType($vo[0]['module_code'],$roleId)" id="k"}
+                  <li class="ul_two_li">
+                    <a href="#" class="ul_two_a">
+                      <span class="glyphicon glyphicon-collapse-down"></span>
+                      <span>{$k[0]['module_name']}</span>
+                    </a>
+                    <ul class="list-unstyled ul_two"  >
+                       {volist name=":SidType($k[0]['module_code'],$roleId)" id = "kk"}
+                      <li class="ul_three_li">
+                        <a href="{:url($kk[0]['module_url'])}">
+                        <span class="glyphicon glyphicon-collapse-up"></span>
+                        <span>{$kk[0]['module_name']}</span> 
+                        </a>
+                      </li>
+                       {/volist}
+                     
+                    </ul>
+                  </li>
+                  {/volist}
+                
+                </ul>
+              </li>
+              {/volist}
+            </ul>
+					</div>
+					<div class="col-md-9 col-sm-9 col-xs-12">
+						<div class="right">
+							<div class="right_top">
+								<ul class="nav nav-tabs" role="tablist">
+									<li role="presentation" class="active"><a href="javascript:void(0);" id="Role">管理员</a></li>
+									<li role="presentation"><a href="javascript:void(0);" id="addRole">管理员添加</a></li>
+								</ul>
+							</div>
+						<!-- 	 <div class="right_title">
+														<form>
+															 <label>用户名:</label>
+															 <input type="text" name="id" value="请输入用户名">
+															 &nbsp;&nbsp;<label>邮箱:</label>
+															 <input type="text" name="key" value="请输入邮箱">
+															 &nbsp;&nbsp;
+															 <button class="btn btn-info">搜索</button>
+															 <button class="btn btn-danger">清空</button>
+														</form>
+													</div> -->
+							<div class="right_table">
+								<table border="1" borderColor="#eee">
+									<tr>
+										<th>ID</th>
+										<th>用户名</th>
+										<th>最后登录IP</th>
+										<th>最后登录时间</th>
+										<th>邮箱</th>
+										<th>状态</th> 
+										<th colspan="4">操作</th>
+										 
+									</tr>
+									{volist name="see" id="vo"}
+									<tr>
+
+										<td class="s1">{$vo.id}</td>
+										<td class="s2">{$vo.name}</td>
+										<td class="s3">{$vo.last_login_ip}</td>
+
+										<td class="s4">{$vo.last_login_time}</td>
+										<td class="s5">{$vo.mail}</td> 
+										<td class="s6">{$vo.status}</td>
+										
+										<td>
+											<button class="btn-sm btn-sm-blue ">编辑</button>
+										</td>
+										<td>
+											<button class="btn-sm btn-sm-blue huifu" onclick="location.reload();">恢复</button>
+										</td>
+										<td>
+											<button class="btn-sm btn-sm-blue lahei" onclick="location.reload();">拉黑</button>
+										</td>
+										<td>
+											<button class="btn-sm btn-sm-blue del" onclick="location.reload();">删除</button>
+										</td>
+									</tr>
+									 {/volist}
+								</table>
+							</div>
+							<div class="add_Role role_form" style="display: none;">
+								<form action="{:url('Adminforcon/adminManage_Add_User')}" name="form1" method="post"  onSubmit="return check();">
+									<div class="item">
+										<label>用户名&nbsp;&nbsp;</label>
+										<input type="text" name="user" id="user" onblur="disusername();">
+									</div>
+									<div class="item">
+										<label>密码&nbsp;&nbsp;</label>
+										<input type="password" name="pwd" id="pwd"  >
+									</div>
+									<div class="item">
+										<label>确认密码&nbsp;&nbsp;</label>
+										<input type="password" name="pwds" id="pwds" onblur="dispwd();">
+									</div>
+									<div class="item">
+										<label>邮箱&nbsp;&nbsp;</label>
+										 <input type="email" name="email" id="email" name="email">
+									</div>
+								 	<div class="item state">
+										<label>角色&nbsp;&nbsp;</label>
+										<select name="roler" id="roler" >
+										 
+											{volist name='roler' id='vo'}
+											<option value="{$vo.role_id}">{$vo.name}</option>
+											{/volist}
+										</select>
+										<!-- {volist name='roler' id='vo'}
+										<input type="checkbox" name='checkbox' value='{$vo.role_id}'  style="width: 30px;" class='roler'>&nbsp;{$vo.name}
+										&nbsp;&nbsp;
+										{/volist} -->
+										 
+									</div>  
+									<div class="item">
+										<label style="visibility: hidden;">状态</label>
+										<span id="info"></span>
+										<!-- <button type="submit" class="btn btn-info" onclick="validation();">添加</button> -->
+										<input type="submit" class="btn btn-info" onclick="return validation();" value="添加"> 
+										<!-- <button class="clicc">fadsfasd</button> -->
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- 脚本语言 -->
+	<script src="./../../js/jquery.min.js"></script>
+	<script src="./../../bootstrap/js/bootstrap.min.js"></script>
+	<script type="text/javascript">
+	     function check(){
+	     	//return false;
+	    if (document.form1.user.value=="")
+        {
+           alert("姓名不能为空");
+           document.form1.user.focus();
+           return false;
+        }else if(document.form1.pwd.value==""){
+        	alert("密码不能为空");
+           document.form1.pwd.focus();
+           return false;
+        }else if(document.form1.pwds.value==""){
+        	alert("确认密码不能为空");
+           document.form1.pwds.focus();
+           return false;
+        }else if(document.form1.checkbox.checked==false){
+        	alert("角色不能为空");
+           document.form1.checkbox.focus();
+           return false;
+        } 
+         else{
+        	return true;  
+        }
+          
+        }
+       	
+   /*    	$(function(){
+       		
+       		$('.clicc').click(function(){
+       			var ss = $('#roler').val();
+       			alert(ss);
+       		})
+       	})*/
+
+      
+
+	     function disusername(){
+          
+         $.post("{:url('Index/exist_res_Username_to_dis')}",{
+         
+         username:$('#user').val()
+        
+         },
+              function(data){
+                if (data=='用户名已存在'){
+                   $('#info').html("<font color=red>"+data+"</font>");
+                }else{
+                  
+                   }
+              
+              }
+           );
+
+     } 
+        function dispwd(){
+    
+         $.post("{:url('Index/exist_res_User_to_dis')}",{
+         
+         pwd:$('#pwd').val(),
+         pwds:$('#pwds').val()
+        
+
+         },
+              function(data){
+
+              $('#info').html("<font color=red>"+data+"</font>");
+              }
+           );
+     }
+		$(document).ready(function() {
+			 
+			$('.user').click(function() {
+				$('.user_login').toggle();
+			});
+			$('.ul_one_a').click(function() {
+				$(this).parent().find('.ul_one').toggle();
+			});
+			$('.ul_two_a').click(function() {
+				$(this).parent().find('.ul_two').toggle();
+			});
+			$('#addRole').click(function() {
+				 $('.add_Role').show();
+				 $('.right_title').hide();
+				 $('.right_table').hide();
+				 $(this).parent().siblings().removeClass('active');
+				 $(this).parent().addClass('active');
+			})
+			$('#Role').click(function() {
+				 $('.add_Role').hide();
+				 $('.right_title').show();
+				 $('.right_table').show();
+				 $(this).parent().siblings().removeClass('active');
+				 $(this).parent().addClass('active');
+			});
+			$('.lahei').click(function(){
+      		var value = $(this).parent().parent().children('.s2 ').text();
+               
+      		 $.post("{:url('Adminforcon/dis_the_status')}",{
+              name:value
+		  },function(data){
+
+		  }); 
+      	});
+			 	$('.del').click(function(){
+      		var value = $(this).parent().parent().children('.s2 ').text();
+      		$.post("{:url('Adminforcon/dis_the_del')}",{
+              name:value
+		  },function(data){
+
+		  });
+      	});
+			 	$('.huifu').click(function(){
+      		var value = $(this).parent().parent().children('.s2 ').text();
+      		$.post("{:url('Adminforcon/dis_the_restatus')}",{
+              name:value
+		  },function(data){
+
+		  });
+      	});
+		})
+	</script>
+</body>
+</html>

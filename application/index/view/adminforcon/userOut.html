@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>本站用户</title>
+	<meta name="viewport" name="width=device-width,initial-scale=1.0">
+	<link rel="stylesheet" type="text/css" href="./../../bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="./../../YuCSS/style.css">
+	<link rel="stylesheet" type="text/css" href="./../../YuCSS/userIn.css">
+</head>
+<body>
+	<div class="wrap">
+		<div class="container-fluid" style="background-color: #666;">
+			<div class="ch_nav">
+				<img src="./../../img/LOGO_index.png" width="35">
+				<span class="logo"><a href="{:url('/manageindex')}" id="logo_txt">CHOGGTEN</a></span>
+				<ul class="fast_key list-inline" style="display: inline-block;">
+					<li>
+						<a href="{:url('/manageindex')}" style="background-color: #4C9Ed9;">
+							<span class="iconfont" title="">&#xe61d;</span>
+						</a>
+						<a href="{:url('/userout')}" style="background-color: orange;">
+							<span class="iconfont" title="">&#xe637;</span>
+						</a>
+						<a href="{:url('/userIn')}">
+							<span class="iconfont" title="">&#xe613;</span>
+						</a>
+						 
+					</li>
+				</ul>
+				<a href="#" class="user">
+					<span class="iconfont" style="color: orange;font-size: 28px;">&#xe632;</span>
+					<span class="txt">欢迎,{$username}</span>
+					<span class="txt2 glyphicon glyphicon-chevron-down"></span>
+				</a>
+				<ul class="user_login list-unstyled" style="display: none;">
+					<li>
+						<a href="{:url('Adminforcon/change_Pwd')}">
+							<span class="glyphicon glyphicon-lock"></span>
+							<span>修改密码</span>
+						</a>
+					</li>
+					<li>
+						<a href="{:url('Adminforcon/out_login')}">
+							<span class="glyphicon glyphicon-off"></span>
+							<span>退出</span>
+						</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div class="">
+			<div class="ch_main">
+				<div class="row">
+						<div class="col-md-2 col-sm-12 col-xs-12">
+							 
+					 
+                      	 <ul class="ul_nav list-unstyled">
+              
+               {volist name="menu" id="vo"}
+              <li class="ul_one_li" style="border-bottom:transparent;">
+                <a href="#" class="ul_one_a">
+                  <span class="iconfont1 icon1">&#xe61f;</span>
+                  <span>{$vo[0]['module_name']}</span>
+                </a>
+                <ul class="list-unstyled ul_one">
+                   {volist name=":SidType($vo[0]['module_code'],$roleId)" id="k"}
+                  <li class="ul_two_li">
+                    <a href="#" class="ul_two_a">
+                      <span class="glyphicon glyphicon-collapse-down"></span>
+                      <span>{$k[0]['module_name']}</span>
+                    </a>
+                    <ul class="list-unstyled ul_two" >
+                       {volist name=":SidType($k[0]['module_code'],$roleId)" id = "kk"}
+                      <li class="ul_three_li">
+                        <a href="{:url($kk[0]['module_url'])}">
+                        <span class="glyphicon glyphicon-collapse-up"></span>
+                        <span>{$kk[0]['module_name']}</span> 
+                        </a>
+                      </li>
+                       {/volist}
+                     
+                    </ul>
+                  </li>
+                  {/volist}
+                
+                </ul>
+              </li>
+              {/volist}
+            </ul>
+
+						
+					</div>
+					<div class="col-md-9 col-sm-9 col-xs-12">
+						<div class="right">
+							<div class="right_top">
+								<ul class="nav nav-tabs" role="tablist">
+									<li role="presentation" class="active"><a href="#">第三方用户</a></li>
+								</ul>
+							</div>
+							 
+							<div class="right_table">
+								<table border="1" borderColor="#eee">
+									<tr>
+										<th>ID</th>
+										<th>来源</th>
+										<th>用户名</th>
+										<th>头像</th>
+										<th>绑定账号</th>
+										<th>邮箱</th>
+										<th>首次登录时间</th>
+										<th>最后登录时间</th>
+										<th>最后登录IP</th>
+										<th>登录次数</th>
+										<th colspan="2">操作</th>
+									</tr>
+									<tr>
+										<td>2</td>
+										<td>xxx</td>
+										<td>admin</td>
+										<td>xxxx</td>
+										<td></td>
+										<td>677.qq.com</td>
+										<td>2017-01-03 13:31:28</td>
+										<td>2000-01-01 00:00:00</td>
+										<td>121.236.82.134</td>
+										<td>5</td> 
+										<td>
+											<button class="btn-sm btn-sm-blue">拉黑</button>
+										</td>
+										<td>
+											<button class="btn-sm btn-sm-blue">启用</button>
+										</td>
+									</tr>
+									 
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- 脚本语言 -->
+	<script src="./../../js/jquery.min.js"></script>
+	<script src="./../../bootstrap/js/bootstrap.min.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			 
+			$('.user').click(function() {
+				$('.user_login').toggle();
+			});
+			$('.ul_one_a').click(function() {
+				$(this).parent().find('.ul_one').toggle();
+			});
+			$('.ul_two_a').click(function() {
+				$(this).parent().find('.ul_two').toggle();
+			});
+
+		})
+	</script>
+</body>
+</html>

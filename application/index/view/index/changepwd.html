@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" type="text/css" href="./../../css/login.css">
+	<script src="http://static.runoob.com/assets/jquery-validation-1.14.0/lib/jquery.js"></script>
+    <script src="http://static.runoob.com/assets/jquery-validation-1.14.0/dist/jquery.validate.min.js"></script>
+</head>
+<body>
+       	<div class="r_item">
+						 <label><i>*</i>&nbsp;手机号码：</label>
+						<div class="left" style="width:57%; display: inline-block;border:1px solid #e3e3e3;">
+							<span style="border-right: 1px solid #e3e3e3;padding: 5px;font-size: 14px;">+86</span>
+							<input type="tel" name="tel" id="tel" style="border:transparent;display: inline-block;">
+						</div>
+						
+					</div>
+					<div class="r_item">
+						<label><i>*</i>&nbsp;验证码：</label>
+						<input type="text" name="yanma" id="yanma" placeholder="" style="width: 80px;">
+						<span class="random">
+							<button id="yanzhengma" onclick="disyanzhengma();" style="width: 100px;">获取验证码</button>
+						</span>
+					</div>
+		             <div class="r_sub">
+					<!-- 	<label style="visibility: hidden;"><i>*</i>&nbsp;手机号码</label> -->
+						<button type="submit" onclick="reg_ajax_submit_to_sucess();">确认</button>
+						
+					</div>			 
+</body>
+</html>

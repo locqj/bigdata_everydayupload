@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>登录注册页面</title>
+	<meta name="viewport" content="width=device-width,initial-scale=1.0">
+	<link rel="stylesheet" type="text/css" href="./../../css/login.css">
+
+</head>
+<body style="overflow-x: hidden;" id="body2">
+	<div id="login">
+		<nav class="nav">
+			<div class="nav_logo">
+				<div class="logo">
+					<img src="./../../img/LOGO.png">
+				</div>
+				<div class="text">
+					<span class="login_name">&nbsp;超腾数据</span>
+					<span class="login_txt">&nbsp;注册</span>
+				</div>
+				
+			</div>
+			<div class="nav_ul">
+				<ul>
+					<li>
+						<a href="http://115.28.131.227/yolanda/chao/index.html">超腾官网</a>	&nbsp;|&nbsp;
+					</li>
+					<li>
+						<a href="index.html">超腾数据</a> &nbsp;|&nbsp;
+					</li>
+				</ul>
+			</div>
+		</nav>
+		
+		<!-- 第二部分 主体部分-->
+		<div class="register">
+			<div class="register_con">
+			<!--	<form action="{:url('Index/reg_from_submit_to_sucess')}" method="post" onsubmit="return toVaild()"> -->
+				<div>
+					<div class="r_head">
+						<span class="iconfont_2">&#xe60e;</span>
+						<span>手机号码登录</span>
+					</div>
+					
+					<!-- <div class="r_item">
+						<label><i>*</i>&nbsp;用户名：</label>
+						<input type="text" name="username" id="user" placeholder="设置你的用户名" onblur="disusername();">
+					</div>
+					<div class="r_item">
+						<label><i>*</i>&nbsp;登录密码：</label>
+						<input type="password" name="pwd" id="pwd" placeholder="设置你的登录密码" onblur="dispwdlength();">
+					</div>
+					<div class="r_item">
+						 <label><i>*</i>&nbsp;密码确认：</label>
+						<input type="password" name="pwds" id="pwds" placeholder="请再次输入你的密码" onblur="dispwd();" >
+					</div>
+					<div class="r_item">
+						 <label><i>*</i>&nbsp;邮箱地址：</label>
+						<input type="email" name="email" id="email" placeholder="">
+					</div> -->
+					<div class="r_item">
+						 <label><i>*</i>&nbsp;手机号码：</label>
+						<div class="left" style="width:57%; display: inline-block;border:1px solid #e3e3e3;">
+							<span style="border-right: 1px solid #e3e3e3;padding: 5px;font-size: 14px;">+86</span>
+							<input type="tel" name="tel" id="tel" style="border:transparent;display: inline-block;">
+						</div>
+						
+					</div>
+					<div class="r_item">
+						<label><i>*</i>&nbsp;验证码：</label>
+						<input type="text" name="yanma" id="yanma" placeholder="" style="width: 80px;">
+						<span class="random">
+							<button id="yanzhengma" onclick="disyanzhengma();" style="width: 100px;">获取验证码</button>
+						</span>
+					</div>
+					<span id="info" style="font-size: 12px;float: right;"></span>
+					<br>
+					<div  class="r_che">
+						<div class="left">
+							 <input type="checkbox" name="cheBox" id="cheBox">
+						</div>
+						 <span class="che_txt">
+						 	同意超腾大数据平台注册协议 
+						 </span>
+
+					</div>
+					<div class="r_sub">
+					<!-- 	<label style="visibility: hidden;"><i>*</i>&nbsp;手机号码</label> -->
+						<button type="submit" onclick="reg_ajax_submit_to_sucess();">登录</button>
+						
+					</div>
+				 
+					
+				<!--</form> -->
+				</div>
+			</div>
+		</div>
+
+		<!-- 联系我们 -->
+		<div class="foot">
+			<div class="contact_me">
+				 <span class="contact_email">联系我们 : choggle@565tech.com</span>
+				 <span class="contact_tel">电话：18852963680</span>
+				 <span class="contact_addr">地址：常熟市同济科技广场24楼</span>
+				 <span class="contact_indent">© CHOGGE 2015－2016 | Terms, Conditions and Privacy Policy | 京ICP备15055677号</span>
+			</div>
+		</div>
+
+	</div>
+	<script src="http://static.runoob.com/assets/jquery-validation-1.14.0/lib/jquery.js"></script>
+    <script src="http://static.runoob.com/assets/jquery-validation-1.14.0/dist/jquery.validate.min.js"></script>
+	<script type="text/javascript"> 
+ 
+
+
+	 function dispwdlength(){
+	 	  var pwdlength = $('#pwd').val().length;
+            
+	 	  if(pwdlength>=6 && pwdlength<=10){
+             
+	 	  }else{
+	 	  	 $('#pwd').val('');
+	 	  	 $('#info').html("<font color=red>请输入大于等于6位，小于等于10位的密码</font>");
+	 	  }
+
+	 }
+     function dispwd(){
+    
+         $.post("{:url('Index/exist_res_User_to_dis')}",{
+   
+         pwd:$('#pwd').val(),
+         pwds:$('#pwds').val()
+    
+
+         },
+              function(data){
+              if(data==""){
+                 $('#info').html("<font color=red></font>");
+              }
+              	else{
+              		 $('#pwds').val('');
+              		$('#info').html("<font color=red>"+data+"</font>");
+              	}
+              
+              }
+           );
+     }
+     function disusername(){
+     	 
+     	    $.post("{:url('Index/exist_res_Username_to_dis')}",{
+         
+            	username:$('#user').val()
+        
+         	},
+              function(data){
+                if (data=='用户名可用'){
+                   $('#info').html("<font color=green>"+data+"</font>");
+                }else{
+                    
+                   $('#info').html("<font color=red>"+data+"</font>");
+                   
+                   }
+              
+              }
+           );
+     }
+        
+
+     
+     num = 90;//全局变量
+     var send_btn = document.getElementById('yanzhengma'); 
+     //执行倒计时
+     function click_yan(){
+     	if(num == 0){
+				send_btn.removeAttribute('disabled');
+				send_btn.innerHTML = '获取验证码';
+			
+				num = 90;
+				return;
+			}else{
+				send_btn.setAttribute('disabled','disabled');
+				send_btn.innerHTML = "重新发送"+num;
+				num--;
+			}
+			setTimeout(function() {
+				  click_yan();
+			},1000);
+     }
+     // 验证手机号
+  function isPhoneNo(phone) {  
+    var pattern = /^1[34578]\d{9}$/;  
+    return pattern.test(phone);  
+  }
+  function isPhoneExist(phone){
+   $.post("{:url('Index/dis_phone')}",{
+   	phone:$('#tel').val()
+   },function(data){
+   	  if(data=='ok'){ 
+
+            $.post("{:url('Index/dis_yanzhengma')}",{
+        	 			phone:$('#tel').val()
+        				 },
+              			function(data){ 
+                             if(data=='ok'){
+                             	$('#info').html("<font color=green>验证码已发送</font>");
+                             }
+              			}
+          		   );
+              click_yan();
+
+   	  }else{ 
+   	  	   $('#info').html("<font color=red>该手机号已存在请登录</font>");
+   	  }
+   }
+   );
+
+  }
+    function disyanzhengma(){
+    	 var tel_text = $('#tel').val();
+    	 if(tel_text == ""){
+    	 	 alert('手机号不得为空');
+    	 	$(this).attr('disabled','disabled');
+
+    	 }else if(isPhoneNo(tel_text))
+    	 {   
+    	 	/*判断手机号是否存在*/
+             isPhoneExist(tel_text); 
+    	 }else
+    	 {
+    	 	  $('#info').html("<font color=red>请输入正确手机格式</font>");
+    	 	//alert('请输入正确手机格式');
+    	 }
+    }
+
+    function reg_ajax_submit_to_sucess(){
+    	 var name = $('#user').val();
+    	 var pwd =  $('#pwd').val();
+    	 var pwds = $('#pwds').val();
+    	 var email = $('#email').val();
+    	 var tel = $('#tel').val();
+    	 var yanma = $('#yanma').val();
+
+    	 if(name ==''||pwd == ''||pwds == ''||email == '' || tel ==''|| yanma==''){
+                   alert('信息不全');
+    	  }else if(pwd != pwds){ 
+
+                   alert('两次密码不正确');
+    	  }
+
+    	  else{
+            $.post("{:url('Index/reg_ajax_submit_to_sucess')}",{
+            username:$('#user').val(),
+            pwd:$('#pwd').val(),
+            phone:$('#tel').val(),
+            email:$('#email').val(),
+            yanma:$('#yanma').val()
+        
+         },
+              function(data){
+                
+                 if(data=='ok'){
+                    window.location.href="{:url('/login')}";
+                 }else{
+                     $('#info').html("<font color=red>"+data+"</font>");
+                 }
+              
+              }
+           );  
+          }
+    }
+ 
+	</script>
+</body>
+</html>

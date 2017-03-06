@@ -1,0 +1,195 @@
+/*头部的样式*/
+body,html{
+	font:14px/1.5 "PingFang SC",Helvetica,"Helvetica Neue","微软雅黑",Tahoma,Arial,sans-serif;
+}
+ a{
+		color:#333;
+}
+
+
+
+.logo{
+	display: inline-block;
+	color:#fff;
+	font-size: 28px;
+	/*font-weight: bold;*/
+}
+.nav-item{
+	height:65px;
+	/*border:1px solid red;*/
+	/*display: inline-block;*/
+	margin-left:200px;
+	margin-top: -70px;
+}
+.nav-item a{
+	height: 63px;
+	padding:0 20px;
+	font-size: 18px;
+	/*border:1px solid red;*/
+	display: inline-block;
+	cursor: pointer;
+
+}
+.active{
+	color:#fff;
+	background: #9BD5FF;
+	border-bottom:3px solid #FFCC99;
+}
+/*用户名样式*/
+.username{
+	font-size:20px;
+	font-weight: bold;
+	color:#eee;
+	margin-right:20px;
+}
+.loginout{
+	color:#ddd;
+	font-size: 14px;
+	
+}
+
+/*左侧的样式*/
+.yibiaopan{
+	height:35px;
+	line-height: 35px;
+	margin-top:10px;
+}
+.yibiaopan .left{
+
+}
+.yibiaopan i{
+	display: inline-block;
+	margin:0 3px;
+}
+
+.yangshi span{
+	height: 30px;
+	line-height: 30px;
+}
+.yangshi ul li{
+	width: 92%;
+	display: inline-block;
+	padding-left:7%;
+	height: 20px;
+	margin:5px 0;
+}
+
+
+/*右侧的样式*/
+#showcharts{
+	width: 80%;
+	padding:0 2%;
+	margin-top:10px;
+	/*border:1px solid red;*/
+}
+.charttitle .left{
+	font-size:22px;
+}
+.charttitle .right i{
+	margin:0 10px;
+	display: inline-block;
+}
+
+
+
+/*首页的教程*/
+#showcharts{
+	width:80%;
+	margin:65px auto 0;
+}
+/*#showcharts>b{
+	font-size: 30px;
+	margin-top: 20px;
+	margin-left: 5%;
+	display: inline-block;
+}*/
+.teach{
+	width:100%;
+	margin:0 auto;
+	/*text-align: center;*/
+}
+.teach a{
+	color: #fff;
+}
+.s1,
+.step2,
+.s3,
+.step4{
+	display: inline-block;
+	width: 40%;
+	height:40%;
+	padding:2% 0;
+	/*padding:140px 0;*/
+	/*height:200px;*/
+	margin:2% 4.5% 1%;
+	border:1px solid #ccc;
+	position: relative;
+	color: #fff;
+}
+.s1:hover,
+.step2:hover,
+.s3:hover,
+.step4:hover{
+	/*border:#074A99 0px solid;*/
+	filter:progid:DXImageTransform.Microsoft.Shadow(color=#074A99,strength=4);/*ie*/
+	-moz-box-shadow: 0 0 20px #074A99;/*firefox*/
+	-webkit-box-shadow: 0 0 20px #074A99;/*safari或chrome*/
+	box-shadow: 0 0 10px #074A99;/*opera或ie9*/
+}
+
+
+
+/* .step1,
+.step2{
+	display: inline-block;
+	width: 47%;
+	height:50%;
+	padding:140px 0;
+	height:200px;
+	margin:2% 1% 1%;
+	border:1px solid #ccc;
+	position: relative;
+	color: #fff;
+}
+.step3,
+.step4{
+	display: inline-block;
+	width: 47%;
+	height:50%;
+	padding:140px 0;
+	height:200px;
+	margin:2% 1%;
+	border:1px solid #ccc;
+	position: relative;
+	color: #fff;
+} */
+.step1 span,
+.step2 span,
+.step3 span,
+.step4 span{
+	width:100%;
+	padding:5px 0;
+	font-size: 18px;
+	color: #fff;
+	text-align: center;
+	display: inline-block;
+	position: absolute;
+	bottom: 0;
+	background-color: rgba(80,80,80,0.6);
+}
+
+.step2 form input[type='file']{
+	display: inline-block;
+	width:140px;
+	font-size: 14px;
+	margin-left: 20px;
+
+}
+.step2 form input[type='submit']{
+	font-size: 14px;
+	color:#333;
+	border:1px solid #eee;
+	background-color: #ddd;
+	padding:2px 4px;
+
+}

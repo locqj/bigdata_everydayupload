@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>本站用户</title>
+	<meta name="viewport" name="width=device-width,initial-scale=1.0">
+	<link rel="stylesheet" type="text/css" href="./../../bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="./../../YuCSS/style.css">
+	<link rel="stylesheet" type="text/css" href="./../../YuCSS/userIn.css">
+</head>
+<body>
+	<div class="wrap">
+		<div class="container-fluid" style="background-color: #666;">
+			<div class="ch_nav">
+				<img src="./../../img/LOGO_index.png" width="35">
+				<span class="logo"><a href="{:url('/manageindex')}" id="logo_txt">CHOGGTEN</a></span>
+				<ul class="fast_key list-inline" style="display: inline-block;">
+					<li>
+						<a href="{:url('/manageindex')}" style="background-color: #4C9Ed9;">
+							<span class="iconfont" title="">&#xe61d;</span>
+						</a>
+						<a href="{:url('/userout')}" style="background-color: orange;">
+							<span class="iconfont" title="">&#xe637;</span>
+						</a>
+						<a href="{:url('/userIn')}">
+							<span class="iconfont" title="">&#xe613;</span>
+						</a>
+						 
+					</li>
+				</ul>
+				<a href="#" class="user">
+					<span class="iconfont" style="color: orange;font-size: 28px;">&#xe632;</span>
+					<span class="txt">欢迎,{$username}</span>
+					<span class="txt2 glyphicon glyphicon-chevron-down"></span>
+				</a>
+				<ul class="user_login list-unstyled" style="display: none;">
+					<li>
+						<a href="{:url('adminforcon/change_Pwd')}">
+							<span class="glyphicon glyphicon-lock"></span>
+							<span>修改密码</span>
+						</a>
+					</li>
+					<li>
+						<a href="{:url('adminforcon/out_login')}">
+							<span class="glyphicon glyphicon-off"></span>
+							<span>退出</span>
+						</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div class="">
+			<div class="ch_main">
+				<div class="row">
+					<div class="col-md-2 col-sm-2 col-xs-12">
+					
+                        
+							 <ul class="ul_nav list-unstyled">
+              
+               {volist name="menu" id="vo"}
+              <li class="ul_one_li" style="border-bottom:transparent;">
+                <a href="#" class="ul_one_a">
+                  <span class="iconfont1 icon1">&#xe61f;</span>
+                  <span>{$vo[0]['module_name']}</span>
+                </a>
+                <ul class="list-unstyled ul_one" style="display:none;">
+                   {volist name=":SidType($vo[0]['module_code'],$roleId)" id="k"}
+                  <li class="ul_two_li">
+                    <a href="#" class="ul_two_a">
+                      <span class="glyphicon glyphicon-collapse-down"></span>
+                      <span>{$k[0]['module_name']}</span>
+                    </a>
+                    <ul class="list-unstyled ul_two"  style="display: none;">
+                       {volist name=":SidType($k[0]['module_code'],$roleId)" id = "kk"}
+                      <li class="ul_three_li">
+                        <a href="{:url($kk[0]['module_url'])}">
+                        <span class="glyphicon glyphicon-collapse-up"></span>
+                        <span>{$kk[0]['module_name']}</span> 
+                        </a>
+                      </li>
+                       {/volist}
+                     
+                    </ul>
+                  </li>
+                  {/volist}
+                
+                </ul>
+              </li>
+              {/volist}
+            </ul>
+						
+					</div>
+				
+				 
+	<!-- 脚本语言 -->
+	<script src="./../../js/jquery.min.js"></script>
+	<script src="./../../bootstrap/js/bootstrap.min.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			 
+			$('.user').click(function() {
+				$('.user_login').toggle();
+			});
+			$('.ul_one_a').click(function() {
+				$(this).parent().find('.ul_one').toggle();
+			});
+			$('.ul_two_a').click(function() {
+				$(this).parent().find('.ul_two').toggle();
+			});
+			$('#addRole').click(function() {
+				 $('.add_Role').show();
+				 $('.right_title').hide();
+				 $('.right_table').hide();
+				 $(this).parent().siblings().removeClass('active');
+				 $(this).parent().addClass('active');
+			})
+			$('#Role').click(function() {
+				 $('.add_Role').hide();
+				 $('.right_title').show();
+				 $('.right_table').show();
+				 $(this).parent().siblings().removeClass('active');
+				 $(this).parent().addClass('active');
+			})
+		})
+	</script>
+</body>
+</html>

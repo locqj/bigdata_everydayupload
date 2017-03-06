@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>重置密码</title>
+	<meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="./../../bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="./../../YuCSS/style.css">
+  <link rel="stylesheet" type="text/css" href="./../../YuCSS/userIn.css">
+  <link rel="stylesheet" type="text/css" href="./../../css/login.css">
+</head>
+<body>
+ <div class="wrap">
+  <div class="container-fluid" style="background-color: #666;">
+    <div class="ch_nav">
+      <img src="./../../img/LOGO_index.png" width="35">
+      <span class="logo"><a href="{:url('/manageindex')}" id="logo_txt">CHOGGTEN</a></span>
+      <ul class="fast_key list-inline" style="display: inline-block;">
+        <li>
+          <a href="{:url('/manageindex')}" style="background-color: #4C9Ed9;">
+            <span class="iconfont" title="">&#xe61d;</span>
+          </a>
+          <a href="{:url('/userout')}" style="background-color: orange;">
+            <span class="iconfont" title="">&#xe637;</span>
+          </a>
+          <a href="{:url('/userIn')}">
+            <span class="iconfont" title="">&#xe613;</span>
+          </a>
+
+        </li>
+      </ul>
+      <a href="#" class="user">
+        <span class="iconfont" style="color: orange;font-size: 28px;">&#xe632;</span>
+        <span class="txt">欢迎,{$username}</span>
+        <span class="txt2 glyphicon glyphicon-chevron-down"></span>
+      </a>
+      <ul class="user_login list-unstyled" style="display: none;">
+        <li>
+          <a href="{:url('Adminforcon/change_Pwd')}">
+            <span class="glyphicon glyphicon-lock"></span>
+            <span>修改密码</span>
+          </a>
+        </li>
+        <li>
+          <a href="{:url('Adminforcon/out_login')}">
+            <span class="glyphicon glyphicon-off"></span>
+            <span>退出</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="register">
+      <div class="register_con" style="margin-top: 12%;">
+        <div>
+          <div class="r_head">
+            <span class="iconfont_2">&#xe60e;</span>
+            <span>重置密码</span>
+          </div>
+          
+          <div class="r_item">
+            <label>&nbsp;用户名：</label>
+            <input type="text" name="username" id="user" style="border:transparent;" readonly="readonly" value="青檬眼豆豆">
+          </div>
+          <div class="r_item">
+            <label><i>*</i>&nbsp;登录密码：</label>
+            <input type="password" name="pwd" id="pwd"/>
+          </div>
+          <div class="r_item">
+             <label><i>*</i>&nbsp;密码确认：</label>
+            <input type="password" name="pwd2" id="pwd2"  onblur="dispwd();" />
+          </div>
+          <span id="info" style="font-size: 12px;float: right;"></span>
+          <br>
+         
+          <div class="r_sub">
+          <!--  <label style="visibility: hidden;"><i>*</i>&nbsp;手机号码</label> -->
+            <!-- <button type="submit" onclick="reg_ajax_submit_to_sucess();">密码重置</button> -->
+            <input type="submit" value="Submit" onclick="tiaozhuan();" value="密码重置" />
+          </div>
+         
+          
+        <!--</form> -->
+        </div>
+      </div>
+    </div>
+
+</div>
+       
+<script src="http://static.runoob.com/assets/jquery-validation-1.14.0/lib/jquery.js"></script>
+<script src="http://static.runoob.com/assets/jquery-validation-1.14.0/dist/jquery.validate.min.js"></script>
+<script type="text/javascript">
+       function dispwd(){
+    
+         $.post("{:url('Index/exist_res_User_to_dis')}",{
+         
+         pwd:$('#pwd').val(),
+         pwds:$('#pwd2').val()
+       
+
+         },
+              function(data){
+              $('#info').html("<font>"+data+"</font>");
+              }
+           );
+     }
+     function tiaozhuan(){
+        $.post("{:url('Adminforcon/exist_res_User_to_dis')}",{ 
+             pwd:$('#pwd').val(),
+             pwds:$('#pwd2').val()  
+         },
+              function(data){
+              if(data=='ok')
+              {
+              window.location.href="{:url('Adminforcon/index')}";
+              }else
+              {
+              $('#info').html("<font>"+data+"</font>");
+             
+                }
+                  
+              }
+           );
+     }
+ </script>
+ <script type="text/javascript">
+   $(document).ready(function(){
+      $('.user').click(function() {
+        $('.user_login').toggle();
+      });
+   })
+ </script>
+</body>
+</html>

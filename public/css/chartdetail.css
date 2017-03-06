@@ -1,0 +1,688 @@
+	body{
+		width:100%;
+		height:100%;
+		padding:0;
+		margin:0;
+		font-family: "Helvetica Neue",Arial,"Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",sans-serif;
+		/*font-family: 'Helvetica Neue',Helvetica,STHeitiSC-Light,WOL_SB,
+		'Segoe UI Semibold','Segoe UI',Tahoma,Helvetica,sans-serif;*/
+		/*border:1px solid #000;*/
+	}
+	*{
+		list-style-type: none;
+		text-decoration: none;
+		padding:0;
+		margin:0;
+		color:#333;
+		/*font-family: 'Helvetica Heve';*/
+	}
+
+input[type='color']{
+	cursor: pointer;
+}
+/*2017-03-05新添*/
+
+.field-content dl dt{
+	line-height: 22px;
+	font-size: 14px;
+	color:#666;
+	font-weight: normal;
+	padding-left: 15%;
+}
+.field-content dl dd{
+	line-height: 22px;
+	padding-left: 40%;
+	font-size:13px;
+	color:#888;
+}
+.field-content hr{
+	border:1px dashed #ccc;
+	line-height: 22px;
+	margin:10px 0;
+}
+.refresh{
+	width:80%;
+	border-radius: 2px;
+	background-color:#D9DFE1;
+	color:#666;
+	padding:5px 0;
+	text-align: center;
+	margin: 15px auto 0;
+	display: inline-block;
+	cursor: pointer;
+}
+.cl{
+	font-size:13px;
+	height:18px;
+	line-height: 18px;
+	margin:8px 0;
+}
+.cl input{
+	height:18px;
+	line-height: 18px;
+}
+
+
+	.clear{
+		clear:both;
+	}
+	.left{
+		float:left;
+	}
+	.right{
+		float:right;
+	}
+	input{
+		border:0;
+		outline: none;
+		background-color: inherit;
+	}
+	input:focus{
+		outline: none;
+	}
+	textarea{
+		resize: none;
+		background-color: inherit;
+	}
+	i{
+		/*cursor: pointer;*/
+	}
+
+	a:hover{
+		text-decoration: none;
+	}
+	/*点击了右边的图表样式*/
+	.clicking{
+		background-color: #FFFFCC;
+		padding:4px;
+		border:3px solid #B5DFFF;
+	}
+	.clicked{
+		background-color: #E8EBED;
+	}
+	/*顶部的样式==============================================*/
+	#header{
+		width:96.7%;
+		height:65px;
+		line-height: 65px;
+		padding:0 2%;
+		position: fixed;
+		top:0;
+		background-color: #35a7ff;
+		z-index: 999;
+		/*border:1px solid red;*/
+	}
+	#chartdetailhead{
+		width:100%;
+		height:65px;
+		line-height: 65px;
+		padding:0 2%;
+		position: fixed;
+		top:0;
+		background-color: #35a7ff;
+		z-index: 999;
+	}
+	#chartdetailhead>div,
+	#header>div{
+		display: inline-block;
+	}
+	#left .nav{
+		width: 116%;
+		margin-left:-7.5%;
+	}
+	#right .nav{
+		width: 113.5%;
+		margin-left:-6%;
+	}
+	.worksheet-title li,
+	.field-title li,
+	.nav-pills li{
+		width:100%;
+		line-height: 18px;
+		/*height:30px;*/
+	}
+	#left .nav-pills,
+	#right .nav-pills{
+		/*background-color: #4DB4FF;*/
+		/*background-color:#BFE4FF;*/
+		background-color:#D9DFE1;
+		cursor: default;
+		/*border:1px solid #ccc;*/
+		/*border-bottom:1px solid #000;*/
+	}
+	.nav-pills li a{
+		font-size:15px;
+	}
+	.nav-pills .iconfont{
+		/*color:#fff;*/
+		/*color:#9966CC;*/
+		/*color:#AE63CF;*/
+		color: #35A7FF;
+	}
+	.worksheet-title>div{
+		display: inline-block;
+	}
+	/*"编辑图表"的文字样式*/
+	.header-name{
+		font-size: 25px;
+		color:#fff;
+	}
+	.showoperate *{
+		color:#ddd;
+	}
+	/*========================================================================*/
+	/*中间所有内容的样式==========================================*/
+	#content{
+		width:100%;
+		/*height:100%;*/
+		height:577px;
+		margin-top:65px;
+		background-color: #F3F5F6;
+	}
+	#content2{
+		width:100%;
+		/*height:100%;*/
+		/*height:577px;*/
+		margin-top:65px;
+		background-color: #F3F5F6;
+	}
+	/*左侧的选项的样式=======================*/
+	#left{
+		width:14%;
+		height:100%;
+		padding:0 1% 0;
+		float: left;
+		display: inline-block;
+		font-size: 14px;
+		border-right:1px solid #DADDDF;
+		background-color:#E8EBED;
+		/*overflow-y:scroll;*/
+	}
+	.worksheet{
+		/*margin-top:10px;*/
+	}
+	.worksheet,
+	.field-title,
+	.field-content{
+		line-height: 35px;
+	}
+
+	/*当前工作表*/
+	.worksheet-content{
+		width: 113.5%;
+		margin-left:-6%;
+		/*padding:0 5% 0 10%;*/
+		/*border-bottom: 1px solid #ddd;*/
+	}
+	.worksheet-content span{
+		display: inline-block;
+		color:#333;
+		padding:6px 0;
+		margin:0 0 0 13%;
+		font-size: 14px;
+			/*color:#678181;*/
+	}
+	.field{
+		position: relative;
+		/*margin-top: 10px;*/
+	}
+	/*搜索样式*/
+	.field-search{
+		/*text-align: center;*/
+		border-bottom:1px solid #35A7ff;
+		padding-left: 20px;
+		margin-top:5px;
+		/*position: relative;*/
+	}
+	/*.icon-sousuo{
+		position: absolute;
+		margin-top:-20px;
+		margin-left:40%;
+	}*/
+	/*字段的样式*/
+	.field-content{
+		padding:5%;
+	}
+	.menu-index{
+		margin-bottom: -10px;
+	}
+
+	.field-content ul li{
+		padding-left:25%;
+	}
+	.field-content ul li a{
+		color:#666;
+		text-decoration: none;
+	}
+
+	/*=======================================================================*/
+	/*中间显示图表的样式=========================*/
+	#center{
+		width:70.5%;
+		height:100%;
+		padding:0 1.5%;
+		float: left;
+		display: inline-block;
+		background-color: #fff;
+	}
+
+	/*“维度”和“数值”的项*/
+	.choose-weidu,
+	.choose-shuzhi{
+		width:100%;
+		height:35px;
+		line-height: 30px;
+		margin:10px auto 0;
+		border-bottom:1px solid #ddd;
+	}
+	.choose-weidu>span,
+	.choose-shuzhi>span{ 
+		/*font-size:15px;*/
+		font-size: 15px;
+	}
+
+	#weidus,
+	#shuzhis{
+		padding-left: 5px;
+	}
+	.newweidu,
+	.newshuzhi{
+		margin:0 5px;
+	}
+	/*拖拽样式*/
+	/*.value{
+		display: inline-block;
+	}*/
+	.drop{
+		width: 92%;
+		/*height:30px;*/
+		float: right;
+		/*border: 1px solid #036BB5;*/
+		display: inline-block;
+	}
+	/*拖拽前的样式*/
+	.field-content .drag{
+		/*margin:0 10px;*/
+		width: 50%;
+		padding-left: 10%;
+		overflow: hidden;		
+	}
+	/*拖拽后的样式*/
+	.choosechart .drag{
+		margin:0 10px;
+		/*width: 50%;*/
+		overflow: hidden;
+		display: inline-block;
+	}
+	/*左边两个筛选*/
+	.shaixuan{
+		display: inline-block;
+		width:19%;
+		height:82%;
+		padding-top:10px;
+		border-right:1px solid #ddd;
+		/*overflow-y: scroll;*/
+	}
+	.shaixuanqi{
+		height:60%;
+	}
+	.yanse{
+		height:30%;
+		/*border-top:1px solid #ddd;*/
+		padding:10px;
+	}
+	.yanse-title{
+		margin-bottom: 20px;
+		font-size: 14px;
+	}
+
+	/*图表显示的样式*/
+	#chart{
+		display: inline-block;
+		width:80%;
+		height:80%;
+		margin-top:10px;
+	}
+	#chart2{
+		display: inline-block;
+		width:80%;
+		height:80%;
+		margin-top:10px;
+	}
+	/*=======================================================================*/
+	/*右边的选项的样式===========================*/
+	#right{
+		width:15.5%;
+		height:100%;
+		padding:0 0.5%;
+		float: left;
+		display: inline-block;
+		overflow-x: hidden;
+		overflow-y: scroll;
+		font-size: 14px;
+		line-height: 25px;
+		background-color: #E8EBED;
+		border-left:1px solid #DADDDF;
+
+	}
+	#right input[type='text']{
+		border-bottom: 1px solid #35A7FF;
+	}
+	#right>div{
+		width: 100%;
+		/*padding-bottom:5px;*/
+		margin:0 auto 8px;
+		/*border-bottom:1px solid grey; */
+	}
+	.charttype{
+		position: relative;
+	}
+	.charttype i{
+		cursor: pointer;
+	}
+	.charttype-title{
+		margin-bottom: 10px;
+	}
+	.chart-type{
+		width:80%;
+		position: relative;
+		margin:0 auto;
+	}
+	.chart-type>div{
+		display: inline-block;
+		width: 48%;
+		margin:0 auto;
+		text-align: center;
+		/*padding:9% 1.5%;*/
+		padding:9% 0;
+		/*float: right;*/
+	}
+	.chart-type>div i{
+		font-size:28px;
+	}
+	.chart-type>div:hover{
+		background-color: #fff;
+	}
+	.chart-hover{
+		
+		border: 2px solid red;
+	}
+
+	/*标题和单位 的样式*/
+	.biaoti span,
+	.danwei span{
+		width: 18%;
+		display: inline-block;
+	}
+	.biaoti input,
+	.danwei input{
+		width: 70%;
+		display: inline-block;
+	}
+	/*最大值和最小值的样式*/
+	.maximum input[type='text'],
+	.minimum input[type='text']{
+		width: 40%;
+	}
+	/*显示条数目  下面的选择框样式*/
+	.showlinenum-edit label{
+		display: block;
+		margin-left: -5%;
+		width: 90%;
+		font-size: 12px;
+		font-weight: normal;
+	}
+	.showlinenum-edit input[type='checkbox']{
+		width: 10%;
+		margin-left: 10%;
+		/*border:1px solid red;*/
+		/*display: block;*/
+	}
+
+	input:focus { outline: none; } 
+
+	/*图表标题部分的样式*/
+	.chartname input[type='text']{
+		margin-left: 5%;
+	}
+	.charttitle span,
+	.charttitle .titleposition{
+		font-size:12px;
+	}
+	.charttitle>div{
+		margin-left: 5%;
+	}
+	.charttitle>span{
+		display: block;
+	}
+	.charttitle input[name='chartname'],
+	.charttitle input[name='size'],
+	.charttitle input[name='position']{
+		width:70%;
+		padding-left: 10%;
+		border-bottom:1px solid #35A7FF;
+	}
+	.charttitle input[name='color'],
+	.charttitle .titleposition{
+		width:70%;
+		/*padding-left: 10%;*/
+	}
+	.charttitle .tianjia{
+		color:#333;
+		/*font-weight: bold;*/
+		padding-left: 0;
+		/*font-size: 16px;*/
+		font-size: 15px;
+		padding:10px 0;
+		margin-left: 0;
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	/*批量添加维度 字段*/
+	.alert{
+		z-index:9999;
+		width: 100%;
+		height:100%;
+		position: absolute;
+		top:0;
+		background-color: rgba(213,217,220,0.94);
+	}
+	.add-ziduan label{
+
+		display: inline-block;
+		margin:20px 10px 10px;
+	}
+	.alert-title .left{
+		font-size: 18px;
+		color:#333;
+		/*font-weight: bold;*/
+	}
+	.alert-content{
+		width:45%;
+		margin:10% auto;
+		padding:20px 2%;
+		background-color: #F0F2F3;
+		z-index:9999;
+	}
+	/*搜索样式*/
+	.search{
+		width: 40%;
+		margin:10px 0;
+		float: right;
+		position: relative;
+	}
+	.alert-search{
+		border-bottom:1px solid #35A7ff;
+		padding-left: 20px;
+		margin-top:5px;
+	}
+	.field .icon-sousuo,
+	.search .icon-sousuo{
+		position: absolute;
+		margin-top:-20px;
+		margin-left:43%;
+	}
+	/*表格样式*/
+	.ziduan{
+		margin:10px 0;
+	}
+	/*各个字段样式*/
+	.ziduan label{
+		width: 25%;
+		padding:10px 0;
+		display: inline-block;
+		float: left;
+		font-size:16px;
+		font-weight: normal;
+		color:#555;
+	}
+
+	/*确定，取消 按钮的样式*/
+	.btns{
+		width: 30%;
+		float: right;
+		margin-top:20px;
+
+	}
+	.alert-ziduan input[type='submit'],
+	.alert-weidu input[type='submit']{
+		width: 45%;
+		height: 35px;
+		font-size: 16px;
+		color:#35A7FF;
+		border:1px solid #eee;
+		background-color: #ddd;
+		cursor: pointer;
+	}
+	input[type='button']{
+		width: 45%;
+		height: 35px;
+		/*color:blue;*/
+		color:#35A7FF;
+		/*font-size: 18px;*/
+		border:1px solid #eee;
+		background-color: #ddd;
+		cursor: pointer;
+	}
+
+
+
+	/*右边各个图表的弹出框样式*/
+	/*法2：通过js获取对应的图表图案对应的位置，然后设置这个框*/
+	.intro{
+		padding:10px 8px;
+		text-align: center;
+	}
+	.intro h5{
+		font-size:18px;
+		margin-bottom:5px;
+	}
+	.intro-line .triangel,
+	.intro-scatter  .triangel,
+	.intro-map .triangel,
+	.intro-funnel .triangel {
+		width: 0;
+		height:0;
+		border-top: 10px solid transparent;
+		border-right: 10px solid #fff;
+		border-left: 10px solid transparent;
+		border-bottom: 10px solid transparent;
+		position: absolute;
+		top:28px;
+		left:-20px;
+	}
+	.intro-bar .triangel,
+	.intro-pie  .triangel,
+	.intro-graph .triangel,
+	.intro-gauge .triangel {
+		width: 0;
+		height:0;
+		border-top: 10px solid transparent;
+		border-right: 10px solid transparent;
+		border-left: 10px solid #fff;
+		border-bottom: 10px solid transparent;
+		position: absolute;
+		top:28px;
+		right:-20px;
+	}
+	/*第一列的right是200，第二列的right是110*/
+	.intro-line{
+		width: 100px;
+		height:60px;
+		background-color: #fff;
+		position: absolute;
+		float: left;
+		margin-top: -145%;
+		margin-left: 40%;
+	}
+	.intro-bar{
+		width: 100px;
+		height:60px;
+		background-color: #fff;
+		position: absolute;
+		margin-top: -145%;
+		margin-left: -10%;
+
+	}
+	.intro-scatter{
+		width: 100px;
+		height:60px;
+		background-color: #fff;
+		position: absolute;
+		margin-top: -110%;
+		margin-left: 40%;
+	}
+	.intro-pie{
+		width: 100px;
+		height:60px;
+		background-color: #fff;
+		position: absolute;
+		margin-top: -110%;
+		margin-left: -10%;
+	}
+	.intro-map{
+		width: 100px;
+		height:60px;
+		background-color: #fff;
+		position: absolute;
+		margin-top: -75%;
+		margin-left: 40%;
+
+	}
+	.intro-graph{
+		width: 100px;
+		height:60px;
+		background-color: #fff;
+		position: absolute;
+		margin-top: -75%;
+		margin-left: -10%;
+	}
+	.intro-funnel{
+		width: 100px;
+		height:60px;
+		background-color: #fff;
+		position: absolute;
+		margin-top: -42%;
+		margin-left: 40%;
+	}
+	.intro-gauge{
+		width: 100px;
+		height:60px;
+		background-color: #fff;
+		position: absolute;
+		margin-top: -40%;
+		margin-left: -10%;
+	}
