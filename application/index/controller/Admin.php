@@ -2,7 +2,7 @@
 namespace app\index\controller;
  use \think\View;
  use \think\Db;
-  use \think\Session;
+ use \think\Session;
  use \think\Controller;
 class admin extends Common
 {  
@@ -49,9 +49,18 @@ class admin extends Common
       $this->assign('username', $username);
       
    }
+   public function confirmdata()
+   {    
+        //$dataSoure = Db::table('cbd_datasource')->select();
+
+        $this->view->engine->layout(false);
+        //$this->assign('dataSoure', $dataSoure);
+        return view();
+   }
   	// lin添加
    public function getdata()
    { 
+
       return view();
    }
    public function test()

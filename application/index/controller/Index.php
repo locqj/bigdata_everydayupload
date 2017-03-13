@@ -8,26 +8,32 @@ class Index  extends Controller
 {   
     public function index()
     {       
-          return  view();
+         return view();
     }
-    public function aboutme(){ 
+    public function aboutme()
+    { 
           return view();
     }
-    public function loginreg(){ 
-         return view();   
+    public function loginreg()
+    { 
+          return view();   
          
     }
-    public function loginreg_for_manage(){ 
-        return view();
+    public function loginreg_for_manage()
+    { 
+          return view();
     }  
-    public function register(){
+    public function register()
+    {
           return view();
     }
-    public function demo(){
+    public function demo()
+    {     
           return view();
     }
     //登陆用户判断
-    public function exist_User_to_dis(){
+    public function exist_User_to_dis()
+    {
           $dis_username =input('post.username');
           $resDb= Db::table('cbd_users')->where('name',$dis_username)->find();
             
@@ -45,8 +51,9 @@ class Index  extends Controller
               }  
     }
     //用户登录提交判断
-    public function login_suss_dis(){
-             $username = input('post.username'); 
+    public function login_suss_dis()
+    {
+           $username = input('post.username'); 
            $password = md5(input('post.passwd')); 
            // echo $username.$password;
           
@@ -67,11 +74,10 @@ class Index  extends Controller
           
     }
     //后台登陆提交判断
-    public function login_suss_dis_manage(){
+    public function login_suss_dis_manage()
+    {
            $username = input('post.username'); 
-           $password = md5(input('post.passwd'));
-       
-            
+           $password = md5(input('post.passwd')); 
            $_SERVER['REMOTE_ADDR'];
            $resDb= Db::table('cbd_users')->where('name',$username)->where('password',$password)->where('role','NEQ','0')->find();
            $last_login_time =date("Y-m-d H:i:s");
@@ -79,8 +85,8 @@ class Index  extends Controller
            if($resDb!=null){
               Session::set('Managename',$username); 
               Db::table('cbd_users')->where('name',$username)->where('password',$password)->update(['last_login_time' => $last_login_time,'last_login_ip'=>$last_login_ip]);  
-              Session::set('Managerole',$resDb['role']); 
-               echo 'success';
+              Session::set('Managerole', $resDb['role']); 
+               echo "success";
                  //return view('adminforcon/index');
            // $this->success('登陆成功','adminforcon/index');
             
@@ -91,18 +97,19 @@ class Index  extends Controller
            }   
     }
     //注册页面的ajax判断
-    public function reg_ajax_submit_to_sucess(){
+    public function reg_ajax_submit_to_sucess()
+    {
             
-         $username =input('post.username');
-         $pwd =md5(input('post.pwd'));
-         $phone =input('post.phone');
-         $email =input('post.email');
-         $yanma =input('post.yanma');
+         $username = input('post.username');
+         $pwd = md5(input('post.pwd'));
+         $phone = input('post.phone');
+         $email = input('post.email');
+         $yanma = input('post.yanma');
          $create_time = date("Y-m-d H:i:s");
          $last_login_ip = $_SERVER['REMOTE_ADDR'];
-         $resDb= Db::table('cbd_yanzheng')->where('yanma',$yanma)->where('phone',$phone)->find();
-        if($resDb!=null){
-             $data = ['name' => $username,'password' => $pwd,'phone' => $phone, 'mail' => $email,'status'=>'1','role'=>'0','create_time'=>$create_time,'last_login_ip'=>$last_login_ip];
+         $resDb = Db::table('cbd_yanzheng')->where('yanma', $yanma)->where('phone', $phone)->find();
+        if($resDb != null){
+             $data = ['name' => $username, 'password' => $pwd, 'phone' => $phone, 'mail' => $email, 'status'=>'1','role'=>'0','create_time'=>$create_time,'last_login_ip'=>$last_login_ip];
              $dis_sus=Db::name('users')->insert($data); 
               if($dis_sus=='1'){
             echo 'ok';
@@ -117,7 +124,8 @@ class Index  extends Controller
 
     }
     //密码判断
-    public function exist_res_User_to_dis(){
+    public function exist_res_User_to_dis()
+    {
           $dis_pwd = input('post.pwd');
           $dis_pwd_s = input('post.pwds');
           if($dis_pwd == $dis_pwd_s){
@@ -127,7 +135,8 @@ class Index  extends Controller
           }
     }
     //注册用户判断
-    public function exist_res_Username_to_dis(){
+    public function exist_res_Username_to_dis()
+    {
          $dis_username = input('post.username');
           $resDb= Db::table('cbd_users')->where('name',$dis_username)->find();
             if($dis_username==null)
@@ -142,7 +151,8 @@ class Index  extends Controller
               }
     }
     //验证码发送
-    public function dis_yanzhengma(){
+    public function dis_yanzhengma()
+    {
            $phone = input('post.phone');
            $resDb= Db::table('cbd_users')->where('phone',$phone)->find();
            if($resDb==null){ 
@@ -192,60 +202,21 @@ class Index  extends Controller
        Session::delete('username');
        $this->redirect('/');
     }*/
-    public function test(){
-        $Nowtime=date("Y-m-d H:i:s");
-        $Ttime=date("Y-m-d");
-        $count = dump(db('yanzheng') ->where('create_time','between time',[$Ttime, $Nowtime])->count('phone'));//当天前的时间
-        $username='admin';
-        $password='admin';
-        $a = md5($password);
-        $resDb= Db::table('cbd_users')->where('name',$username)->where('password',$a)->find();
-        //ssdump($resDb);
-        dump($resDb['role']);
-    }
-   //实现菜单demo
-    public function test1(){
-            $get_module_code=Db::table('cbd_privilege')->distinct(true)->field('module_code')->where('role_code','2')->where('status','1')->select();
-            //dump($get_module_code);
-            for($i=0;$i<count($get_module_code);$i++)
-            {
-               $menu= Db::table('cbd_module')->where('module_code',$get_module_code[$i]['module_code'])->where('parent_code','PARENT')->select();
-
-            } 
-            $this->assign('menu',$menu);
-          
-            return view();
-          
+    public function test()
+    {
+      /* $getData = Db::table('cbd_datasource_name')->select();
+       foreach ($getData as $key => $value) {
+           //echo $data['column_name'] = $value['column_name'];
+            $getValuebyColumnName = Db::table('cbd_datasource')->column($value['column_name']);
+            $dataByMix[$key][$value['column_value']] = $getValuebyColumnName;
+              
+       }
+       echo json_encode($dataByMix,JSON_UNESCAPED_UNICODE); //实现获取xls数据json*/
+       /*获取文件名方法*/
+       $getData = Db::table('cbd_datasource_name')->field('file_name')->group('file_name')->select();
+       pp($getData);
         
     }
-    
-    public function tt (){
-          $m = Db::table('cbd_module')->select();
-           $m = M('cn_menu')->field(true)->select();
-    $d = getTree($m,0);
-    $this->assign('menu',$d);
-      dump($d);
-
-    }
-    public function upload(){
-    // 获取表单上传文件 例如上传了001.jpg
-    $file = request()->file('image');
-    // 移动到框架应用根目录/public/uploads/ 目录下
-    $info = $file->rule('date')->validate(['ext'=>'jpg,png,gif'])->move(ROOT_PATH . 'public' . DS . 'uploads',true,false);
-    if($info){
-        // 成功上传后 获取上传信息
-        // 输出 jpg
-         
-        echo $info->getExtension().'<br/>';
-        // 输出 20160820/42a79759f284b767dfcb2a0197904287.jpg
-        echo $info->getSaveName().'<br/>';
-        echo $info->getOwner().'<br/>';
-        // 输出 42a79759f284b767dfcb2a0197904287.jpg
-        echo $info->getFilename().'<br/>'; 
-    }else{
-        // 上传失败获取错误信息
-        echo $file->getError();
-    }
-}
+   
    
 }

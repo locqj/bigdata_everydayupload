@@ -16,35 +16,9 @@
 	<div id="wrap">
 
 		<!-- 头部 -->
-		<nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="margin: 0;">
-			<div class="container-fluid">
-				<!-- Brand and toggle get grouped for better mobile display -->
-				<div class="navbar-header">
-					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-						<span class="sr-only">Toggle navigation</span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-					</button>
-					<a class="navbar-brand" href="{:url('/index')}"><img src="./../../img/LOGO_index.png">&nbsp;CHOGGE</a>
-				</div>
-
-				<!-- 导航 -->
-				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-					<ul class="nav navbar-nav navbar-right" style="margin-right: 60px;">
-						<li><a href="http://blog.565tech.com/">博客</a></li>
-						<li><a href="#">文档</a></li>
-						<li><a href="#">Demo</a></li>
-						<li><a href="#">产品</a></li>
-						<!-- <li><a href="{:url('/aboutme')}">关于</a></li> -->
-						<li><a href="{:url('/login')}">登录</a></li>
-					</ul>
-				</div><!-- /.navbar-collapse -->
-
-			</div><!-- /.container-fluid -->
-		</nav>
+	     {include file="public/index/header" /}
 		<!-- end of nav -->
-		<button class="alert" style="width: 100px;height:30px;margin-top:100px;position: fixed">点击</button>
+		 
 		<!-- 示例展示 -->
 		<div id="demo" style="margin-bottom: 30px;">
 			<div class="chartdemo demo1">
@@ -95,15 +69,10 @@
 		<!-- 结束示例展示 -->
 		
 		
-		<!-- 联系我们 -->
-		<div class="container-fluid" style="background-color: #63AADE;">
-			<div class="contact_me">
-				 <span class="contact_email">联系我们 : chogge@565tech.com</span>
-				<!--  <span class="contact_tel">电话：18852963680</span> -->
-				 <span class="contact_addr">地址：常熟市同济科技广场24楼</span>
-				 <span class="contact_indent">©爱诺信物联科技有限公司 | 苏ICP备13035478号-4</span>
-			</div>
-		</div>
+		 
+	    <!-- footer -->
+	     {include file="public/index/footer" /}
+		<!-- end of footer -->
 	</div>
 
 	<!-- 脚本语言 -->

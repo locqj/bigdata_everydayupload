@@ -13,20 +13,8 @@
 </head>
 <body>
 	<!-- 头部的导航栏 -->
-	<div id="header">
-		<div class="left">
-			<span class="logo">爱诺信数据</span>
-			<!-- <div class="nav-item">
-				<a id="yibiaopan" class="active" href="{:url('/userAdmin')}">首页</a>
-				<a id="gongzuobiao" class="disactive" href="{:url('/worksheet')}">工作表</a>
-				<a id="shujuyuan" class="disactive" href="{:url('/datasource')}">数据源</a>
-				<a id="mubanku" class="disactive" href=" {:url('/module')}">模板库</a>
-			</div> -->
-		</div>
-		<div class="right">
-			<span class="username">{$username}<span style="font-size: 18px;color:#fff;font-weight: normal">，欢迎您!</span></span>
-			<a href="{:url('Admin/out_login')}" class="loginout">退出</a>
-		</div>
+        {include file="public/admin/nav" /}
+		 
 	</div>
 	<!-- 具体内容 -->
 	<div id="content">

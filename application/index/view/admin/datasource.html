@@ -10,62 +10,37 @@
 	<link rel="stylesheet" type="text/css" href="./../../css/chartdetail.css">
 </head>
 <body>
-	<!-- 头部的导航栏 -->
-	<div id="header">
-		<div class="left">
-			<div class="logo">爱诺信数据</div>
-				<div class="nav-item">
-				<a id="yibiaopan" class="disactive" href="{:url('/userAdmin')}">首页</a>
-				<a id="gongzuobiao" class="disactive" href="{:url('/worksheet')}">工作表</a>
-				<a id="shujuyuan" class="active" href="{:url('/datasource')}">数据源</a>
-				<a id="mubanku" class="disactive" href=" {:url('/module')}">模板库</a>
-			</div>
-		</div>
-		<div class="right">
-			<span class="username">{$username}</span>
-			<a href="{:url('Admin/out_login')}" class="loginout">退出</a>
-		</div>
-	</div>
+     <!-- 头部的导航栏 -->
+	{include file="public/admin/nav" /}
 	<!-- 具体内容 -->
 	<div id="content">
-		<!-- 左侧添加仪表盘和样式 -->
-		<div id="left">
-			<div class="yibiaopan">
-				<div class="left"><b>仪表盘</b></div>
-				<div class="right">
-					<i class="iconfont icon-sousuo"></i>
-					<i class="iconfont icon-jiahao"></i>
-					<i class="iconfont icon-zhankai"></i>
-				</div>	
-				<div class="clear"></div>
-			</div>
-			<div class="yangshi">
-				<span>添加的样式</span>
-				<ul>
-					<li>仪表盘1</li>
-					<li>仪表盘2</li>
-					<li>仪表盘3</li>
-				</ul>
-			</div>
-		</div>
-		<!-- 右边具体显示图表的名字和表 -->
-		<div id="showcharts" class="left">
-			<div class="charttitle">
-				<div class="left"><b>仪表盘名字</b>
-                 
-                     
+	 <div><img src="./../../img/empty-top.png"></div>
+       	<div class="step2" style="background:url('./../../img/upload.png');background-size:100% 100%;">
+					<span>步骤2、上传excel文件
+						<form action="{:url('UpDownFile/upload')}" enctype="multipart/form-data" method="post" style="display: inline-block">
+                  			<input type="file" name="image"  class="upfile"/> 
+                  			<input type="submit" name="uploadFile" id="uploadFile" value="上传" /> 
+               			</form>
+               		</span>				
 				</div>
-				<div class="right">
-					<i class="iconfont icon-jiahao">添加图表</i>
-					<i>图文模式</i>
-					<i>分享</i>
-				</div>
-				<div class="clear"></div>
-			</div>
-			<div class="charts">
-			 
-			</div>
-		</div>
 	</div>
 </body>
+ 
+	<script type="text/javascript">
+		 $(function(){
+		 	$('#uploadFile').click(function(){
+		 		var fileval =  $('.upfile').val();
+		 		if(fileval!=''){
+		 		    alert('上传成功'); 
+		 			return true;
+		 		}else{
+		 			alert('请上传模板文件');
+		 			return false;
+		 		}
+		 		// alert(fileval);
+		 	})
+		 	
+		 })
+ 
+   </script>
 </html>

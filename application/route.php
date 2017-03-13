@@ -20,6 +20,7 @@ return [
        'aboutme' => 'index/index/aboutme', //关于页面
        'login' => 'index/index/loginreg',//登陆页面
        'register' => 'index/index/register',//注册页面
+       'demo' => 'index/index/demo',//demo页面
        'manage' => 'index/index/loginreg_for_manage', //后台登陆
        'manageindex' => 'index/adminforcon/index', //后台首页
        'userout' => 'index/adminforcon/userout', //后台userout
@@ -30,6 +31,8 @@ return [
        'worksheet' => 'index/admin/worksheet',//工作表   
        'module' => 'index/admin/module', //模板库
        'datasource' => 'index/admin/datasource', //数据源
+       'confirmdata' => 'index/admin/confirmdata',//确认els数据
+       'confirm' => 'index/UpDownFile/confirm_els',//提交els数据
        'editchart' => 'index/admin/chartdetail2',//编辑图标
        'changepassword' => 'index/index/forget_pwd_send_yanma', //修改密码验证
        'change' => 'index/index/reset_pawd' //修改密码

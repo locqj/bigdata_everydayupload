@@ -1,0 +1,58 @@
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+ 	<meta charset="UTF-8">
+ 	<title>Document</title>
+  <script src="https://cdn.static.runoob.com/libs/jquery/1.10.2/jquery.min.js"></script>
+ </head>
+ <body>
+ 	  <table border="1">
+        {foreach name="dataSource" item="vo"} 
+            <tr>
+             {foreach name="vo" item="so"}
+               <td id = '$key'>
+                {if condition="$so eq null"}NULL
+                {else /} 
+                   {$so}
+                {/if} 
+                </td>
+             {/foreach}
+            </tr>   
+        {/foreach}
+       </table>        
+        
+             表名：<input  id="filename" name="filename" type="text">
+                   <span id="info"></span>
+        	<button id="sure" type="submit">确认</button>
+
+
+        
+
+ </body>
+     <script type="text/javascript">
+          $(document).ready(function(){
+                $("#sure").click(function(){
+                       if($("#filename").val() != "")
+                         {
+                          $.post("{:url('UpDownFile/dist_file_name')}",{
+                             filename:$('#filename').val()},
+                            function(data){
+                             alert(data);
+                             if(data == "ok"){
+                          
+                               window.location.href="{:url('/confirm')}";
+
+                            }else{
+                               $('#info').html("<font color=red>该表名已存在</font>");
+                                 }
+                              
+                              }
+                           );  
+                         }else{
+                           $('#info').html("<font color=red>请输入表名</font>");
+                         }
+                 });
+             });
+
+     </script>
+ </html>

@@ -13,9 +13,12 @@ Class Common extends Controller {
     {
         if(Session::get('username') == null)
         {
-		  $this->success('非法登陆', '/login');  
+		  $this->redirect('/login');
         }
 		  
     }
+    function p($array){
+        dump($array,1,'<pre>',0);
+     }
 
 }
