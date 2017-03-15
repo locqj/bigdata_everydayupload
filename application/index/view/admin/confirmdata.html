@@ -136,13 +136,15 @@
         });
         $('#workname').blur(function(){
            if($('#workname').val() == ''){
-              $('#info').html('文件名不得为空');
+              $('#info').html('工作表不得为空');
            }
            $.post("{:url('UpDownFile/dist_file_name')}",{'workname':$('#workname').val()},function(data){
                if(data == "ok"){
 
                }else{
                  $('#info').html('名字已重复');
+                 $('#workname').val("");
+                 $('#workname').focus();
                }
 
            })
@@ -150,9 +152,10 @@
       })
       function checksubmit()
       {
-           if($('#workname').val() == ''){
-            return false;
+           if($('#workname').val()!='' && $('#remark').val()!=''){
+            return true;
            }
+           return false;
 
       }
        

@@ -11,7 +11,7 @@ class UpDownFile extends Common {
     public function upload()
     {
     // 获取表单上传文件 例如上传了001.jpg
-    $file = request()->file('image');
+     $file = request()->file('image');
     // 移动到框架应用根目录/public/uploads/ 目录下
     $info = $file->rule('date')->validate(['ext'=>'xls'])->move(ROOT_PATH . 'public' . DS . 'uploads','');
     if($info){ 
@@ -47,7 +47,7 @@ class UpDownFile extends Common {
           
             }
             /* pp($dataSource);*/
-             $this->view->engine->layout(false);
+             Session::set('filename', $file);        
              Session::set('dataSource', $dataSource);
              $this->assign('dataSource', $dataSource);
              return view('admin/confirmdata');
@@ -76,16 +76,17 @@ class UpDownFile extends Common {
 /*确认提交els表*/
     public function confirm_els()
     {
-             
+            $inputWorkName = input('post.workname');
+            $inputReMark = input('post.remark');
             $dataSource = Session::get('dataSource');    
-            $getFilename = Session::get('filename');  
+            
             foreach ($dataSource as $key => $value) {
               
                   if ($key == 0) {
                     foreach ($value as $k => $val) { 
                       $dataName['column_name'] = $k;
                       $dataName['column_value'] = $val;
-                      $dataName['file_name'] = $getFilename;
+                      $dataName['file_name'] = $inputWorkName;
                       $dataName['user'] = Session::get('username');
                        Db::table('cbd_datasource_name')->insert($dataName);
                       } 
@@ -97,23 +98,25 @@ class UpDownFile extends Common {
                     foreach ($value as $k => $val) { 
                        $dataValue[$k] = $val; 
                        }
-                       $dataValue['file_name'] = $getFilename;
+                       $dataValue['file_name'] = $inputWorkName;
                        $dataValue['user'] = Session::get('username');
                        Db::table('cbd_datasource')->insert($dataValue);
                        
                   }
               } 
+               
+                 Db::table('cbd_data_store_filename')->insert(['datafilename' => $inputWorkName, 'remark' => $inputReMark, 'user' => Session::get('username')]);
                  $this->assign('username', Session::get('username'));
-                 return view('admin/index'); 
+                 return view('admin/worksheet'); 
             
     }
     public function dist_file_name()
     {
-      $getFilename = input('post.filename');
+      $getFilename = input('post.workname');
       $getFindReturnValue = Db::table('cbd_datasource_name')->where('file_name', $getFilename)->find();
       if($getFindReturnValue == null){
         echo "ok";
-        Session::set('filename', $getFilename);
+       
       }else{
         echo "error";
       }
