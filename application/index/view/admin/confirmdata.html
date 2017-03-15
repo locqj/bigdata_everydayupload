@@ -1,35 +1,99 @@
- <!DOCTYPE html>
- <html lang="en">
- <head>
- 	<meta charset="UTF-8">
- 	<title>Document</title>
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>模板首页</title>
   <script src="https://cdn.static.runoob.com/libs/jquery/1.10.2/jquery.min.js"></script>
- </head>
- <body>
- 	  <table border="1">
-        {foreach name="dataSource" item="vo"} 
-            <tr>
-             {foreach name="vo" item="so"}
-               <td id = '$key'>
-                {if condition="$so eq null"}NULL
-                {else /} 
-                   {$so}
-                {/if} 
-                </td>
-             {/foreach}
-            </tr>   
-        {/foreach}
-       </table>        
-        
-             表名：<input  id="filename" name="filename" type="text">
-                   <span id="info"></span>
-        	<button id="sure" type="submit">确认</button>
+  <link rel="stylesheet" type="text/css" href="./../../css/iconfont/iconfont.css">
+  <link rel="stylesheet" type="text/css" href="./../../css/chartdetail.css">
+  <link rel="stylesheet" type="text/css" href="./../../css/index2.css">
+  <link rel="stylesheet" type="text/css" href="./../../css/timeline.css">
+  <link rel="stylesheet" type="text/css" href="./../../css/dealdata.css">
+</head>
+<body>
+  <!-- 头部的导航栏 -->
+  <div id="header">
+    <div class="left">
+      <div class="return">
+        <i class="iconfont icon-fanhui"></i>
+        <span style="display: inline-block;border-right:2px solid #eee;height:23px;margin:0px 20px;"></span>
+      </div>
+      <div class="nav-item" style="font-size: 24px;margin-left: 120px;color:#fff">上传数据</div>
+    </div>
+  </div>
+  <div class="container">
+        <div class="main">
+            <ul class="cbp_tmtimeline">
+           <!--      <li>
+               <div class="cbp_tmicon cbp_tmicon-phone">
+               </div>
+               <div class="cbp_tmlabel">
+                 <span>上传文件</span>
+               <form action="{:url('UpDownFile/upload')}"  onsubmit="return checksubmit();" id="form1" enctype="multipart/form-data" method="post" style="display: inline-block">
 
+                   <div class="andArea" >
+                     <div class="filePicker">
+                       <i class="iconfont icon-jiahao"></i>
+                     </div>
+                     <input id="fileImage" type="file" class="upfile" name="image">
+                   </div>
+                   <div id="fileName">
+                      <label class="fileName">暂时没有选择文件</label>
+                   </div>
+                   <div class="clear"></div>
+                   <input type="submit" name="uploadFile" id="uploadFile" value="上&nbsp;&nbsp;&nbsp;&nbsp;传">
+              </form>
+               </div>
+           </li> -->
+                <li>
+                    <a name="step2"><div class="cbp_tmicon cbp_tmicon-screen"></div>
+                    <div class="cbp_tmlabel">
+                        <span id="yulan">
+                             <table border="1">
+                              {foreach name="dataSource" item="vo"}
+                                  <tr>
+                                   {foreach name="vo" item="so"}
+                                     <td id = '$key'>
+                                      {if condition="$so eq null"}NULL
+                                      {else /}
+                                         {$so}
+                                      {/if}
+                                      </td>
+                                   {/foreach}
+                                  </tr>
+                              {/foreach}
+                             </table>
+                        </span>
 
-        
+                    </div>
+                    </a>
+                </li>
+                <li>
+                    <a name="step3"><div class="cbp_tmicon cbp_tmicon-mail"></div></a>
+                    <div class="cbp_tmlabel">
+                        <span>工作表设置</span>
+                        <form action="{:url('/confirm')}" method="post" class="setsheet"  onsubmit="return checksubmit()">
+                          <div>
+                            <span>工作表</span>
+                            <input type="text" name="workname" id="workname">
+                          </div>
+                          <div>
+                            <span>备&nbsp;&nbsp;&nbsp;&nbsp;注</span>
+                            <input type="text" name="remark" id="remark">
+                          </div>
+                          <span id="info"></span>
+                          <div>
+                            <input type="submit" name="sendworkname" id="sendworkname" value="确&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;定">
+                          </div>
+                        </form>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
 
- </body>
-     <script type="text/javascript">
+</body>
+    <!--  <script type="text/javascript">
           $(document).ready(function(){
                 $("#sure").click(function(){
                        if($("#filename").val() != "")
@@ -39,20 +103,58 @@
                             function(data){
                              alert(data);
                              if(data == "ok"){
-                          
+
                                window.location.href="{:url('/confirm')}";
 
                             }else{
                                $('#info').html("<font color=red>该表名已存在</font>");
                                  }
-                              
+
                               }
-                           );  
+                           );
                          }else{
                            $('#info').html("<font color=red>请输入表名</font>");
                          }
                  });
              });
 
-     </script>
- </html>
+           </script> -->
+
+    <script type="text/javascript">
+      $(function(){
+        // 将点击事件转移
+        $(".filePicker").bind("click", function(e){
+            $("#fileImage").click();
+        });
+        $('#fileImage').bind('input propertychange', function() {
+          $('.fileName').html($('#fileImage').val());
+        });
+
+        // 点击的返回按钮
+        $('.icon-fanhui').click(function(){
+          window.location.href='http://chogge.565tech.com/worksheet.html';
+        });
+        $('#workname').blur(function(){
+           if($('#workname').val() == ''){
+              $('#info').html('文件名不得为空');
+           }
+           $.post("{:url('UpDownFile/dist_file_name')}",{'workname':$('#workname').val()},function(data){
+               if(data == "ok"){
+
+               }else{
+                 $('#info').html('名字已重复');
+               }
+
+           })
+        });
+      })
+      function checksubmit()
+      {
+           if($('#workname').val() == ''){
+            return false;
+           }
+
+      }
+       
+       </script>
+</html>

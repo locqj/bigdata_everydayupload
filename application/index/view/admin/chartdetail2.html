@@ -18,13 +18,20 @@
 	<!-- <script type="text/javascript" src='http://gallery.echartsjs.com/dep/echarts/latest/extension/bmap.min.js'></script> -->
 	<script type="text/javascript" src='http://api.map.baidu.com/api?v=2.0&ak=ZUONbpqGBsYGXNIYHicvbAbM'></script>
 	<script type="text/javascript" src='http://gallery.echartsjs.com/dep/echarts/map/js/china.js'></script>
+<script>
+	$(function(){
+		$('.fanhui').click(function(){
+			window.location.href = 'http://chogge.565tech.com/userAdmin.html';
+		})
+	})
+</script>
 
 </head>
 <body>
 	 <!-- 顶部的具体信息 ==================================================== -->
 	<div id="chartdetailhead">
 		<div class="return left">
-			<i class="iconfont icon-fanhui" style="color:#fff"></i>
+			<i class="iconfont icon-fanhui" style="color:#fff;cursor:pointer"></i>
 		</div>
 		<div class="header-name">编辑图表</div>
 		<div class="showoperate right">

@@ -8,39 +8,88 @@
 	<link rel="stylesheet" type="text/css" href="./../../css/iconfont/iconfont.css">
 	<link rel="stylesheet" type="text/css" href="./../../css/index2.css">
 	<link rel="stylesheet" type="text/css" href="./../../css/chartdetail.css">
+		<style type="text/css">
+		.andArea{
+			font-size: 18px;
+			text-align: center;
+			display: inline-block;
+
+		}
+		.filePicker{
+			width:85px;
+			height:85px;
+			margin:10px;
+			display: inline-block;
+			border: 2px dashed #ff7a7a;
+			border-radius: 3px;
+			cursor: pointer;
+			overflow-x: hidden;
+
+		}
+		.filePicker .icon-jiahao{
+			color:#ff7a7a;
+			font-size: 50px;
+			font-weight: normal;
+		}
+
+		#fileImage{
+			display: none;
+		}
+	</style>
 </head>
 <body>
-     <!-- 头部的导航栏 -->
+	<!-- 头部的导航栏 -->
 	{include file="public/admin/nav" /}
 	<!-- 具体内容 -->
-	<div id="content">
-	 <div><img src="./../../img/empty-top.png"></div>
-       	<div class="step2" style="background:url('./../../img/upload.png');background-size:100% 100%;">
-					<span>步骤2、上传excel文件
-						<form action="{:url('UpDownFile/upload')}" enctype="multipart/form-data" method="post" style="display: inline-block">
+	<div id="content" class="upexcel">
+		<div>
+			<img src="./../../img/empty-top.png" style="margin-top: 40px;"></div>
+			<!-- <div class="step2" style="background:url('./../../img/upload.png');background-size:100% 100%;"> -->
+			<div class="step2">
+				<!-- 上传excel文件 -->
+				
+					<!-- <a href="{:url('/confirmdata')}">
+						<i class="iconfont icon-jiahao">添加数据源</i>
+					</a> -->
+					 <form action="{:url('UpDownFile/upload')}" enctype="multipart/form-data" method="post" style="display: inline-block">
                   			<input type="file" name="image"  class="upfile"/> 
                   			<input type="submit" name="uploadFile" id="uploadFile" value="上传" /> 
                			</form>
-               		</span>				
-				</div>
-	</div>
-</body>
- 
-	<script type="text/javascript">
-		 $(function(){
-		 	$('#uploadFile').click(function(){
-		 		var fileval =  $('.upfile').val();
-		 		if(fileval!=''){
-		 		    alert('上传成功'); 
-		 			return true;
-		 		}else{
-		 			alert('请上传模板文件');
-		 			return false;
-		 		}
+					<!-- <form action="{:url('UpDownFile/upload')}" enctype="multipart/form-data" method="post" style="display: inline-block">
+						<input type="file" name="image"  class="upfile"/>
+							<div class="andArea" >
+								<div class="filePicker">
+									<i class="iconfont icon-jiahao"></i>
+								</div>
+								<input id="fileImage" type="file" class="upfile" name="image">
+							</div>
+						<br>
+						<input type="submit" name="uploadFile" id="uploadFile" value="上&nbsp;&nbsp;传" /> 
+					</form> -->
+			</div>
+		</div>
+
+
+		<script type="text/javascript">
+			$(function(){
+				$('#uploadFile').click(function(){
+					var fileval =  $('.upfile').val();
+					if(fileval!=''){
+						alert('上传成功'); 
+						return true;
+					}else{
+						alert('请上传模板文件');
+						return false;
+					}
 		 		// alert(fileval);
-		 	})
-		 	
-		 })
- 
-   </script>
-</html>
+		 		})
+		 		// 将点击事件转移
+				$(".filePicker").bind("click", function(e){
+			    	$("#fileImage").click();
+			    });
+
+			})
+
+		</script>
+	</body>
+	</html>

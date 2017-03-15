@@ -1,77 +1,92 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>测试获取json格式的数据</title>
 	<meta charset="utf-8">
-	<script type="text/javascript" src='./../../js/echarts.min.js'></script>
+	<title>仪表盘首页</title>
 	<script src="https://cdn.static.runoob.com/libs/jquery/1.10.2/jquery.min.js"></script>
+	<script type="text/javascript" src="./../../js/index2.js"></script>
+	<script type="text/javascript" src='./../../js/chartdetail.js'></script>
+	<link rel="stylesheet" type="text/css" href="./../../css/iconfont/iconfont.css">
+	
+	<link rel="stylesheet" type="text/css" href="./../../css/chartdetail.css">
+	<link rel="stylesheet" type="text/css" href="./../../css/index2.css">
 </head>
 <body>
-	<div id="main" style="width:800px;height:600px"></div>
+	<!-- 头部的导航栏 -->
+        {include file="public/admin/nav" /}
+		 
+	</div>
+	<!-- 具体内容 -->
+	<div id="content">
+		<!-- 左侧添加仪表盘和样式 -->
+		<!-- <div id="left">
+			<div class="yibiaopan">
+				<div class="left"><b>操作教程</b></div>
+				<div class="left"><b>仪表盘</b></div>
+				<div class="right">
+					<i class="iconfont icon-sousuo"></i>
+					<i class="iconfont icon-jiahao"></i>
+					<i class="iconfont icon-zhankai"></i>
+				</div>
+				<div class="clear"></div>
+			</div>
+			<div class="yangshi">
+				<span>添加的样式</span>
+				<ul>
+					<li>教程</li>
+					<li>案例</li>
+					<li>仪表盘3</li>
+				</ul>
+			</div>
+		</div> -->
+		<!-- 右边具体显示内容 -->
+		<div id="showcharts">
+			<!-- <b>操作教程</b> -->
+			<div class="teach">
+				<!-- 1、下载 -->
+				<a href="http://chogge.565tech.com/demo.xls" class="s1" style="background:url('./../../img/load.png');background-size:100% 100%;">
+					<div class="step1">
+					
+						<span>步骤1、点击下载excel模板</span>
+					</div>
+				</a>
+				<!-- 2、上传 -->
+				<div class="step2" style="background:url('./../../img/upload.png');background-size:100% 100%;">
+					<span>步骤2、上传excel文件
+						<form action="{:url('UpDownFile/upload')}" enctype="multipart/form-data" method="post" style="display: inline-block">
+                  			<input type="file" name="image"  class="upfile"/> 
+                  			<input type="submit" name="uploadFile" id="uploadFile" value="上传" /> 
+               			</form>
+               		</span>				
+				</div>
+				<!-- 3、编辑 -->
+				<a href="{:url('/editchart')}" class="s3" style="background:url('./../../img/edit.png');background-size:100% 100%; ">
+					<div class="step3">
+						<span>步骤3、编辑图表</span>
+					</div>
+				</a>
+				<!-- 4、导出 -->
+				<div class="step4"  style="background:url('./../../img/finish.png');background-size:100% 100%; ">
+					<span>步骤4、导出</span>
+				</div>
+			</div>
+		</div>
+	</div>
 	<script type="text/javascript">
-		$(function(){
-			var myChart = echarts.init(document.getElementById('main'));
-
-				var xData = function() {
-			    	var data = [];
-			   		for (var i = 1; i < 15; i++) {
-			       		data.push(i + "月份");
-			    	}
-			    	return data;
-				}();
-			option = {
-			    xAxis:  {
-			        type: 'category',
-			        boundaryGap: false,
-			        data: xData
-			    },
-			    yAxis: {
-			        type: 'value'
-			    },
-			    series: [
-			        {
-			            name:'最高气温',
-			            type:'line',
-			            data:''
-			            // data:[1, 2, 2, 5, 3, 2, 0]
-			        }
-			    ]
-			};
-
-			$.ajax({
-				type:'GET',
-				url:'./../../data/data3.json',
-				dataType : "json",
-				success:function(result){
-					// alert(result[1]['name']);
-					option.series[0].data = result[0]['data'];
-					// alert(result[0]['data']);
-					myChart.setOption(option);
-				},
-				complete:function(data){
-
-				},
-				error:function(errorMsg){
-
-				}
-
-			})
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-			
-		})
+		 $(function(){
+		 	$('#uploadFile').click(function(){
+		 		var fileval =  $('.upfile').val();
+		 		if(fileval!=''){
+		 		    alert('上传成功'); 
+		 			return true;
+		 		}else{
+		 			alert('请上传模板文件');
+		 			return false;
+		 		}
+		 		// alert(fileval);
+		 	})
+		 	
+		 })
 	</script>
 </body>
 </html>
