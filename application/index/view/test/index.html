@@ -5,14 +5,46 @@
 	<title>Document</title>
 	<script src="http://static.runoob.com/assets/jquery-validation-1.14.0/lib/jquery.js"></script>
     <script src="http://static.runoob.com/assets/jquery-validation-1.14.0/dist/jquery.validate.min.js"></script>
-<script type="text/javascript">
     
-</script>
+ 
 </head>
 <body>
-   <form action="#" enctype="multipart/form-data" method="post">
-<input type="file" name="image" /> <br> 
-<input type="submit" value="上传" /> 
-</form> 
+    <form id="uploadForm" enctype="multipart/form-data">
+    <input id="file" type="file" name="file"/>
+    <button id="upload" type="button">upload</button>
+    <span id="infolist"></span>
+</form>
+     
 </body>
+  <script type="text/javascript">
+     $(document).ready(function(){
+           $('#upload').click(function(event) {
+                    $.ajax({
+                  url: "{:url('Test/upload')}",
+                  type: 'POST',
+                  cache: false,
+                  data: new FormData($('#uploadForm')[0]),
+                  processData: false,
+                  contentType: false
+              }).done(function(res) {
+              	         
+	 	  $.ajax({
+				type:'post', //请求方式，默认get
+				url :"{:url('Test/test')}",
+				data:{
+				getFunction:1, 
+				},success:function(data,status){  
+				 
+				$('#infolist').html("456");
+			 
+				},error:function(data,statsu){
+				alert("发送请求失败！");
+				}
+				});
+	 	  
+              }).fail(function(res) {});
+           });	
+     });
+     
+  </script>
 </html>

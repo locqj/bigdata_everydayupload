@@ -48,13 +48,13 @@
 			<div class="step2">
 				<!-- 上传excel文件 -->
 				
-					<!-- <a href="{:url('/confirmdata')}">
+					<a href="{:url('/confirmdata')}">
 						<i class="iconfont icon-jiahao">添加数据源</i>
-					</a> -->
-					 <form action="{:url('UpDownFile/upload')}" enctype="multipart/form-data" method="post" style="display: inline-block">
-                  			<input type="file" name="image"  class="upfile"/> 
-                  			<input type="submit" name="uploadFile" id="uploadFile" value="上传" /> 
-               			</form>
+					</a>
+					<!--  <form action="{:url('UpDownFile/upload')}" enctype="multipart/form-data" method="post" style="display: inline-block">
+					                  			<input type="file" name="image"  class="upfile"/> 
+					                  			<input type="submit" name="uploadFile" id="uploadFile" value="上传" /> 
+					               			</form> -->
 					<!-- <form action="{:url('UpDownFile/upload')}" enctype="multipart/form-data" method="post" style="display: inline-block">
 						<input type="file" name="image"  class="upfile"/>
 							<div class="andArea" >
@@ -72,7 +72,7 @@
 
 		<script type="text/javascript">
 			$(function(){
-				$('#uploadFile').click(function(){
+			/*	$('#uploadFile').click(function(){
 					var fileval =  $('.upfile').val();
 					if(fileval!=''){
 						alert('上传成功'); 
@@ -82,7 +82,7 @@
 						return false;
 					}
 		 		// alert(fileval);
-		 		})
+		 		})*/
 		 		// 将点击事件转移
 				$(".filePicker").bind("click", function(e){
 			    	$("#fileImage").click();

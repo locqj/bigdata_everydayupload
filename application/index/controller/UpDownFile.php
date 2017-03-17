@@ -49,10 +49,7 @@ class UpDownFile extends Common {
             /* pp($dataSource);*/
                  
              Session::set('dataSource', $dataSource);
-             $this->assign('dataSource', $dataSource);
-             return view('admin/confirmdata');
-   
-                    
+            
 
     }else{
             // 上传失败获取错误信息
@@ -111,6 +108,10 @@ class UpDownFile extends Common {
                  $this->assign('fileName', $fileName);
                  $this->redirect('/worksheet');
             
+    }
+    public function sure_els_relook()
+    {
+      echo json_encode(Session::get('dataSource'));
     }
     public function dist_file_name()
     {

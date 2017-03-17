@@ -24,44 +24,33 @@
   <div class="container">
         <div class="main">
             <ul class="cbp_tmtimeline">
-           <!--      <li>
-               <div class="cbp_tmicon cbp_tmicon-phone">
-               </div>
-               <div class="cbp_tmlabel">
-                 <span>上传文件</span>
-               <form action="{:url('UpDownFile/upload')}"  onsubmit="return checksubmit();" id="form1" enctype="multipart/form-data" method="post" style="display: inline-block">
-
-                   <div class="andArea" >
-                     <div class="filePicker">
-                       <i class="iconfont icon-jiahao"></i>
-                     </div>
-                     <input id="fileImage" type="file" class="upfile" name="image">
+         <li>
+             <div class="cbp_tmicon cbp_tmicon-phone">
+             </div>
+             <div class="cbp_tmlabel">
+               <span>上传文件</span>
+             <form   id="form1" enctype="multipart/form-data"  style="display: inline-block">
+         
+                 <div class="andArea" >
+                   <div class="filePicker">
+                     <i class="iconfont icon-jiahao"></i>
                    </div>
-                   <div id="fileName">
-                      <label class="fileName">暂时没有选择文件</label>
-                   </div>
-                   <div class="clear"></div>
-                   <input type="submit" name="uploadFile" id="uploadFile" value="上&nbsp;&nbsp;&nbsp;&nbsp;传">
-              </form>
-               </div>
-           </li> -->
+                   <input id="fileImage" type="file" class="upfile" name="image">
+                 </div>
+                 <div id="fileName">
+                    <label class="fileName">暂时没有选择文件</label>
+                 </div>
+                 <div class="clear"></div>
+                 <input type="button" name="uploadFile" id="uploadFile" value="上&nbsp;&nbsp;&nbsp;&nbsp;传">
+            </form>
+             </div>
+         </li>
                 <li>
                     <a name="step2"><div class="cbp_tmicon cbp_tmicon-screen"></div>
                     <div class="cbp_tmlabel">
                         <span id="yulan">
-                             <table border="1">
-                              {foreach name="dataSource" item="vo"}
-                                  <tr>
-                                   {foreach name="vo" item="so"}
-                                     <td id = '$key'>
-                                      {if condition="$so eq null"}NULL
-                                      {else /}
-                                         {$so}
-                                      {/if}
-                                      </td>
-                                   {/foreach}
-                                  </tr>
-                              {/foreach}
+                             <table border="1" id="infolist" name="infolist">
+                           
                              </table>
                         </span>
 
@@ -72,7 +61,7 @@
                     <a name="step3"><div class="cbp_tmicon cbp_tmicon-mail"></div></a>
                     <div class="cbp_tmlabel">
                         <span>工作表设置</span>
-                        <form action="{:url('/confirm')}" method="post" class="setsheet"  onsubmit="return checksubmit()">
+                        <form action="{:url('/confirm')}" method="post" class="setsheet"  onsubmit="return checksubmit2()">
                           <div>
                             <span>工作表</span>
                             <input type="text" name="workname" id="workname">
@@ -93,32 +82,7 @@
     </div>
 
 </body>
-    <!--  <script type="text/javascript">
-          $(document).ready(function(){
-                $("#sure").click(function(){
-                       if($("#filename").val() != "")
-                         {
-                          $.post("{:url('UpDownFile/dist_file_name')}",{
-                             filename:$('#filename').val()},
-                            function(data){
-                             alert(data);
-                             if(data == "ok"){
-
-                               window.location.href="{:url('/confirm')}";
-
-                            }else{
-                               $('#info').html("<font color=red>该表名已存在</font>");
-                                 }
-
-                              }
-                           );
-                         }else{
-                           $('#info').html("<font color=red>请输入表名</font>");
-                         }
-                 });
-             });
-
-           </script> -->
+ 
 
     <script type="text/javascript">
       $(function(){
@@ -127,7 +91,7 @@
             $("#fileImage").click();
         });
         $('#fileImage').bind('input propertychange', function() {
-          $('.fileName').html($('#fileImage').val());
+          $('.fileName').html($('#image').val());
         });
 
         // 点击的返回按钮
@@ -149,15 +113,56 @@
 
            })
         });
+        $('#uploadFile').click(function(event) {
+                    $.ajax({
+                  url: "{:url('UpDownFile/upload')}",
+                  type: 'POST',
+                  cache: false,
+                  data: new FormData($('#form1')[0]),
+                  processData: false,
+                  contentType: false
+              }).done(function(res) {
+                       
+                           $.ajax({
+                             type:'post', //请求方式，默认get
+                             url :"{:url('UpDownFile/sure_els_relook')}",
+                             data:{
+                             getFunction:1,
+                              
+                             },success:function(data,status){  
+                              var data =  eval("("+data+")");
+                                      var str = '';
+                                      
+                             $.each(data,function(i,val){
+                                        
+                                 str = str + '<tr>';
+                                 $.each(val,function(k,v){
+                                   str = str + '<td> '+v+' </td>'; 
+                                        }); 
+                                 str = str + '</tr>';
+                             });
+                             $('#infolist').html(str);
+                            
+                             },error:function(data,statsu){
+                             alert("发送请求失败！");
+                             }
+                             });
+              }).fail(function(res) { 
+
+                                    }); 
+                   
+           });
+ 
       })
-      function checksubmit()
+
+      
+       function checksubmit2()
       {
-           if($('#workname').val()!='' && $('#remark').val()!=''){
-            return true;
+           if($('#workname').val()!='' && $('#remark').val()!=''){ 
+            return true;  
            }
            return false;
 
       }
-       
        </script>
 </html>
