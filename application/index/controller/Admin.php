@@ -36,7 +36,26 @@ class admin extends Common
    public function worksheet()
    {
       $this->init_load();
+      $fileName = Db::table('cbd_data_store_filename')->where('user', Session::get('username'))->select();
+      $this->assign('fileName', $fileName);
       return view();
+   }
+   public function worksheet_show_els()
+   {
+      $getFileName = input('post.filename');
+      $fileColumn = Db::table('cbd_datasource_name')->where('file_name', $getFileName)->field('column_name')->select();
+        
+      $column = array();
+      foreach ($fileColumn as $key => $value) {
+         $column[$key] = $value['column_name'];
+      } 
+         
+      $data = Db::table('cbd_datasource')->where('file_name', $getFileName)->field($column)->select();
+      echo json_encode($data);
+         
+      
+      
+      
    }
    public function out_login()
    {
@@ -67,6 +86,7 @@ class admin extends Common
    {
       return view();
    }
+   
 
 
 

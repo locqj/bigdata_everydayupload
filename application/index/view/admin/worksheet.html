@@ -22,15 +22,15 @@
 					<i class="iconfont icon-sousuo"></i>
 					<i class="iconfont icon-jiahao"></i>
 					<i class="iconfont icon-zhankai"></i>
-				</div>	
+				</div>
 				<div class="clear"></div>
 			</div>
 			<div class="yangshi">
 				<span>添加的样式</span>
 				<ul>
-					<li>仪表盘1</li>
-					<li>仪表盘2</li>
-					<li>仪表盘3</li>
+					{foreach name="fileName" item="vo"}
+					<li id={$vo.id}  >{$vo.datafilename}</li>
+					{/foreach}
 				</ul>
 			</div>
 		</div>
@@ -46,9 +46,48 @@
 				<div class="clear"></div>
 			</div>
 			<div class="charts">
-				
+                 
+					<table>
+						<tr>
+							<td id="infolist"></td>
+						</tr>
+					</table>
+					
 			</div>
 		</div>
 	</div>
 </body>
+	<script type="text/javascript">
+	 $(document).ready(function(){ 
+	 
+	 $('ul li').click(function() {
+	 	    
+	 	  $.ajax({
+				type:'post', //请求方式，默认get
+				url :"{:url('Admin/worksheet_show_els')}",
+				data:{
+				getFunction:1,
+				filename:$(this).text()
+				},success:function(data,status){  
+				 var data =  eval("("+data+")");
+                 var str = '';
+                 
+				$.each(data,function(i,val){
+				           
+						str = str + '<tr>';
+						$.each(val,function(k,v){
+						  str = str + '<td> '+v+' </td>';	
+				           }); 
+						str = str + '</tr>';
+				});
+				$('#infolist').html(str);
+			 
+				},error:function(data,statsu){
+				alert("发送请求失败！");
+				}
+				});
+				 });
+	}); 
+
+	</script>
 </html>

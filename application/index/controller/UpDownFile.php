@@ -47,7 +47,7 @@ class UpDownFile extends Common {
           
             }
             /* pp($dataSource);*/
-             Session::set('filename', $file);        
+                 
              Session::set('dataSource', $dataSource);
              $this->assign('dataSource', $dataSource);
              return view('admin/confirmdata');
@@ -78,8 +78,8 @@ class UpDownFile extends Common {
     {
             $inputWorkName = input('post.workname');
             $inputReMark = input('post.remark');
-            $dataSource = Session::get('dataSource');    
-            
+            $dataSource = Session::get('dataSource');
+ 
             foreach ($dataSource as $key => $value) {
               
                   if ($key == 0) {
@@ -106,8 +106,10 @@ class UpDownFile extends Common {
               } 
                
                  Db::table('cbd_data_store_filename')->insert(['datafilename' => $inputWorkName, 'remark' => $inputReMark, 'user' => Session::get('username')]);
+                 $fileName = Db::table('cbd_data_store_filename')->where('user', Session::get('username'))->select();
                  $this->assign('username', Session::get('username'));
-                 return view('admin/worksheet'); 
+                 $this->assign('fileName', $fileName);
+                 $this->redirect('/worksheet');
             
     }
     public function dist_file_name()
