@@ -1,115 +1,129 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-	<meta charset="utf-8">
-	<title>仪表盘首页</title>
-	<script src="https://cdn.static.runoob.com/libs/jquery/1.10.2/jquery.min.js"></script>
-	<script type="text/javascript" src="./../../js/index2.js"></script>
-	<link rel="stylesheet" type="text/css" href="./../../css/iconfont/iconfont.css">
-	<link rel="stylesheet" type="text/css" href="./../../css/index2.css">
-	<link rel="stylesheet" type="text/css" href="./../../css/chartdetail.css">
-	<link rel="stylesheet" type="text/css" href="./../../css/tanchuang.css">
+    <meta charset="utf-8">
+    <title>仪表盘首页</title>
+    <script src="https://cdn.static.runoob.com/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script type="text/javascript" src="./../../js/index2.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../css/iconfont/iconfont.css">
+    <link rel="stylesheet" type="text/css" href="./../../css/index2.css">
+    <link rel="stylesheet" type="text/css" href="./../../css/chartdetail.css">
+    <link rel="stylesheet" type="text/css" href="./../../css/tanchuang.css">
 </head>
+
 <body>
     <!-- 头部的导航栏 -->
-    	<div id="header">
-		<div class="left">
-			<div class="logo">爱诺信数据</div>
-				<div class="nav-item">
-				<a id="yibiaopan" class="active" href="{:url('/userAdmin')}">仪表盘</a>
-				<a id="gongzuobiao" href="{:url('/worksheet')}">工作表</a>
-				<a id="shujuyuan"  href="{:url('/datasource')}">数据源</a>
-				<a id="mubanku" href=" {:url('/module')}">模板库</a>
-			</div>
-		</div>
-		<div class="right">
-		  
-			<span class="username">{$username}</span>
-			<a href="{:url('Admin/out_login')}" class="loginout">退出</a>
-		</div>
-	</div>
-	
-	<!-- 具体内容 -->
-	<div id="content">
-		<!-- 左侧添加仪表盘和样式 -->
-		<div id="left">
-			<div class="yibiaopan" style="border-bottom: 1px dashed #ccc">
-				<div class="left">
-					<i class="iconfont icon-work-list"></i>
-					<b>图表</b>
-				</div>
-				<div class="right">
-					<!-- <i class="iconfont icon-sousuo"></i> -->
-					<i class="iconfont icon-jiahao"></i>
-					<!-- <i class="iconfont icon-zhankai"></i> -->
-				</div>	
-				<div class="clear"></div>
-			</div>
-			<div class="yangshi">
-				<ul>
-				</ul>
-			</div>
-		</div>
-		<!-- 右边具体显示图表的名字和表 -->
-		<div id="showcharts" class="left">
-			<div class="charts">
-				
-			</div>
-		</div>
-	</div>
+    <div id="header">
+        <div class="left">
+            <div class="logo">爱诺信数据</div>
+            <div class="nav-item">
+                <a id="yibiaopan" class="active" href="{:url('/userAdmin')}">仪表盘</a>
+                <a id="gongzuobiao" href="{:url('/worksheet')}">工作表</a>
+                <a id="shujuyuan" href="{:url('/datasource')}">数据源</a>
+                <a id="mubanku" href=" {:url('/module')}">模板库</a>
+            </div>
+        </div>
+        <div class="right">
+            <span class="username">{$username}</span>
+            <a href="{:url('Admin/out_login')}" class="loginout">退出</a>
+        </div>
+    </div>
+    <!-- 具体内容 -->
+    <div id="content">
+        <!-- 左侧添加仪表盘和样式 -->
+        <div id="left">
+            <div class="yibiaopan" style="border-bottom: 1px dashed #ccc">
+                <div class="left">
+                    <i class="iconfont icon-work-list"></i>
+                    <b>图表</b>
+                </div>
+                <div class="right">
+                    <!-- <i class="iconfont icon-sousuo"></i> -->
+                    <i class="iconfont icon-jiahao"></i>
+                    <!-- <i class="iconfont icon-zhankai"></i> -->
+                </div>
+                <div class="clear"></div>
+            </div>
+            <div class="yangshi">
+                <ul>
+                </ul>
+            </div>
+        </div>
+        <!-- 右边具体显示图表的名字和表 -->
+        <div id="showcharts" class="left">
+            <div class="charts">
+            </div>
+        </div>
+    </div>
+    <!-- 点击加号，弹出的仪表盘添加的弹框 -->
+    <div class="tanchuang" style="display: none">
+        <div class="tanchuang-info">
+            <div class="tan-title">
+                <span>添加图表</span>
+                <i class="iconfont icon-cha"></i>
+            </div>
+            <div class="sheetinit">
+                <div class="chosetype">
+                    <span>选择图表类型</span>
+                    <input type="checkbox" name="" checked="checked">普通图表
+                </div>
+                <div class="choseshet">
+                    <span>选择工作表</span>
+                    <!-- 遍历出所有的工作表,默认选中一个 -->
+                    {foreach name="getTheFileName" id="vo"}
+                    <div class="sheet">
+                        <input type="radio" name="sheet" value="{$vo.datafilename}" checked="checked">
+                        <span>{$vo.datafilename}</span>
+                    </div>
+                    {/foreach}
+                </div>
+                <div class="caozuo">
+                    <!-- 点击“确定”，进入到图表的编辑界面 -->
+                    <input type="button" value="确定" class="sure">
+                    <input type="button" name="" value="取消">
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+    $(function() {
 
-	<!-- 点击加号，弹出的仪表盘添加的弹框 -->
-	<div class="tanchuang" style="display: none">
-		<div class="tanchuang-info">
-			<div class="tan-title">
-				<span>添加图表</span>
-				<i class="iconfont icon-cha"></i>
-			</div>
-			<div class="sheetinit">
-				<div class="chosetype">
-					<span>选择图表类型</span>
-					<input type="checkbox" name="" checked="checked">普通图表
-				</div>
-				<div class="choseshet">
-					<span>选择工作表</span>
-					<!-- 遍历出所有的工作表,默认选中一个 -->
-					<div class="sheet">
-						<input type="radio" name="sheet" value="工作表1" checked="checked">
-						<span>工作表1</span>
-					</div>
-					<div class="sheet">
-						<input type="radio" name="sheet" value="工作表2">
-						<span>工作表2</span>
-					</div>
-				</div>
-				<div class="caozuo">
-					<!-- 点击“确定”，进入到图表的编辑界面 -->
-					<input type="button" value="确定" class="sure">
-					<input type="button" name="" value="取消">
-				</div>
-			</div>
-		</div>
-	</div>
+        //默认设置i第一个值为选中的值
+        $('input:radio:first').attr('checked', true);
+        //添加图表之后，左侧会多出一行
+        $('.caozuo .sure').click(function() {
+            //获取被选中的radio的值,新建完图表之后，点击编辑，链接到编辑图表界面
+            var biaoming = $('input[name=sheet]:checked').val();
 
+            var firstli = "<li><span>" + biaoming + "</span><a href='http://chogge.565tech.com/editchart.html'><i class='iconfont icon-weibiaoti1'></i></a></li>";
+            $.post("{:url('Admin/add_charts')}", {
+                'getAjaxFileName': biaoming
+            }, function(data) {
+                if (data == 'ok') {
+                    $('.yangshi ul').append("<li><span>" + biaoming + "</span><a href='http://chogge.565tech.com/editchart.html'><i class='iconfont icon-weibiaoti1'></i></a></li>");
+                }
+            });
 
-<script type="text/javascript">
-	$(function(){
+        })
 
 
 
-		//默认设置i第一个值为选中的值
-		$('input:radio:first').attr('checked',true);
-		//添加图表之后，左侧会多出一行
-		$('.caozuo .sure').click(function(){
-			//获取被选中的radio的值,新建完图表之后，点击编辑，链接到编辑图表界面
-			var biaoming = $('input[name=sheet]:checked').val();
-			var firstli =  "<li><span>"+biaoming+"</span><a href='http://chogge.565tech.com/editchart.html'><i class='iconfont icon-weibiaoti1'></i></a></li>";
-			$('.yangshi ul').append(firstli);
-		})
+    })
+    window.onload = function() {
+        $.post("{:url('Admin/index_show_filename')}", {}, function(data) {
+            var data = eval("(" + data + ")");
+            var str = '';
+            $.each(data, function(q, val) {
 
-			
-
-	})
-</script>
+                str = str + '<li><span>';
+                str = str + val.datafilename;
+                str = str + "</span><a href='http://chogge.565tech.com/editchart.html'><i class='iconfont icon-weibiaoti1'></i></a></li>";
+            }); 
+            $('.yangshi ul').append(str);
+        })
+    };
+    </script>
 </body>
+
 </html>

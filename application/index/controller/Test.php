@@ -6,9 +6,11 @@ namespace app\index\controller;
  use \think\Controller;
  use test\Test1;
  
-class Test {
+class Test extends Controller{
 	
    public function index(){
+     $a = 'asd';
+     $this->assign('test', $a);
      return view();
    }
      public function upload(){
@@ -16,25 +18,13 @@ class Test {
      
      $file = request()->file('file'); 
     // 移动到框架应用根目录/public/uploads/ 目录下
-    $info = $file->validate(['ext'=>'xls'])->move(ROOT_PATH . 'public' . DS . 'uploads','');
+    $info = $file->validate(['ext'=>'xls,xlsx'])->move(ROOT_PATH . 'public' . DS . 'uploads','');
     if($info){
-        // 成功上传后 获取上传信息
-        // 输出 jpg
-         
-       // echo $info->getExtension().'<br/>';
-        // 输出 20160820/42a79759f284b767dfcb2a0197904287.jpg
-       $file_name= './uploads/'.$info->getSaveName();
-
-        //echo $info->getOwner().'<br/>';
-        // 输出 42a79759f284b767dfcb2a0197904287.jpg
-        //echo $info->getFilename().'<br/>'; 
-        //echo  $info->getSaveName();
-        
-             \think\Loader::import('PHPExcel.IOFactory');
-             
-            
+       
+           $file_name= './uploads/'.$info->getSaveName(); 
+             \think\Loader::import('PHPExcel.IOFactory'); 
           $objReader = \PHPExcel_IOFactory::createReader('Excel5'); 
-            //$objReader = PHPExcel_IOFactory::createReader('Excel5');
+           
             $objPHPExcel = $objReader->load($file_name,$encode='utf-8');
             $sheet = $objPHPExcel->getSheet(0);
             $highestRow = $sheet->getHighestRow(); // 取得总行数

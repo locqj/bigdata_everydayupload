@@ -13,7 +13,7 @@ class UpDownFile extends Common {
     // 获取表单上传文件 例如上传了001.jpg
      $file = request()->file('image');
     // 移动到框架应用根目录/public/uploads/ 目录下
-    $info = $file->rule('date')->validate(['ext'=>'xls'])->move(ROOT_PATH . 'public' . DS . 'uploads','');
+    $info = $file->rule('date')->validate(['ext'=>'xls,xlsx'])->move(ROOT_PATH . 'public' . DS . 'uploads','');
     if($info){ 
            $file_name= './uploads/'.$info->getSaveName(); 
         
@@ -22,7 +22,12 @@ class UpDownFile extends Common {
             $dataSource = array();
             
             $count = 0;
-            $objReader = \PHPExcel_IOFactory::createReader('Excel5'); 
+            if($info->getExtension() == "xls"){
+              $objReader = \PHPExcel_IOFactory::createReader('Excel5'); 
+            }else{
+              $objReader = \PHPExcel_IOFactory::createReader('Excel2007'); 
+            }
+            
             
             $objPHPExcel = $objReader->load($file_name,$encode='utf-8');
             $sheet = $objPHPExcel->getSheet(0);
@@ -76,7 +81,7 @@ class UpDownFile extends Common {
             $inputWorkName = input('post.workname');
             $inputReMark = input('post.remark');
             $dataSource = Session::get('dataSource');
- 
+            if(is_array($dataSource)){
             foreach ($dataSource as $key => $value) {
               
                   if ($key == 0) {
@@ -101,12 +106,19 @@ class UpDownFile extends Common {
                        
                   }
               } 
+
                
                  Db::table('cbd_data_store_filename')->insert(['datafilename' => $inputWorkName, 'remark' => $inputReMark, 'user' => Session::get('username')]);
                  $fileName = Db::table('cbd_data_store_filename')->where('user', Session::get('username'))->select();
                  $this->assign('username', Session::get('username'));
                  $this->assign('fileName', $fileName);
+                 Session::delete('dataSource');
                  $this->redirect('/worksheet');
+             }else{
+                  
+                  Session::delete('dataSource');
+                  $this->redirect('/confirmdata');
+             }
             
     }
     public function sure_els_relook()

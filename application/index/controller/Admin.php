@@ -10,7 +10,20 @@ class admin extends Common
    public function index()
    {
       $this->init_load();
+      $getTheFileName = Db::table('cbd_data_store_filename')->where('status', 0)->select(); 
+      $this->assign('getTheFileName', $getTheFileName);
       return view();
+   }
+   public function index_show_filename()
+   {
+      $showFileName = Db::table('cbd_data_store_filename')->where('status', 1)->select();
+      echo json_encode($showFileName);
+   }
+   public function add_charts()
+   {
+      $getAjaxFileName = input('post.getAjaxFileName');
+      Db::table('cbd_data_store_filename')->where('datafilename', $getAjaxFileName)->update(['status' => 1]);
+      echo 'ok';
    }
    public function chartdetail()
    {
@@ -70,10 +83,7 @@ class admin extends Common
    }
    public function confirmdata()
    {    
-        //$dataSoure = Db::table('cbd_datasource')->select();
-
-        $this->view->engine->layout(false);
-        //$this->assign('dataSoure', $dataSoure);
+       
         return view();
    }
   	// lin添加
