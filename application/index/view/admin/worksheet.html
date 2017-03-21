@@ -1,93 +1,194 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<meta charset="utf-8">
-	<title>工作表首页</title>
-	<script src="https://cdn.static.runoob.com/libs/jquery/1.10.2/jquery.min.js"></script>
-	<script type="text/javascript" src="./../../js/index2.js"></script>
-	<link rel="stylesheet" type="text/css" href="./../../css/iconfont/iconfont.css">
-	<link rel="stylesheet" type="text/css" href="./../../css/index2.css">
-	<link rel="stylesheet" type="text/css" href="./../../css/chartdetail.css">
-</head>
-<body>
-     <!-- 头部的导航栏 -->
-	{include file="public/admin/nav" /}
-	<!-- 具体内容 -->
-	<div id="content">
-		<!-- 左侧添加仪表盘和样式 -->
-		<div id="left">
-			<div class="yibiaopan">
-				<div class="left"><b>仪表盘</b></div>
-				<div class="right">
-					<i class="iconfont icon-sousuo"></i>
-					<i class="iconfont icon-jiahao"></i>
-					<i class="iconfont icon-zhankai"></i>
-				</div>
-				<div class="clear"></div>
-			</div>
-			<div class="yangshi">
-				<span>添加的样式</span>
-				<ul>
-					{foreach name="fileName" item="vo"}
-					<li id={$vo.id}  >{$vo.datafilename}</li>
-					{/foreach}
-				</ul>
-			</div>
-		</div>
-		<!-- 右边具体显示图表的名字和表 -->
-		<div id="showcharts" class="left">
-			<div class="charttitle">
-				<div class="left"><b>仪表盘名字</b></div>
-				<div class="right">
-					<i class="iconfont icon-jiahao">添加图表</i>
-					<i>图文模式</i>
-					<i>分享</i>
-				</div>
-				<div class="clear"></div>
-			</div>
-			<div class="charts">
-                 
-					<table>
-						<tr>
-							<td id="infolist"></td>
-						</tr>
-					</table>
-					
-			</div>
-		</div>
-	</div>
-</body>
-	<script type="text/javascript">
-	 $(document).ready(function(){ 
-	 
-	 $('ul li').click(function() {
-	 	    
-	 	  $.ajax({
-				type:'post', //请求方式，默认get
-				url :"{:url('Admin/worksheet_show_els')}",
-				data:{
-				getFunction:1,
-				filename:$(this).text()
-				},success:function(data,status){  
-				 var data =  eval("("+data+")");
-                 var str = '';
-                 
-				$.each(data,function(i,val){
-				           
-						str = str + '<tr>';
-						$.each(val,function(k,v){
-						  str = str + '<td> '+v+' </td>';	
-				           }); 
-						str = str + '</tr>';
-				});
-				$('#infolist').html(str);
-			 
-				},error:function(data,statsu){
-				alert("发送请求失败！");
-				}
-				});
-				 });
-	}); 
 
-	</script>
+<head>
+    <meta charset="utf-8">
+    <title>工作表首页</title>
+    <script src="https://cdn.static.runoob.com/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script type="text/javascript" src="./../../js/index2.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../css/iconfont/iconfont.css">
+    <link rel="stylesheet" type="text/css" href="./../../css/index2.css">
+    <link rel="stylesheet" type="text/css" href="./../../css/chartdetail.css">
+    <link rel="stylesheet" type="text/css" href="./../../css/tanchuang.css">
+</head>
+
+<body>
+    <!-- 头部的导航栏 -->
+    <!-- 头部的导航栏 -->
+    {include file="public/admin/nav" /}
+    <!-- 具体内容 -->
+    <div id="content">
+        <!-- 左侧添加仪表盘和样式 -->
+        <div id="left">
+            <div class="yibiaopan">
+                <div class="left">
+                    <i class="iconfont icon-shujuku"></i>
+                    <b>工作表</b>
+                </div>
+                <div class="right">
+                    <i class="iconfont icon-sousuo"></i>
+                    <i class="iconfont icon-jiahao"></i>
+                </div>
+                <div class="clear"></div>
+            </div>
+            <div class="yangshi">
+                <!-- <span>添加的样式</span> -->
+                <ul>
+                   
+                    {foreach name='fileName' item='vo'}
+                    <li id={$vo.id}>
+                        <i class="iconfont icon-iconfontyuan"></i>
+                        <span style="width: 85%">{$vo.file_name}</span>
+                        <i class='iconfont icon-zhankai test' value="{$vo.file_name}"></i>
+                        <div class='biao_caozuo' style="z-index: 9999 display:none;">
+                            <span class='biao_edit' value="{$vo.file_name}"><i class="iconfont icon-bianji"></i>编辑</span>
+                            <span class='biao_delete' value="{$vo.file_name}"><i class="iconfont icon-shanchu" ></i>删除</span>
+                        </div>
+                    </li>
+                    {/foreach}
+                </ul>
+            </div>
+        </div>
+        <!-- 右边具体显示图表的名字和表 -->
+        <div id="showcharts" class="left">
+            <div class="charttitle">
+            </div>
+            <div class="charts">
+                <table>
+                    <tr>
+                        <td id="infolist"></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    <!-- 点击编辑，弹出修改图表名字 -->
+    <div class="tanchuang tan_editbiaoname" style="display:none">
+        <div class="tanchuang-info">
+            <div class="tan-title">
+                <span>修改表名</span>
+                <i class="iconfont icon-cha"></i>
+            </div>
+            <form>
+            	<div>
+            		<span id="filenamespan"></span>
+                    <span id="errorinfo" style="display: block;"></span>
+            	</div>
+                <div>
+                    <span>表&nbsp;&nbsp;&nbsp;&nbsp;名</span>
+                    <input type="text" name="workname" id="workname">
+                </div>
+                <div>
+                    <span>备&nbsp;&nbsp;&nbsp;&nbsp;注</span>
+                    <input type="text" name="remark" id="remark">
+                </div>
+                <div class="caozuo">
+                    <input type="button" id="sendworkname" name="sendworkname" value="确&nbsp;&nbsp;定">
+                    <input type="button" value="取&nbsp;&nbsp;消">
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+<script type="text/javascript">
+$(document).ready(function() {
+    /*获取编辑表名*/
+	    $('.yangshi ul li .biao_caozuo .biao_edit').click(function() {
+	         var bianjiId = $(this).attr('value');
+	         $("#filenamespan").html(bianjiId);
+	    });
+        /*验证表名是否重复*/
+        $('#workname').blur(function() {
+             $.post("{:url('UpDownFile/dist_file_name')}",{'workname':$('#workname').val()},
+                function(data){
+                    if(data =='ok'){
+                            $('#errorinfo').hide();
+                    }else{
+                          $('#errorinfo').html($('#workname').val()+'名字已重复');
+                            $('#workname').val("");
+                            $('#workname').focus();
+                    }
+                });
+        });
+        /*删除事件*/
+        $('.biao_delete').click(function(event) {
+            $.post("{:url('Admin/delectFile')}",{'fileName':$(this).attr('value')},
+                function(data){
+                    if(data == 'ok'){
+                        window.location.href = "{:url('/worksheet')}";
+                    }
+                });
+        });
+        /*提交编辑修改*/
+	    $('#sendworkname').click(function() {
+        $.post("{:url('Admin/worksheet_reset_filename_and_remark')}", {
+            'workname': $('#workname').val(),
+            'remark': $('#remark').val(),
+             'fileOldName':$('#filenamespan').text(),
+
+        }, function(data) {
+        	
+        	if(data == 'success'){
+        		window.location.href="{:url('/worksheet')}";
+                $("#workname").val('');
+                $("#remark").val('');
+        	}else{
+        		alert(data);
+        	}
+
+        });
+        	
+    });
+        /*点击显示表格*/
+    $('ul li').click(function() {
+ 			 
+        $.ajax({
+            type: 'post', //请求方式，默认get
+            url: "{:url('Admin/worksheet_show_els')}",
+            data: {
+                getFunction: 1,
+                filename: $(this).attr('id')
+            },
+            success: function(data, status) {
+                var data = eval("(" + data + ")");
+                var str = '';
+
+                $.each(data, function(i, val) {
+
+                    str = str + '<tr>';
+                    $.each(val, function(k, v) {
+                        str = str + '<td> ' + v + ' </td>';
+                    });
+                    str = str + '</tr>';
+                });
+                $('#infolist').html(str);
+
+            },
+            error: function(data, statsu) {
+                alert("发送请求失败！");
+            }
+        });
+    });
+    /*点击箭号，显示隐藏框*/
+      $('.yangshi ul li .icon-zhankai').click(function(){
+
+        var i_id = $(this).next('div').css('display');
+
+        if (i_id == 'none') {
+            $(this).next('div').css('display', 'block');
+        } else {
+            $(this).next('div').css('display', 'none');
+
+        }
+
+    });
+      /*将所有隐藏框隐藏*/
+    $('.yangshi ul li').children('*:not(.test)').click(function() {
+
+        $(".yangshi ul li div").css('display', 'none');
+    });
+});
+ 
+</script>
+
 </html>

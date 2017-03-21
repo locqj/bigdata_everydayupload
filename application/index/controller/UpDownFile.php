@@ -108,7 +108,7 @@ class UpDownFile extends Common {
               } 
 
                
-                 Db::table('cbd_data_store_filename')->insert(['datafilename' => $inputWorkName, 'remark' => $inputReMark, 'user' => Session::get('username')]);
+                 Db::table('cbd_data_store_filename')->insert(['file_name' => $inputWorkName, 'remark' => $inputReMark, 'user' => Session::get('username')]);
                  $fileName = Db::table('cbd_data_store_filename')->where('user', Session::get('username'))->select();
                  $this->assign('username', Session::get('username'));
                  $this->assign('fileName', $fileName);

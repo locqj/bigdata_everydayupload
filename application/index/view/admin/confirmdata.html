@@ -1,168 +1,191 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-  <meta charset="utf-8">
-  <title>模板首页</title>
-  <script src="https://cdn.static.runoob.com/libs/jquery/1.10.2/jquery.min.js"></script>
-  <link rel="stylesheet" type="text/css" href="./../../css/iconfont/iconfont.css">
-  <link rel="stylesheet" type="text/css" href="./../../css/chartdetail.css">
-  <link rel="stylesheet" type="text/css" href="./../../css/index2.css">
-  <link rel="stylesheet" type="text/css" href="./../../css/timeline.css">
-  <link rel="stylesheet" type="text/css" href="./../../css/dealdata.css">
+    <meta charset="utf-8">
+    <title>模板首页</title>
+    <script src="https://cdn.static.runoob.com/libs/jquery/1.10.2/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="./../../css/iconfont/iconfont.css">
+    <link rel="stylesheet" type="text/css" href="./../../css/chartdetail.css">
+    <link rel="stylesheet" type="text/css" href="./../../css/index2.css">
+    <link rel="stylesheet" type="text/css" href="./../../css/timeline.css">
+    <link rel="stylesheet" type="text/css" href="./../../css/dealdata.css">
 </head>
+
 <body>
-  <!-- 头部的导航栏 -->
-  <div id="header">
-    <div class="left">
-      <div class="return">
-        <i class="iconfont icon-fanhui"></i>
-        <span style="display: inline-block;border-right:2px solid #eee;height:23px;margin:0px 20px;"></span>
-      </div>
-      <div class="nav-item" style="font-size: 24px;margin-left: 120px;color:#fff">上传数据</div>
+    <!-- 头部的导航栏 -->
+    <div id="header">
+        <div class="left">
+            <div class="return">
+                <i class="iconfont icon-fanhui"></i>
+          <!--       <span style="display: inline-block;border-right:2px solid #eee;height:23px;margin:0px 20px;"></span> -->
+            </div>
+            <div class="nav-item" style="font-size: 24px;margin-left: 120px;color:#fff">上传数据</div>
+        </div>
     </div>
-  </div>
-  <div class="container">
+    <div class="clear"></div>
+    <div class="container">
         <div class="main">
             <ul class="cbp_tmtimeline">
-         <li>
-             <div class="cbp_tmicon cbp_tmicon-phone">
-             </div>
-             <div class="cbp_tmlabel">
-               <span>上传文件</span>
-             <form   id="form1" enctype="multipart/form-data"  style="display: inline-block">
-         
-                 <div class="andArea" >
-                   <div class="filePicker">
-                     <i class="iconfont icon-jiahao"></i>
-                   </div>
-                   <input id="fileImage" type="file" class="upfile" name="image">
-                 </div>
-                 <div id="fileName">
-                    <label class="fileName">暂时没有选择文件</label>
-                 </div>
-                 <div class="clear"></div>
-                 <input type="button" name="uploadFile" id="uploadFile" value="上&nbsp;&nbsp;&nbsp;&nbsp;传">
-            </form>
-             </div>
-         </li>
                 <li>
-                    <a name="step2"><div class="cbp_tmicon cbp_tmicon-screen"></div>
+                    <div class="cbp_tmicon cbp_tmicon-phone"></div>
                     <div class="cbp_tmlabel">
-                        <span id="yulan">
-                             <table border="1" id="infolist" name="infolist">
-                           
-                             </table>
-                        </span>
-
+                        <span><i class="iconfont icon-arrow121112"></i>上传文件</span>
+                        <form id="form1" enctype="multipart/form-data" style="display: inline-block">
+                            <div class="andArea">
+                                <div class="filePicker">
+                                    <i class="iconfont icon-jiahao"></i>
+                                </div>
+                                <input id="fileImage" type="file" class="upfile" name="image">
+                            </div>
+                            <div id="fileName">
+                                <label class="fileName">暂时没有选择文件</label>
+                            </div>
+                            <div class="clear"></div>
+                            <a href="#uploadFile">
+                                <input type="button" name="uploadFile" id="uploadFile" value="上&nbsp;&nbsp;&nbsp;&nbsp;传">
+                            </a>
+                        </form>
                     </div>
-                    </a>
                 </li>
                 <li>
-                    <a name="step3"><div class="cbp_tmicon cbp_tmicon-mail"></div></a>
+                    <div class="cbp_tmicon cbp_tmicon-screen"></div>
                     <div class="cbp_tmlabel">
-                        <span>工作表设置</span>
-                        <form action="{:url('/confirm')}" method="post" class="setsheet"  onsubmit="return checksubmit2()">
-                          <div>
-                            <span>工作表</span>
-                            <input type="text" name="workname" id="workname">
-                          </div>
-                          <div>
-                            <span>备&nbsp;&nbsp;&nbsp;&nbsp;注</span>
-                            <input type="text" name="remark" id="remark">
-                          </div>
-                          <span id="info"></span>
-                          <div>
-                            <input type="submit" name="sendworkname" id="sendworkname" value="确&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;定">
-                          </div>
+                        <span class="tb_name" style=""><i class="iconfont icon-tables" ></i><label>暂时没有文件</label></span>
+                        <div id="yulan">
+                            <table border="1" id="infolist" name="infolist" cellspacing="0">
+                            </table>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <a name="step3">
+                        <div class="cbp_tmicon cbp_tmicon-mail"></div>
+                    </a>
+                    <div class="cbp_tmlabel">
+                        <span><i class="iconfont icon-shezhi"></i>工作表设置</span>
+                        <form action="{:url('/confirm')}" method="post" class="setsheet" onsubmit="return checksubmit2()">
+                            <div>
+                                <span>工作表</span>
+                                <input type="text" name="workname" id="workname">
+                            </div>
+                            <div>
+                                <span>备&nbsp;&nbsp;&nbsp;&nbsp;注</span>
+                                <input type="text" name="remark" id="remark">
+                            </div>
+                            <span id="info" style="display:none"></span>
+                            <div>
+                                <input type="submit" name="sendworkname" id="sendworkname" value="确&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;定">
+                            </div>
                         </form>
                     </div>
                 </li>
             </ul>
         </div>
     </div>
-
 </body>
- 
+<script type="text/javascript">
+$(function() {
+    // 将点击事件转移
+    $(".filePicker").bind("click", function(e) {
+        $("#fileImage").click();
+    });
+    $('#fileImage').bind('input propertychange', function() {
+        var filename = $('#fileImage').val();
+        $('.fileName').html(filename);
+        // $('.tb_name').text(filename);
+    });
+    $('#fileImage').change(function() {
+        var filename = $('#fileImage').val();
+        // 谷歌中的文件名是所有的路径，因此在这里截取一下字符串，去掉路径
+        var first_gang = filename.lastIndexOf('\\') + 1;
+        $('.fileName').text(filename.substr(first_gang));
 
-    <script type="text/javascript">
-      $(function(){
-        // 将点击事件转移
-        $(".filePicker").bind("click", function(e){
-            $("#fileImage").click();
+    });
+
+    // 点击的返回按钮
+    $('.icon-fanhui').click(function() {
+        window.location.href = 'http://chogge.565tech.com/worksheet.html';
+    });
+    $('#workname').blur(function() {
+        if ($('#workname').val() == '') {
+            $('#info').show().html('工作表不得为空');
+        }else if ($('#workname').val() != '') {
+            $('#info').hide();
+        }
+        $.post("{:url('UpDownFile/dist_file_name')}", {
+            'workname': $('#workname').val()
+        }, function(data) {
+            if (data == "ok") {
+                $('#info').hide();
+            } else {
+                $('#info').show().html('名字已重复');
+                $('#workname').val("");
+                $('#workname').focus();
+            }
+
+        })
+    });
+    $('#uploadFile').click(function(event) {
+        var filename = $('#fileImage').val();
+        // 点击上传时，给下面的表格添加名字
+        // 谷歌中的文件名是所有的路径，因此在这里截取一下字符串，去掉路径
+        var first_gang = filename.lastIndexOf('\\') + 1;
+        $('.tb_name label').text(filename.substr(first_gang));
+
+        window.location.hash = "#step2";
+        $('#yulan').css('height', '400px');
+        $.ajax({
+            url: "{:url('UpDownFile/upload')}",
+            type: 'POST',
+            cache: false,
+            data: new FormData($('#form1')[0]),
+            processData: false,
+            contentType: false
+        }).done(function(res) {
+
+            $.ajax({
+                type: 'post',  
+                url: "{:url('UpDownFile/sure_els_relook')}",
+                data: {
+                    getFunction: 1,
+
+                },
+                success: function(data, status) {
+                    var data = eval("(" + data + ")");
+                    var str = '';
+
+                    $.each(data, function(i, val) {
+
+                        str = str + '<tr>';
+                        $.each(val, function(k, v) {
+                            str = str + '<td> ' + v + ' </td>';
+                        });
+                        str = str + '</tr>';
+                    });
+                    $('#infolist').html(str);
+
+                },
+                error: function(data, statsu) {
+                    alert("发送请求失败！");
+                }
+            });
+        }).fail(function(res) {
+
         });
-        $('#fileImage').bind('input propertychange', function() {
-          $('.fileName').html($('#image').val());
-        });
 
-        // 点击的返回按钮
-        $('.icon-fanhui').click(function(){
-          window.location.href='http://chogge.565tech.com/worksheet.html';
-        });
-        $('#workname').blur(function(){
-           if($('#workname').val() == ''){
-              $('#info').html('工作表不得为空');
-           }
-           $.post("{:url('UpDownFile/dist_file_name')}",{'workname':$('#workname').val()},function(data){
-               if(data == "ok"){
+    });
 
-               }else{
-                 $('#info').html('名字已重复');
-                 $('#workname').val("");
-                 $('#workname').focus();
-               }
+})
 
-           })
-        });
-        $('#uploadFile').click(function(event) {
-                    $.ajax({
-                  url: "{:url('UpDownFile/upload')}",
-                  type: 'POST',
-                  cache: false,
-                  data: new FormData($('#form1')[0]),
-                  processData: false,
-                  contentType: false
-              }).done(function(res) {
-                       
-                           $.ajax({
-                             type:'post', //请求方式，默认get
-                             url :"{:url('UpDownFile/sure_els_relook')}",
-                             data:{
-                             getFunction:1,
-                              
-                             },success:function(data,status){  
-                              var data =  eval("("+data+")");
-                                      var str = '';
-                                      
-                             $.each(data,function(i,val){
-                                        
-                                 str = str + '<tr>';
-                                 $.each(val,function(k,v){
-                                   str = str + '<td> '+v+' </td>'; 
-                                        }); 
-                                 str = str + '</tr>';
-                             });
-                             $('#infolist').html(str);
-                            
-                             },error:function(data,statsu){
-                             alert("发送请求失败！");
-                             }
-                             });
-              }).fail(function(res) { 
 
-                                    }); 
-                   
-           });
- 
-      })
+function checksubmit2() {
+    if ($('#workname').val() != '') {
+        return true;
+    }
+    return false;
 
-      
-       function checksubmit2()
-      {
-           if($('#workname').val()!='' && $('#remark').val()!=''){ 
-            return true;  
-           }
-           return false;
+}
+</script>
 
-      }
-       </script>
 </html>

@@ -14,39 +14,35 @@
 
 <body>
     <!-- 头部的导航栏 -->
-    <div id="header">
-        <div class="left">
-            <div class="logo">爱诺信数据</div>
-            <div class="nav-item">
-                <a id="yibiaopan" class="active" href="{:url('/userAdmin')}">仪表盘</a>
-                <a id="gongzuobiao" href="{:url('/worksheet')}">工作表</a>
-                <a id="shujuyuan" href="{:url('/datasource')}">数据源</a>
-                <a id="mubanku" href=" {:url('/module')}">模板库</a>
-            </div>
-        </div>
-        <div class="right">
-            <span class="username">{$username}</span>
-            <a href="{:url('Admin/out_login')}" class="loginout">退出</a>
-        </div>
-    </div>
+   {include file="public/admin/nav" /}
     <!-- 具体内容 -->
     <div id="content">
         <!-- 左侧添加仪表盘和样式 -->
         <div id="left">
-            <div class="yibiaopan" style="border-bottom: 1px dashed #ccc">
+            <div class="yibiaopan">
                 <div class="left">
                     <i class="iconfont icon-work-list"></i>
                     <b>图表</b>
                 </div>
                 <div class="right">
-                    <!-- <i class="iconfont icon-sousuo"></i> -->
-                    <i class="iconfont icon-jiahao"></i>
-                    <!-- <i class="iconfont icon-zhankai"></i> -->
+                    <i class="iconfont icon-sousuo"></i>
+                    <i class="iconfont icon-jiahao"></i> 
                 </div>
                 <div class="clear"></div>
             </div>
             <div class="yangshi">
+             
                 <ul>
+                    <li id="ulli" style="display:none;">
+
+                        <i class="iconfont icon-iconfontyuan"></i>
+                        <span style="width: 85%">biaoming</span>
+                        <i class='iconfont icon-zhankai' id="test" value="0"></i>
+                        <div class='biao_caozuo' style="z-index: 9999; display: none;">
+                            <span class='biao_edit'><i class="iconfont icon-bianji"></i>编辑</span>
+                            <span class='biao_delete'><i class="iconfont icon-shanchu"></i>删除</span>
+                        </div>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -57,7 +53,7 @@
         </div>
     </div>
     <!-- 点击加号，弹出的仪表盘添加的弹框 -->
-    <div class="tanchuang" style="display: none">
+    <div class="tanchuang tan_addbiao" style="display: none">
         <div class="tanchuang-info">
             <div class="tan-title">
                 <span>添加图表</span>
@@ -73,8 +69,8 @@
                     <!-- 遍历出所有的工作表,默认选中一个 -->
                     {foreach name="getTheFileName" id="vo"}
                     <div class="sheet">
-                        <input type="radio" name="sheet" value="{$vo.datafilename}" checked="checked">
-                        <span>{$vo.datafilename}</span>
+                        <input type="radio" name="sheet" value="{$vo.file_name}" checked="checked">
+                        <span>{$vo.file_name}</span>
                     </div>
                     {/foreach}
                 </div>
@@ -86,9 +82,31 @@
             </div>
         </div>
     </div>
+    <!-- 点击编辑，弹出修改图表名字 -->
+    <div class="tanchuang tan_editbiaoname" style="display:none">
+        <div class="tanchuang-info">
+        	<div class="tan-title">
+                <span>修改表名</span>
+                <i class="iconfont icon-cha"></i>
+            </div>
+	        <form>
+	            <div>
+	                <span>表&nbsp;&nbsp;&nbsp;&nbsp;名</span>
+	                <input type="text" name="workname" id="workname">
+	            </div>
+	            <div>
+	                <span>备&nbsp;&nbsp;&nbsp;&nbsp;注</span>
+	                <input type="text" name="remark" id="remark">
+	            </div>
+	            <div class="caozuo">
+	                <input type="submit" name="sendworkname" value="确&nbsp;&nbsp;定">
+	                <input type="button" value="取&nbsp;&nbsp;消">
+	            </div>
+	        </form>
+        </div>
+    </div>
     <script type="text/javascript">
     $(function() {
-
         //默认设置i第一个值为选中的值
         $('input:radio:first').attr('checked', true);
         //添加图表之后，左侧会多出一行
@@ -96,33 +114,63 @@
             //获取被选中的radio的值,新建完图表之后，点击编辑，链接到编辑图表界面
             var biaoming = $('input[name=sheet]:checked').val();
 
-            var firstli = "<li><span>" + biaoming + "</span><a href='http://chogge.565tech.com/editchart.html'><i class='iconfont icon-weibiaoti1'></i></a></li>";
+            // var firstli = "<li><span>" + biaoming + "</span><a href='http://chogge.565tech.com/editchart.html'><i class='iconfont icon-weibiaoti1'></i></a></li>";  自行创建元素，失败；使用eq(0)
+            var $firstli = $('.yangshi ul li').eq(0);
+            var cloneli = $firstli.clone(true);
+            $(cloneli).css('display', 'block');
+            $(cloneli).children('span').text(biaoming); //cloneli为一个对象，可以直接放在$()里面
+            $('.yangshi ul').append(cloneli);
+
+            // $firstli.appendChild(first);
+
+            // var $firstli = $('.yangshi ul li').eq(0);
             $.post("{:url('Admin/add_charts')}", {
                 'getAjaxFileName': biaoming
             }, function(data) {
                 if (data == 'ok') {
-                    $('.yangshi ul').append("<li><span>" + biaoming + "</span><a href='http://chogge.565tech.com/editchart.html'><i class='iconfont icon-weibiaoti1'></i></a></li>");
+
+                    // $('.yangshi ul').append($firstli.clone(true));
                 }
             });
 
-        })
+        });
+          $('.yangshi ul li .icon-zhankai').click(function() {
+                
+                var i_id = $(this).next('div').css('display');
+                
+                if(i_id == 'none'){  
+                     $(this).next('div').css('display','block');
+                }else{
+                     $(this).next('div').css('display','none');
 
+                }
+
+        });
+          $("#ulli").children('*:not(#test)').click(function() {
+               
+                $(".yangshi ul li div").css('display','none'); 
+          });
+          
+        
 
 
     })
     window.onload = function() {
         $.post("{:url('Admin/index_show_filename')}", {}, function(data) {
             var data = eval("(" + data + ")");
-            var str = '';
             $.each(data, function(q, val) {
-
-                str = str + '<li><span>';
-                str = str + val.datafilename;
-                str = str + "</span><a href='http://chogge.565tech.com/editchart.html'><i class='iconfont icon-weibiaoti1'></i></a></li>";
-            }); 
-            $('.yangshi ul').append(str);
+                var $firstli = $('.yangshi ul li').eq(0);
+                 var cloneli = $firstli.clone(true);
+                 $(cloneli).css('display', 'block');
+                $(cloneli).children('span').text(val.file_name);
+                $(cloneli).children('i').attr('id', val.id); //locqj添加
+                 $(cloneli).children('div').attr('id', val.id); //locqj添加
+                //cloneli为一个对象，可以直接放在$()里面 
+                $('.yangshi ul').append(cloneli);
+            })
         })
     };
+    
     </script>
 </body>
 
