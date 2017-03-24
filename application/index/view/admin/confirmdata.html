@@ -18,7 +18,7 @@
         <div class="left">
             <div class="return">
                 <i class="iconfont icon-fanhui"></i>
-          <!--       <span style="display: inline-block;border-right:2px solid #eee;height:23px;margin:0px 20px;"></span> -->
+                <!--       <span style="display: inline-block;border-right:2px solid #eee;height:23px;margin:0px 20px;"></span> -->
             </div>
             <div class="nav-item" style="font-size: 24px;margin-left: 120px;color:#fff">上传数据</div>
         </div>
@@ -110,7 +110,7 @@ $(function() {
     $('#workname').blur(function() {
         if ($('#workname').val() == '') {
             $('#info').show().html('工作表不得为空');
-        }else if ($('#workname').val() != '') {
+        } else if ($('#workname').val() != '') {
             $('#info').hide();
         }
         $.post("{:url('UpDownFile/dist_file_name')}", {
@@ -145,7 +145,7 @@ $(function() {
         }).done(function(res) {
 
             $.ajax({
-                type: 'post',  
+                type: 'post',
                 url: "{:url('UpDownFile/sure_els_relook')}",
                 data: {
                     getFunction: 1,

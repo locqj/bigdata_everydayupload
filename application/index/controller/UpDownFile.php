@@ -90,6 +90,7 @@ class UpDownFile extends Common {
                       $dataName['column_value'] = $val;
                       $dataName['file_name'] = $inputWorkName;
                       $dataName['user'] = Session::get('username');
+                      $dataName['status_del'] = '1';
                        Db::table('cbd_datasource_name')->insert($dataName);
                       } 
                      
@@ -102,13 +103,19 @@ class UpDownFile extends Common {
                        }
                        $dataValue['file_name'] = $inputWorkName;
                        $dataValue['user'] = Session::get('username');
+                       $dataValue['status_del'] = '1';
                        Db::table('cbd_datasource')->insert($dataValue);
                        
                   }
               } 
 
                
-                 Db::table('cbd_data_store_filename')->insert(['file_name' => $inputWorkName, 'remark' => $inputReMark, 'user' => Session::get('username')]);
+                 Db::table('cbd_data_store_filename')->insert([
+                  'file_name' => $inputWorkName, 
+                  'remark' => $inputReMark, 
+                  'user' => Session::get('username'),
+                  'status_del' => '1'
+                  ]);
                  $fileName = Db::table('cbd_data_store_filename')->where('user', Session::get('username'))->select();
                  $this->assign('username', Session::get('username'));
                  $this->assign('fileName', $fileName);

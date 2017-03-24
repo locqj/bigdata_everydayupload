@@ -53,18 +53,47 @@ class admin extends Common
       $this->assign('fileName', $fileName);
       return view();
    }
+
    public function worksheet_show_els()
    {
-      $getFileName = input('post.filename');
-      $fileColumn = Db::table('cbd_datasource_name')->where('file_name', $getFileName)->field('column_name')->select();
-        
+      $getFileId = input('post.fileId');
+      $getFileName = Db::table('cbd_data_store_filename')->where('id', $getFileId)->value('file_name');
+      $fileColumn = Db::table('cbd_datasource_name')->where('file_name', $getFileName)->field('column_name,column_value')->select();
+    
       $column = array();
+      $column_value =array();
       foreach ($fileColumn as $key => $value) {
          $column[$key] = $value['column_name'];
+         $column_value[$key] = $value['column_value'];
       } 
-         
-      $data = Db::table('cbd_datasource')->where('file_name', $getFileName)->field($column)->select();
+        $column['id'] = 'id';
+        /*pp($fileColumn) ;*/
+      $data['tbody'] = Db::table('cbd_datasource')->where('file_name', $getFileName)->field($column)->select();
+      $data['thead'] = $column_value;
+      /*pp($data);*/
       echo json_encode($data);  
+   }
+
+   public function worksheet_update_els()
+   {
+      $getUpdateValue = input('post.updateValue');
+      $getUpdateId = input('post.updateId');
+      $splitTheUpadteValueToArray = $this->split_the_update_string($getUpdateValue);
+      /*pp($splitTheUpadteValueToArray);*/
+      Db::table('cbd_datasource')->where('id', $getUpdateId)->update($splitTheUpadteValueToArray);
+      echo 'ok';
+
+   }
+   public function split_the_update_string($splitString)
+   {
+      $splitS = json_decode($splitString);
+      $splitSToArray = array();
+      foreach ($splitS as $key => $value) {
+         $split = explode("@", $value);
+         $key = $split[0];
+         $splitSToArray[$key] = $split[1];
+      }
+      return $splitSToArray;
    }
    public function worksheet_reset_filename_and_remark()
    {

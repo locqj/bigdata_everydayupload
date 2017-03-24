@@ -14,7 +14,7 @@
 
 <body>
     <!-- 头部的导航栏 -->
-   {include file="public/admin/nav" /}
+    {include file="public/admin/nav" /}
     <!-- 具体内容 -->
     <div id="content">
         <!-- 左侧添加仪表盘和样式 -->
@@ -26,15 +26,13 @@
                 </div>
                 <div class="right">
                     <i class="iconfont icon-sousuo"></i>
-                    <i class="iconfont icon-jiahao"></i> 
+                    <i class="iconfont icon-jiahao"></i>
                 </div>
                 <div class="clear"></div>
             </div>
             <div class="yangshi">
-             
                 <ul>
                     <li id="ulli" style="display:none;">
-
                         <i class="iconfont icon-iconfontyuan"></i>
                         <span style="width: 85%">biaoming</span>
                         <i class='iconfont icon-zhankai' id="test" value="0"></i>
@@ -85,24 +83,24 @@
     <!-- 点击编辑，弹出修改图表名字 -->
     <div class="tanchuang tan_editbiaoname" style="display:none">
         <div class="tanchuang-info">
-        	<div class="tan-title">
+            <div class="tan-title">
                 <span>修改表名</span>
                 <i class="iconfont icon-cha"></i>
             </div>
-	        <form>
-	            <div>
-	                <span>表&nbsp;&nbsp;&nbsp;&nbsp;名</span>
-	                <input type="text" name="workname" id="workname">
-	            </div>
-	            <div>
-	                <span>备&nbsp;&nbsp;&nbsp;&nbsp;注</span>
-	                <input type="text" name="remark" id="remark">
-	            </div>
-	            <div class="caozuo">
-	                <input type="submit" name="sendworkname" value="确&nbsp;&nbsp;定">
-	                <input type="button" value="取&nbsp;&nbsp;消">
-	            </div>
-	        </form>
+            <form>
+                <div>
+                    <span>表&nbsp;&nbsp;&nbsp;&nbsp;名</span>
+                    <input type="text" name="workname" id="workname">
+                </div>
+                <div>
+                    <span>备&nbsp;&nbsp;&nbsp;&nbsp;注</span>
+                    <input type="text" name="remark" id="remark">
+                </div>
+                <div class="caozuo">
+                    <input type="submit" name="sendworkname" value="确&nbsp;&nbsp;定">
+                    <input type="button" value="取&nbsp;&nbsp;消">
+                </div>
+            </form>
         </div>
     </div>
     <script type="text/javascript">
@@ -134,24 +132,24 @@
             });
 
         });
-          $('.yangshi ul li .icon-zhankai').click(function() {
-                
-                var i_id = $(this).next('div').css('display');
-                
-                if(i_id == 'none'){  
-                     $(this).next('div').css('display','block');
-                }else{
-                     $(this).next('div').css('display','none');
+        $('.yangshi ul li .icon-zhankai').click(function() {
 
-                }
+            var i_id = $(this).next('div').css('display');
+
+            if (i_id == 'none') {
+                $(this).next('div').css('display', 'block');
+            } else {
+                $(this).next('div').css('display', 'none');
+
+            }
 
         });
-          $("#ulli").children('*:not(#test)').click(function() {
-               
-                $(".yangshi ul li div").css('display','none'); 
-          });
-          
-        
+        $("#ulli").children('*:not(#test)').click(function() {
+
+            $(".yangshi ul li div").css('display', 'none');
+        });
+
+
 
 
     })
@@ -160,17 +158,16 @@
             var data = eval("(" + data + ")");
             $.each(data, function(q, val) {
                 var $firstli = $('.yangshi ul li').eq(0);
-                 var cloneli = $firstli.clone(true);
-                 $(cloneli).css('display', 'block');
+                var cloneli = $firstli.clone(true);
+                $(cloneli).css('display', 'block');
                 $(cloneli).children('span').text(val.file_name);
                 $(cloneli).children('i').attr('id', val.id); //locqj添加
-                 $(cloneli).children('div').attr('id', val.id); //locqj添加
+                $(cloneli).children('div').attr('id', val.id); //locqj添加
                 //cloneli为一个对象，可以直接放在$()里面 
                 $('.yangshi ul').append(cloneli);
             })
         })
     };
-    
     </script>
 </body>
 
