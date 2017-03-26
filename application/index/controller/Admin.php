@@ -10,13 +10,21 @@ class admin extends Common
    public function index()
    {
       $this->init_load();
-      $getTheFileName = Db::table('cbd_data_store_filename')->where(['status' => 0,'status_del' => 1])->select(); 
+      $getTheFileName = Db::table('cbd_data_store_filename')->where([
+         'user' => Session::get('username'),
+         'status' => 0, 
+         'status_del' => 1
+         ])->select(); 
       $this->assign('getTheFileName', $getTheFileName);
       return view();
    }
    public function index_show_filename()
    {
-      $showFileName = Db::table('cbd_data_store_filename')->where(['status' => 1,'status_del' => 1])->select();
+      $showFileName = Db::table('cbd_data_store_filename')->where([
+         'status' => 1,
+         'status_del' => 1,
+         'user' => Session::get('username')
+         ])->select();
       echo json_encode($showFileName);
    }
    public function add_charts()
@@ -49,7 +57,10 @@ class admin extends Common
    public function worksheet()
    {
       $this->init_load();
-      $fileName = Db::table('cbd_data_store_filename')->where(['user' => Session::get('username'),'status_del' => 1])->select();
+      $fileName = Db::table('cbd_data_store_filename')->where([
+         'user' => Session::get('username'),
+         'status_del' => 1
+         ])->select();
       $this->assign('fileName', $fileName);
       return view();
    }
@@ -68,7 +79,10 @@ class admin extends Common
       } 
         $column['id'] = 'id';
         /*pp($fileColumn) ;*/
-      $data['tbody'] = Db::table('cbd_datasource')->where('file_name', $getFileName)->field($column)->select();
+      $data['tbody'] = Db::table('cbd_datasource')->where([
+         'file_name' => $getFileName,
+         'status_del' => 1
+         ])->field($column)->select();
       $data['thead'] = $column_value;
       /*pp($data);*/
       echo json_encode($data);  
@@ -83,6 +97,16 @@ class admin extends Common
       Db::table('cbd_datasource')->where('id', $getUpdateId)->update($splitTheUpadteValueToArray);
       echo 'ok';
 
+   }
+   public function worksheet_del_els()
+   {
+      $getDataDelId = input('post.dataId');
+      $returnHandleResult = Db::table('cbd_datasource')->where('id', $getDataDelId)->setField('status_del', '0');
+      if($returnHandleResult == '1') {
+         echo "success";
+      }else {
+         echo "error";
+      }
    }
    public function split_the_update_string($splitString)
    {

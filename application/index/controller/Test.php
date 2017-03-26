@@ -9,8 +9,7 @@ namespace app\index\controller;
 class Test extends Controller{
 	
   public function index(){
-     $a = 'asd';
-     $this->assign('test', $a);
+      
      return view();
    }
    

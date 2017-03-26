@@ -21,6 +21,7 @@
     <div id="content">
         <!-- 左侧添加仪表盘和样式 -->
         <div id="left">
+
             <div class="yibiaopan">
                 <div class="left">
                     <i class="iconfont icon-shujuku"></i>
@@ -29,6 +30,7 @@
                 <div class="right">
                     <i class="iconfont icon-sousuo"></i>
                     <i class="iconfont icon-jiahao"></i>
+
                 </div>
                 <div class="clear"></div>
             </div>
@@ -38,7 +40,7 @@
                     {foreach name='fileName' item='vo'}
                     <li name={$vo.id}>
                         <i class="iconfont icon-iconfontyuan"></i>
-                        <span style="width: 85%">{$vo.file_name}</span>
+                        <span style="width: 85%" onclick=leftliclick({$vo.id},"{$vo.file_name}")>{$vo.file_name}</span>
                         <i class='iconfont icon-zhankai test' value="{$vo.file_name}"></i>
                         <div class='biao_caozuo' style="z-index: 9999 display:none;">
                             <span class='biao_edit' value="{$vo.file_name}"><i class="iconfont icon-bianji"></i>编辑</span>
@@ -51,13 +53,26 @@
         </div>
         <!-- 右边具体显示图表的名字和表 -->
         <div id="showcharts" class="left">
-            <div class="charttitle">
+               
+            <div class="page-header">
             </div>
+            <div class="view">
+        <ul class="nav nav-tabs" contenteditable="fasle">
+            <li class="active">
+                <a href="#">数据预览</a>
+            </li>
+            <li>
+                <a href="#">更新记录</a>
+            </li>
+             
+       
+        </ul>
+    </div>
             <div class="charts">
-                <table class="table table-striped table-bordered ">
-                    <thead id="infohead">
+                <table class="table table-striped table-bordered " >
+                    <thead id="infohead" style="display:block;overflow-y: scroll;border-bottom:1px solid #eee;">
                     </thead>
-                    <tbody id="infolist">
+                    <tbody id="infolist" style="display:block; max-height:500px; overflow-y: scroll;">
                     </tbody>
                 </table>
             </div>
@@ -145,8 +160,8 @@ $(document).ready(function() {
 
     });
     /*点击显示表格*/
-    $('ul li').click(function() {
-
+  /*  $('ul li').click(function() {
+        
         $.ajax({
             type: 'post', //请求方式，默认get
             url: "{:url('Admin/worksheet_show_els')}",
@@ -165,7 +180,7 @@ $(document).ready(function() {
                     $.each(val, function(k, v) {
                         if (k == 'id') {
 
-                            str = str + '<td style="width: 90px"><center><button class="btn btn-primary" id=' + i + ' onclick="update(' + v + ',' + i + ');">修改</button></center></td>';
+                            str = str + '<td style="width: 90px"><center><button class="btn btn-primary" id=' + i + ' onclick="update(' + v + ',' + i + ');">修改</button></center></td><td style="width: 90px"><center><button class="btn btn-primary"  onclick="del('+ v +');">删除</button></center></td>';
 
                         } else {
                             str = str + '<td style="width: 90px" value=' + k + ' class="default"><input disabled="true" class=' + i + ' style="width: 90px" type="text" value=' + v + ' ></input></td>';
@@ -177,7 +192,7 @@ $(document).ready(function() {
                 });
                 theadval = theadval + '<tr class="info">';
                 $.each(data.thead, function(i, val) {
-                    theadval = theadval + '<td style="width: 90px" value=' + i + ' >' + val + '</td>';
+                    theadval = theadval + '<td style="width: 107px" value=' + i + ' >' + val + '</td>';
                 });
                 theadval = theadval + '</tr>';
                 $('#infolist').html(str);
@@ -190,7 +205,7 @@ $(document).ready(function() {
         });
 
 
-    });
+    });*/
 
     /*点击箭号，显示隐藏框*/
     $('.yangshi ul li .icon-zhankai').click(function() {
@@ -246,8 +261,7 @@ function update(v, i) {
                 updateId: v
                  
             },
-              success: function(data, status) {
-                alert(data);
+              success: function(data, status) { 
                  
               },
               error: function(data, statsu) {}
@@ -257,6 +271,65 @@ function update(v, i) {
     }
 
 
+}
+function leftliclick(fileId,fileName)
+{  
+    window["fileId"]=fileId;
+    window["fileName"]=fileName;
+    $("div.page-header").html("<h1 contenteditable='false'>"+fileName+"</h1>");
+     $.ajax({
+            type: 'post', //请求方式，默认get
+            url: "{:url('Admin/worksheet_show_els')}",
+            data: {
+                 
+                fileId: fileId
+            },
+            success: function(data, status) {
+                 var data = eval("(" + data + ")");
+                var str = '';
+                var theadval = '';
+               // alert(data);
+                $.each(data.tbody, function(i, val) {
+
+                    str = str + '<tr>';
+                    $.each(val, function(k, v) {
+                        if (k == 'id') {
+
+                            str = str + '<td style="width: 90px"><center><button class="btn btn-primary" id=' + i + ' onclick="update(' + v + ',' + i + ');">修改</button></center></td><td style="width: 90px"><center><button class="btn btn-primary"  onclick="del('+ v +');">删除</button></center></td>';
+
+                        } else {
+                            str = str + '<td style="width: 90px" value=' + k + ' class="default"><input disabled="true" class=' + i + ' style="width: 90px" type="text" value=' + v + ' ></input></td>';
+                        }
+
+                    });
+
+                    str = str + '</tr>';
+                });
+                theadval = theadval + '<tr class="info">';
+                $.each(data.thead, function(i, val) {
+                    theadval = theadval + '<td style="width: 107px" value=' + i + ' >' + val + '</td>';
+                });
+                theadval = theadval + '</tr>';
+                $('#infolist').html(str);
+                $('#infohead').html(theadval);
+
+            },
+            error: function(data, statsu) {
+                alert("发送请求失败！");
+            }
+        });
+}
+
+function del(v)
+{
+    
+    $.post("{:Url('Admin/worksheet_del_els')}", {'dataId':v}, function(data){
+        if(data == "success") {
+            leftliclick(window['fileId'],window['fileName']);
+        }else {
+            alert('error');
+        }
+    })
 }
 </script>
 
