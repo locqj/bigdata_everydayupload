@@ -9,6 +9,7 @@
     <link rel="stylesheet" type="text/css" href="./../../css/iconfont/iconfont.css">
     <link rel="stylesheet" type="text/css" href="./../../css/index2.css">
     <link rel="stylesheet" type="text/css" href="./../../css/chartdetail.css">
+    <link rel="stylesheet" type="text/css" href="./../../css/worksheet.css">
     <link rel="stylesheet" type="text/css" href="./../../css/tanchuang.css">
     <link rel="stylesheet" type="text/css" href="./../../css/bootstrap/css/bootstrap.min.css">
     <script type="text/javascript" src="./../../css/bootstrap/js/bootstrap.min.js"></script>
@@ -38,7 +39,7 @@
                 <!-- <span>添加的样式</span> -->
                 <ul>
                     {foreach name='fileName' item='vo'}
-                    <li name={$vo.id}>
+                    <li name={$key}>
                         <i class="iconfont icon-iconfontyuan"></i>
                         <span style="width: 85%" onclick=leftliclick({$vo.id},"{$vo.file_name}")>{$vo.file_name}</span>
                         <i class='iconfont icon-zhankai test' value="{$vo.file_name}"></i>
@@ -52,9 +53,9 @@
             </div>
         </div>
         <!-- 右边具体显示图表的名字和表 -->
-        <div id="showcharts" class="left">
-               
-            <div class="page-header">
+        <div id="showcharts" class="left"> 
+            <div class="filetitle">
+          
             </div>
             <div class="view">
         <ul class="nav nav-tabs" contenteditable="fasle">
@@ -63,6 +64,9 @@
             </li>
             <li>
                 <a href="#">更新记录</a>
+            </li>
+              <li style="float: right">
+                <a href="#" onclick="add_data();">添加数据</a>
             </li>
              
        
@@ -108,6 +112,7 @@
 </body>
 <script type="text/javascript">
 $(document).ready(function() {
+    load();
     /*获取编辑表名*/
     $('.yangshi ul li .biao_caozuo .biao_edit').click(function() {
         var bianjiId = $(this).attr('value');
@@ -159,53 +164,7 @@ $(document).ready(function() {
         });
 
     });
-    /*点击显示表格*/
-  /*  $('ul li').click(function() {
-        
-        $.ajax({
-            type: 'post', //请求方式，默认get
-            url: "{:url('Admin/worksheet_show_els')}",
-            data: {
-                getFunction: 1,
-                fileId: $(this).attr('name')
-            },
-            success: function(data, status) {
-                 var data = eval("(" + data + ")");
-                var str = '';
-                var theadval = '';
-               // alert(data);
-                $.each(data.tbody, function(i, val) {
-
-                    str = str + '<tr>';
-                    $.each(val, function(k, v) {
-                        if (k == 'id') {
-
-                            str = str + '<td style="width: 90px"><center><button class="btn btn-primary" id=' + i + ' onclick="update(' + v + ',' + i + ');">修改</button></center></td><td style="width: 90px"><center><button class="btn btn-primary"  onclick="del('+ v +');">删除</button></center></td>';
-
-                        } else {
-                            str = str + '<td style="width: 90px" value=' + k + ' class="default"><input disabled="true" class=' + i + ' style="width: 90px" type="text" value=' + v + ' ></input></td>';
-                        }
-
-                    });
-
-                    str = str + '</tr>';
-                });
-                theadval = theadval + '<tr class="info">';
-                $.each(data.thead, function(i, val) {
-                    theadval = theadval + '<td style="width: 107px" value=' + i + ' >' + val + '</td>';
-                });
-                theadval = theadval + '</tr>';
-                $('#infolist').html(str);
-                $('#infohead').html(theadval);
-
-            },
-            error: function(data, statsu) {
-                alert("发送请求失败！");
-            }
-        });
-
-
-    });*/
+  
 
     /*点击箭号，显示隐藏框*/
     $('.yangshi ul li .icon-zhankai').click(function() {
@@ -276,7 +235,7 @@ function leftliclick(fileId,fileName)
 {  
     window["fileId"]=fileId;
     window["fileName"]=fileName;
-    $("div.page-header").html("<h1 contenteditable='false'>"+fileName+"</h1>");
+    $("div.filetitle").html("<h2 contenteditable='false'>"+fileName+"</h2>");
      $.ajax({
             type: 'post', //请求方式，默认get
             url: "{:url('Admin/worksheet_show_els')}",
@@ -330,6 +289,56 @@ function del(v)
             alert('error');
         }
     })
+}
+function load()
+{
+    var loadfirst  = $('.yangshi ul li:eq(0) span').attr('onclick');
+    var loadsecond = loadfirst.split(',"');
+    var loadsecond_1 = loadsecond[0].split('(');
+    var loadsecond_2 = loadsecond[1].split('")');
+ 
+    leftliclick(loadsecond_1[1],loadsecond_2[0]); 
+}
+function add_data()
+{   
+    var lastId = $('.charts table tbody tr:last td button').attr('id');
+    var buttonElement = '.charts table tbody tr:last td button';
+    var tdElement = '.charts table tbody tr:last td';
+    var inputElement = '.charts table tr:last td input';
+    var addId = parseInt(lastId) + 1;
+    $('.charts table tbody tr:eq(0)').clone().appendTo('.charts table tbody:last');
+    $(tdElement).attr('class','danger');
+    $(buttonElement).attr('id',addId);
+    $(inputElement).attr('class',addId);
+    $(buttonElement).removeAttr('onclick');
+    insert_btn_handle();
+    del_btn_handle();
+    $('.charts table tbody tr:last td input').removeAttr('disabled').val("");
+    $('.charts table tbody tr:last td input:first').focus();
+    add_ajax_to_func();
+
+}
+function insert_btn_handle()
+{   
+    var thisElement = '.charts table tbody tr:last td button:first';
+    $(thisElement).attr('onclick','insert_val();');
+    $(thisElement).text('确认').attr('class', 'btn btn-success');
+
+}
+function del_btn_handle()
+{   
+    var thisElement = '.charts table tbody tr:last td button:last';
+    $(thisElement).attr('onclick','remove_val();'); 
+    $(thisElement).text('撤销').attr('class','btn btn-success');
+}
+
+function insert_val()
+{
+    alert('ok');
+}
+function remove_val()
+{
+    alert('del');
 }
 </script>
 
