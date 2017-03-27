@@ -1,17 +1,18 @@
 <!-- 头部的导航栏 -->
-	<div id="header">
-		<div class="left">
-			<div class="logo">爱诺信数据</div>
-				<div class="nav-item">
-				<a id="yibiaopan" class="<?php if($_SERVER['REQUEST_URI'] == '/userAdmin.html'){echo 'active';}else{echo 'disactive';}?>" href="{:url('/userAdmin')}">仪表盘</a>
-				<a id="gongzuobiao" class="<?php if($_SERVER['REQUEST_URI'] == '/worksheet.html'){echo 'active';}else{echo 'disactive';}?> " href="{:url('/worksheet')}">工作表</a>
-				<a id="shujuyuan" class="<?php if($_SERVER['REQUEST_URI'] == '/datasource.html'){echo 'active';}else{echo 'disactive';}?> " href="{:url('/datasource')}">数据源</a>
-				<a id="mubanku" class="<?php if($_SERVER['REQUEST_URI'] == '/module.html'){echo 'active';}else{echo 'disactive';}?> " href=" {:url('/module')}">模板库</a>
-			</div>
-		</div>
-		<div class="right">
-		  
-			<span class="username">{$username}</span>
-			<a href="{:url('Admin/out_login')}" class="loginout">退出</a>
-		</div>
-	</div>
+<div id="header">
+    <div class="left">
+        <div class="logo">爱诺信数据</div>
+        <div class="nav-item">
+            <a id="yibiaopan" class="<?php if($_SERVER['REQUEST_URI'] == '/userAdmin.html'){echo 'active';}else{echo 'disactive';}?>" href="{:url('/userAdmin')}">仪表盘</a>
+            <a id="gongzuobiao" class="<?php if($_SERVER['REQUEST_URI'] == '/worksheet.html'){echo 'active';}else{echo 'disactive';}?> " href="{:url('/worksheet')}">工作表</a>
+            <a id="shujuyuan" class="<?php if($_SERVER['REQUEST_URI'] == '/datasource.html'){echo 'active';}else{echo 'disactive';}?> " href="{:url('/datasource')}">数据源</a>
+            <a id="mubanku" class="<?php if($_SERVER['REQUEST_URI'] == '/module.html'){echo 'active';}else{echo 'disactive';}?> " href=" {:url('/module')}">模板库</a> {if condition="$_SERVER['REQUEST_URI'] == '/userAdmin.html'"}
+            <a id="bianji" class="<?php if($_SERVER['REQUEST_URI'] == '/editchart.html'){echo 'active';}else{echo 'disactive';}?>" href="{:url('/editchart')}">编辑</a> {else /} {/if}
+            
+        </div>
+    </div>
+    <div class="right">
+        <span class="username">{$username}</span>
+        <a href="{:url('Admin/out_login')}" class="loginout">退出</a>
+    </div>
+</div>

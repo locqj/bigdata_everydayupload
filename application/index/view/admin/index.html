@@ -14,22 +14,7 @@
 
 <body>
     <!-- 头部的导航栏 -->
-    <div id="header">
-        <div class="left">
-            <div class="logo">爱诺信数据</div>
-            <div class="nav-item">
-                <a id="yibiaopan" class="active" href="{:url('/userAdmin')}">仪表盘</a>
-                <a id="gongzuobiao" href="{:url('/worksheet')}">工作表</a>
-                <a id="shujuyuan" href="{:url('/datasource')}">数据源</a>
-                <a id="mubanku" href=" {:url('/module')}">模板库</a>
-                <a href="http://chogge.565tech.com/editchart.html">编辑</a>
-            </div>
-        </div>
-        <div class="right">
-            <span class="username">{$username}</span>
-            <a href="{:url('Admin/out_login')}" class="loginout">退出</a>
-        </div>
-    </div>
+  {include file="public/admin/nav" /}
     <!-- 具体内容 -->
     <div id="content">
         <!-- 左侧添加仪表盘和样式 -->

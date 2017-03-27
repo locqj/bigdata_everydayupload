@@ -201,8 +201,7 @@ function update(v, i) {
         $("button#" + i + "").text('修改');
         $("button#" + i + "").attr('class', 'btn btn-primary');
         $("input." + i + "").parent().parent().attr('class', '');
-        var inputLength = $("input." + i + "").size() - 1;
-
+        var inputLength = $("input." + i + "").size() - 1; 
         for (var fuck = 0; fuck <= inputLength; fuck++) {
             var q = $("input." + i + "").eq(fuck).parent().attr('value');
             
@@ -295,8 +294,7 @@ function load()
     var loadfirst  = $('.yangshi ul li:eq(0) span').attr('onclick');
     var loadsecond = loadfirst.split(',"');
     var loadsecond_1 = loadsecond[0].split('(');
-    var loadsecond_2 = loadsecond[1].split('")');
- 
+    var loadsecond_2 = loadsecond[1].split('")'); 
     leftliclick(loadsecond_1[1],loadsecond_2[0]); 
 }
 function add_data()
@@ -311,17 +309,17 @@ function add_data()
     $(buttonElement).attr('id',addId);
     $(inputElement).attr('class',addId);
     $(buttonElement).removeAttr('onclick');
-    insert_btn_handle();
+    insert_btn_handle(addId);
     del_btn_handle();
     $('.charts table tbody tr:last td input').removeAttr('disabled').val("");
     $('.charts table tbody tr:last td input:first').focus();
     add_ajax_to_func();
 
 }
-function insert_btn_handle()
+function insert_btn_handle(addId)
 {   
     var thisElement = '.charts table tbody tr:last td button:first';
-    $(thisElement).attr('onclick','insert_val();');
+    $(thisElement).attr('onclick','insert_val('+ addId +');');
     $(thisElement).text('确认').attr('class', 'btn btn-success');
 
 }
@@ -332,13 +330,36 @@ function del_btn_handle()
     $(thisElement).text('撤销').attr('class','btn btn-success');
 }
 
-function insert_val()
+function insert_val(addId)
 {
-    alert('ok');
+     var inputLength = $('.danger input.'+ addId +'').size() - 1; 
+     var addDataVal = new Array();
+      for (var fuck = 0; fuck <= inputLength; fuck++) {
+            var q = $('.danger input.'+ addId +'').eq(fuck).parent().attr('value'); 
+            addDataVal[fuck]= q+"@"+$('.danger input.'+ addId +'').eq(fuck).val();
+        }
+
+           
+           
+        $.ajax({
+            type: 'post', //请求方式，默认get
+            url: "{:url('Admin/worksheet_add_data_els')}",
+            traditional:true,  
+            data: {
+                insertValue: JSON.stringify(addDataVal),
+                insertFileName: window["fileName"],     
+            },
+              success: function(data, status) { 
+                 leftliclick(window['fileId'],window['fileName']);
+              },
+              error: function(data, statsu) {
+                alert(data);
+              }
+          });
 }
 function remove_val()
-{
-    alert('del');
+{   
+    leftliclick(window['fileId'],window['fileName']);
 }
 </script>
 

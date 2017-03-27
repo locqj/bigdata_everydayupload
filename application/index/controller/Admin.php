@@ -100,11 +100,26 @@ class admin extends Common
    }
    public function worksheet_del_els()
    {
-      $getDataDelId = input('post.dataId');
-      $returnHandleResult = Db::table('cbd_datasource')->where('id', $getDataDelId)->setField('status_del', '0');
+      $getDelDataId = input('post.dataId');
+      $returnHandleResult = Db::table('cbd_datasource')->where('id', $getDelDataId)->setField('status_del', '0');
       if($returnHandleResult == '1') {
          echo "success";
       }else {
+         echo "error";
+      }
+   }
+   public function worksheet_add_data_els()
+   {
+      $getInsertData = input('post.insertValue');
+      $getInsertFileName = input('post.insertFileName');
+      $splitTheUpadteValueToArray = $this->split_the_update_string($getInsertData);
+      $splitTheUpadteValueToArray['file_name'] = $getInsertFileName;
+      $splitTheUpadteValueToArray['status_del'] = 1;
+      $splitTheUpadteValueToArray['user'] = Session::get('username');
+      $returnHandleResult = Db::table('cbd_datasource')->insert($splitTheUpadteValueToArray);
+      if($returnHandleResult == '1'){
+         echo "success";
+      }else{
          echo "error";
       }
    }
