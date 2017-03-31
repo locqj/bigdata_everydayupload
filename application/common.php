@@ -23,9 +23,7 @@ function SidType($parent_code){
    //$list='asd';
     return $parent_code;
 }
-function fuck(){
-	 echo 'ok';
-}
+
 function recursion($data, $id=0) {
  $list = array();
  foreach($data as $v) {
@@ -39,6 +37,10 @@ function recursion($data, $id=0) {
  }
  return $list;
 }
+     function pap($array){
+        dump($array,1,'<pre>',0);
+     }
+
 /*
  function getTree($data,$pid){
     if (!is_array($data) || empty($data) ) return false;

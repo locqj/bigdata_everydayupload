@@ -4,21 +4,9 @@ namespace app\index\controller;
  use \think\Db;
  use \think\Session;
  use \think\Controller;
-class Adminforcon extends Controller
+class Adminforcon extends CommonAdminforcon 
 {   
-      protected $beforeActionList = [
-        'initialize',
-         
-    ];
-    public function initialize ()
-    {
-		   
-		 	  if(Session::get('Managename') == null)
-        { 
-          $this->redirect('/manage');      
-		    }
-		  
-    }
+      
      
 	public function index()
   { 
@@ -75,7 +63,7 @@ class Adminforcon extends Controller
   {
      $role_name = input('post.name');
      $role_id = input('post.roleid'); 
-     if($role_id == Session::get('Managerole'))
+     if($role_id == Session::get('s_managerole'))
      {
        echo '非法操作';
      }else{
@@ -159,13 +147,13 @@ class Adminforcon extends Controller
 	}
 	public function out_login()
   {
-	   Session::delete('Managename');
-	   Session::delete('Managerole');
+	   Session::delete('s_managename');
+	   Session::delete('s_managerole');
 	   $this->redirect('/manage');
 	}
 	public function change_Pwd()
   {
-      $username =Session::get('Managename');
+      $username =Session::get('s_managename');
       $this->assign('username',$username);
 	    return view('change_Pwd');
 	}
@@ -177,7 +165,7 @@ class Adminforcon extends Controller
         if($pdw == $pdws)
           {
             $password = md5($pdw);
-            $username = Session::get('Managename');
+            $username = Session::get('s_managename');
             $find_the_user_pwd= Db::table('cbd_users')->where('name', $username)->field('password')->find(); 
         if($find_the_user_pwd['password'] == $password)
           {  
@@ -216,7 +204,7 @@ class Adminforcon extends Controller
     }
     public function getUserName_and_getMenu()
     {
-     $username = Session::get('Managename'); 
+     $username = Session::get('s_managename'); 
      $this->assign('username', $username);
      $this->menu();
     }
@@ -226,7 +214,7 @@ class Adminforcon extends Controller
       $get_module_code = Db::table('cbd_privilege')->
                              distinct(true)->
                              field('module_code')->
-                             where('role_code', Session::get('Managerole'))->
+                             where('role_code', Session::get('s_managerole'))->
                              where('status', '1')->select(); 
           foreach($get_module_code as $key => $value) 
           { 
@@ -239,7 +227,7 @@ class Adminforcon extends Controller
                   }
           }   
             $this->assign('menu', $a);
-            $this->assign('roleId', Session::get('Managerole'));
+            $this->assign('roleId', Session::get('s_managerole'));
     }
    
 }

@@ -113,7 +113,7 @@ $(function() {
         } else if ($('#workname').val() != '') {
             $('#info').hide();
         }
-        $.post("{:url('UpDownFile/dist_file_name')}", {
+        $.post("{:url('UpDownFile/distFileName')}", {
             'workname': $('#workname').val()
         }, function(data) {
             if (data == "ok") {

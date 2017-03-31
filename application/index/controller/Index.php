@@ -4,36 +4,29 @@ namespace app\index\controller;
  use \think\Db;
  use \think\Session;
   use \think\Controller;
-class Index  extends Controller
+class Index  extends Common
 {   
-    public function index()
-    {       
+    public function index(){       
          return view();
     }
-    public function aboutme()
-    { 
+    public function aboutme(){ 
           return view();
     }
-    public function loginreg()
-    { 
+    public function loginreg(){ 
           return view();   
          
     }
-    public function loginreg_for_manage()
-    { 
+    public function loginreg_for_manage(){ 
           return view();
     }  
-    public function register()
-    {
+    public function register(){
           return view();
     }
-    public function demo()
-    {     
+    public function demo(){     
           return view();
     }
     //登陆用户判断
-    public function exist_User_to_dis()
-    {
+    public function exist_User_to_dis(){
           $dis_username =input('post.username');
           $resDb= Db::table('cbd_users')->where('name',$dis_username)->find();
             
@@ -51,8 +44,7 @@ class Index  extends Controller
               }  
     }
     //用户登录提交判断
-    public function login_suss_dis()
-    {
+    public function login_suss_dis(){
            $username = input('post.username'); 
            $password = md5(input('post.passwd')); 
            // echo $username.$password;
@@ -62,8 +54,11 @@ class Index  extends Controller
            $last_login_time =date("Y-m-d H:i:s");
            $last_login_ip = $_SERVER['REMOTE_ADDR'];
            if($resDb!=null){
-              Session::set('username',$username); 
-              Db::table('cbd_users')->where('name',$username)->where('password',$password)->update(['last_login_time' => $last_login_time,'last_login_ip'=>$last_login_ip]);  
+              Session::set('s_username',$username); 
+              Db::table('cbd_users')->where('name',$username)->where('password',$password)->update([
+                'last_login_time' => $last_login_time,
+                'last_login_ip'=>$last_login_ip
+                ]);  
                echo 'success';
             
             
@@ -74,8 +69,7 @@ class Index  extends Controller
           
     }
     //后台登陆提交判断
-    public function login_suss_dis_manage()
-    {
+    public function login_suss_dis_manage(){
            $username = input('post.username'); 
            $password = md5(input('post.passwd')); 
            $_SERVER['REMOTE_ADDR'];
@@ -83,9 +77,9 @@ class Index  extends Controller
            $last_login_time =date("Y-m-d H:i:s");
            $last_login_ip = $_SERVER['REMOTE_ADDR'];
            if($resDb!=null){
-              Session::set('Managename',$username); 
+              Session::set('s_managename',$username); 
               Db::table('cbd_users')->where('name',$username)->where('password',$password)->update(['last_login_time' => $last_login_time,'last_login_ip'=>$last_login_ip]);  
-              Session::set('Managerole', $resDb['role']); 
+              Session::set('s_managerole', $resDb['role']); 
                echo "success";
                  //return view('adminforcon/index');
            // $this->success('登陆成功','adminforcon/index');
@@ -97,8 +91,7 @@ class Index  extends Controller
            }   
     }
     //注册页面的ajax判断
-    public function reg_ajax_submit_to_sucess()
-    {
+    public function reg_ajax_submit_to_sucess(){
             
          $username = input('post.username');
          $pwd = md5(input('post.pwd'));
@@ -124,8 +117,7 @@ class Index  extends Controller
 
     }
     //密码判断
-    public function exist_res_User_to_dis()
-    {
+    public function exist_res_User_to_dis(){
           $dis_pwd = input('post.pwd');
           $dis_pwd_s = input('post.pwds');
           if($dis_pwd == $dis_pwd_s){
@@ -135,8 +127,7 @@ class Index  extends Controller
           }
     }
     //注册用户判断
-    public function exist_res_Username_to_dis()
-    {
+    public function exist_res_Username_to_dis(){
          $dis_username = input('post.username');
           $resDb= Db::table('cbd_users')->where('name',$dis_username)->find();
             if($dis_username==null)
@@ -151,8 +142,7 @@ class Index  extends Controller
               }
     }
     //验证码发送
-    public function dis_yanzhengma()
-    {
+    public function dis_yanzhengma(){
            $phone = input('post.phone');
            $resDb= Db::table('cbd_users')->where('phone',$phone)->find();
            if($resDb==null){ 
@@ -195,27 +185,14 @@ class Index  extends Controller
            
         }else{
           echo '该号码已存在用户，请登录';
+      }
     }
-    }
-   /* //退出登录
-    public function out_login(){
-       Session::delete('username');
-       $this->redirect('/');
-    }*/
-    public function test()
-    {
-      /* $getData = Db::table('cbd_datasource_name')->select();
-       foreach ($getData as $key => $value) {
-           //echo $data['column_name'] = $value['column_name'];
-            $getValuebyColumnName = Db::table('cbd_datasource')->column($value['column_name']);
-            $dataByMix[$key][$value['column_value']] = $getValuebyColumnName;
-              
-       }
-       echo json_encode($dataByMix,JSON_UNESCAPED_UNICODE); //实现获取xls数据json*/
-       /*获取文件名方法*/
-       $getData = Db::table('cbd_datasource_name')->field('file_name')->group('file_name')->select();
-       pp($getData);
-        
+    public function md5DiyEncryption(){
+        $str = '123456';
+        $st = $str."asdjklasjdia";
+        echo md5($st);
+        $test = Db::table('cbd_users')->select();
+        pap($test);
     }
    
    

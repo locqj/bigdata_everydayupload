@@ -159,13 +159,16 @@
               function(data){
                 
                  if(data=='ok'){
-                    window.location.href="{:url('/loginreg')}";
+                    window.location.href="{:url('/userAdmin')}"; 
+                    return true;
                  }else{
                      $('#info').html("<font color=red>"+data+"</font>");
+                     return false;
                  }
               
               }
            );  
+            return false;
     }
      /*
         function toVaild(){

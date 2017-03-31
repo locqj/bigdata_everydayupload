@@ -38,7 +38,7 @@
             <div class="yangshi">
                 <!-- <span>添加的样式</span> -->
                 <ul>
-                    {foreach name='fileName' item='vo'}
+                    {foreach name='get_filename_form_db' item='vo'}
                     <li name={$key}>
                         <i class="iconfont icon-iconfontyuan"></i>
                         <span style="width: 85%" onclick=leftliclick({$vo.id},"{$vo.file_name}")>{$vo.file_name}</span>
@@ -120,7 +120,7 @@ $(document).ready(function() {
     });
     /*验证表名是否重复*/
     $('#workname').blur(function() {
-        $.post("{:url('UpDownFile/dist_file_name')}", {
+        $.post("{:url('UpDownFile/distFileName')}", {
                 'workname': $('#workname').val()
             },
             function(data) {
@@ -146,7 +146,7 @@ $(document).ready(function() {
     });
     /*提交编辑修改*/
     $('#sendworkname').click(function() {
-        $.post("{:url('Admin/worksheet_reset_filename_and_remark')}", {
+        $.post("{:url('Admin/worksheetResetFilenameAndRemark')}", {
             'workname': $('#workname').val(),
             'remark': $('#remark').val(),
             'fileOldName': $('#filenamespan').text(),
@@ -165,7 +165,7 @@ $(document).ready(function() {
 
     });
   
-
+    
     /*点击箭号，显示隐藏框*/
     $('.yangshi ul li .icon-zhankai').click(function() {
 
@@ -193,6 +193,7 @@ function update(v, i) {
     if ($("input." + i + "").attr('disabled') == 'disabled') {
         $("input." + i + "").removeAttr('disabled');
         $("button#" + i + "").text('确认');
+     
         $("button#" + i + "").attr('class', 'btn btn-success');
         $("input." + i + "").parent().parent().attr('class', 'danger');
 
@@ -211,12 +212,12 @@ function update(v, i) {
          
         $.ajax({
             type: 'post', //请求方式，默认get
-            url: "{:url('Admin/worksheet_update_els')}",
+            url: "{:url('Admin/worksheetUpdateEls')}",
             /*traditional:true, */
             
             data: {
-                updateValue: JSON.stringify(updateVal),
-                updateId: v
+                get_ajax_update_col_value: JSON.stringify(updateVal),
+                get_ajax_update_col_id: v
                  
             },
               success: function(data, status) { 
@@ -237,10 +238,10 @@ function leftliclick(fileId,fileName)
     $("div.filetitle").html("<h2 contenteditable='false'>"+fileName+"</h2>");
      $.ajax({
             type: 'post', //请求方式，默认get
-            url: "{:url('Admin/worksheet_show_els')}",
+            url: "{:url('Admin/worksheetShowEls')}",
             data: {
                  
-                fileId: fileId
+                ajax_get_file_id: fileId
             },
             success: function(data, status) {
                  var data = eval("(" + data + ")");
@@ -281,7 +282,7 @@ function leftliclick(fileId,fileName)
 function del(v)
 {
     
-    $.post("{:Url('Admin/worksheet_del_els')}", {'dataId':v}, function(data){
+    $.post("{:Url('Admin/worksheetDelEls')}", {'dataId':v}, function(data){
         if(data == "success") {
             leftliclick(window['fileId'],window['fileName']);
         }else {
@@ -343,7 +344,7 @@ function insert_val(addId)
            
         $.ajax({
             type: 'post', //请求方式，默认get
-            url: "{:url('Admin/worksheet_add_data_els')}",
+            url: "{:url('Admin/worksheetAddDataEls')}",
             traditional:true,  
             data: {
                 insertValue: JSON.stringify(addDataVal),

@@ -65,7 +65,7 @@
                 <div class="choseshet">
                     <span>选择工作表</span>
                     <!-- 遍历出所有的工作表,默认选中一个 -->
-                    {foreach name="getTheFileName" id="vo"}
+                    {foreach name="get_the_file_name" id="vo"}
                     <div class="sheet">
                         <input type="radio" name="sheet" value="{$vo.file_name}" checked="checked">
                         <span>{$vo.file_name}</span>
@@ -122,8 +122,8 @@
             // $firstli.appendChild(first);
 
             // var $firstli = $('.yangshi ul li').eq(0);
-            $.post("{:url('Admin/add_charts')}", {
-                'getAjaxFileName': biaoming
+            $.post("{:url('Admin/indexAddCharts')}", {
+                'get_ajax_filename': biaoming
             }, function(data) {
                 if (data == 'ok') {
 
@@ -145,6 +145,7 @@
             $(this).parents('li').siblings().find('.biao_caozuo').hide();
 
         });
+        
         $("#ulli").children('*:not(#test)').click(function() {
 
             $(".yangshi ul li div").css('display', 'none');
@@ -155,7 +156,7 @@
 
     })
     window.onload = function() {
-        $.post("{:url('Admin/index_show_filename')}", {}, function(data) {
+        $.post("{:url('Admin/indexShowFilename')}", {}, function(data) {
             var data = eval("(" + data + ")");
             $.each(data, function(q, val) {
                 var $firstli = $('.yangshi ul li').eq(0);

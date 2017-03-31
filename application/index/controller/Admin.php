@@ -4,193 +4,171 @@ namespace app\index\controller;
  use \think\Db;
  use \think\Session;
  use \think\Controller;
-class admin extends Common
+class admin extends CommonAdmin
 {  
 
-   public function index()
-   {
-      $this->init_load();
-      $getTheFileName = Db::table('cbd_data_store_filename')->where([
-         'user' => Session::get('username'),
+   public function index(){
+      $this->initLoad();
+      $get_the_file_name = Db::table('cbd_data_store_filename')->where([
+         'user' => Session::get('s_username'),
          'status' => 0, 
          'status_del' => 1
          ])->select(); 
-      $this->assign('getTheFileName', $getTheFileName);
+      $this->assign('get_the_file_name', $get_the_file_name);
       return view();
    }
-   public function index_show_filename()
-   {
-      $showFileName = Db::table('cbd_data_store_filename')->where([
+   public function indexShowFilename(){
+      $show_file_name = Db::table('cbd_data_store_filename')->where([
          'status' => 1,
          'status_del' => 1,
-         'user' => Session::get('username')
+         'user' => Session::get('s_username')
          ])->select();
-      echo json_encode($showFileName);
+      echo json_encode($show_file_name);
    }
-   public function add_charts()
-   {
-      $getAjaxFileName = input('post.getAjaxFileName');
-      Db::table('cbd_data_store_filename')->where('file_name', $getAjaxFileName)->update(['status' => 1]);
+   public function indexAddCharts(){
+      $get_ajax_filename = input('post.get_ajax_filename');
+      Db::table('cbd_data_store_filename')->where('file_name', $get_ajax_filename)->update(['status' => 1]);
       echo 'ok';
    }
-   public function chartdetail()
-   {
-       $this->init_load();
+   public function chartDetail(){
+       $this->initLoad();
        return view();
    }
-   public function chartdetail2()
-   {
-      $this->init_load();
+   public function chartDetail2(){
+      $this->initLoad();
       return view();
    } 
-   public function datasource()
-   {
-      $this->init_load();
+   public function dataSource(){
+      $this->initLoad();
       return view();
    }
    
-   public  function module()
-   {
-      $this->init_load();
+   public  function module(){
+      $this->initLoad();
       return view();
    }
-   public function worksheet()
-   {
-      $this->init_load();
-      $fileName = Db::table('cbd_data_store_filename')->where([
-         'user' => Session::get('username'),
+   public function workSheet(){
+      $this->initLoad();
+      $get_filename_form_db = Db::table('cbd_data_store_filename')->where([
+         'user' => Session::get('s_username'),
          'status_del' => 1
          ])->select();
-      $this->assign('fileName', $fileName);
+      $this->assign('get_filename_form_db', $get_filename_form_db);
       return view();
    }
 
-   public function worksheet_show_els()
-   {
-      $getFileId = input('post.fileId');
-      $getFileName = Db::table('cbd_data_store_filename')->where('id', $getFileId)->value('file_name');
-      $fileColumn = Db::table('cbd_datasource_name')->where('file_name', $getFileName)->field('column_name,column_value')->select();
+   public function worksheetShowEls(){
+      $ajax_get_file_id = input('post.ajax_get_file_id');
+      $get_file_name_for_db = Db::table('cbd_data_store_filename')->where('id', $ajax_get_file_id)->value('file_name');
+      $file_column_form_db = Db::table('cbd_datasource_name')->where('file_name', $get_file_name_for_db)->field('column_name,column_value')->select();
     
       $column = array();
       $column_value =array();
-      foreach ($fileColumn as $key => $value) {
+      foreach ($file_column_form_db as $key => $value) {
          $column[$key] = $value['column_name'];
          $column_value[$key] = $value['column_value'];
       } 
-        $column['id'] = 'id';
-        /*pp($fileColumn) ;*/
-      $data['tbody'] = Db::table('cbd_datasource')->where([
-         'file_name' => $getFileName,
+      $column['id'] = 'id'; 
+      $return_data['tbody'] = Db::table('cbd_datasource')->where([
+         'file_name' => $get_file_name_for_db,
          'status_del' => 1
          ])->field($column)->select();
-      $data['thead'] = $column_value;
-      /*pp($data);*/
-      echo json_encode($data);  
+      $return_data['thead'] = $column_value;
+      echo json_encode($return_data);  
    }
 
-   public function worksheet_update_els()
-   {
-      $getUpdateValue = input('post.updateValue');
-      $getUpdateId = input('post.updateId');
-      $splitTheUpadteValueToArray = $this->split_the_update_string($getUpdateValue);
-      /*pp($splitTheUpadteValueToArray);*/
-      Db::table('cbd_datasource')->where('id', $getUpdateId)->update($splitTheUpadteValueToArray);
+   public function worksheetUpdateEls(){
+      $get_ajax_update_col_value = input('post.get_ajax_update_col_value');
+      $get_ajax_update_col_id = input('post.get_ajax_update_col_id');
+      $split_the_upadte_value_to_array = $this->splitTheUpdateString($get_ajax_update_col_value);
+      Db::table('cbd_datasource')->where('id', $get_ajax_update_col_id)->update($split_the_upadte_value_to_array);
       echo 'ok';
 
    }
-   public function worksheet_del_els()
-   {
-      $getDelDataId = input('post.dataId');
-      $returnHandleResult = Db::table('cbd_datasource')->where('id', $getDelDataId)->setField('status_del', '0');
-      if($returnHandleResult == '1') {
+   public function worksheetDelEls(){
+      $get_ajax_del_data_id = input('post.dataId');
+      $return_handle_result = Db::table('cbd_datasource')->where('id', $get_ajax_del_data_id)->setField('status_del', '0');
+      if($return_handle_result == '1') {
          echo "success";
       }else {
          echo "error";
       }
    }
-   public function worksheet_add_data_els()
-   {
-      $getInsertData = input('post.insertValue');
-      $getInsertFileName = input('post.insertFileName');
-      $splitTheUpadteValueToArray = $this->split_the_update_string($getInsertData);
-      $splitTheUpadteValueToArray['file_name'] = $getInsertFileName;
-      $splitTheUpadteValueToArray['status_del'] = 1;
-      $splitTheUpadteValueToArray['user'] = Session::get('username');
-      $returnHandleResult = Db::table('cbd_datasource')->insert($splitTheUpadteValueToArray);
-      if($returnHandleResult == '1'){
+   public function worksheetAddDataEls(){
+      $get_ajax_insert_data = input('post.insertValue');
+      $get_ajax_insert_filename = input('post.insertFileName');
+      $split_the_update_value_to_array = $this->splitTheUpdateString($get_ajax_insert_data);
+      $split_the_update_value_to_array['file_name'] = $get_ajax_insert_filename;
+      $split_the_update_value_to_array['status_del'] = 1;
+      $split_the_update_value_to_array['user'] = Session::get('s_username');
+      $return_handle_result = Db::table('cbd_datasource')->insert($split_the_update_value_to_array);
+      if($return_handle_result == '1'){
          echo "success";
       }else{
          echo "error";
       }
    }
-   public function split_the_update_string($splitString)
-   {
-      $splitS = json_decode($splitString);
-      $splitSToArray = array();
-      foreach ($splitS as $key => $value) {
+   public function splitTheUpdateString($split_String){
+      $split_data_string = json_decode($split_String);
+      $split_data_string_to_array = array();
+      foreach ($split_data_string as $key => $value) {
          $split = explode("@", $value);
          $key = $split[0];
-         $splitSToArray[$key] = $split[1];
+         $split_data_string_to_array[$key] = $split[1];
       }
-      return $splitSToArray;
+      return $split_data_string_to_array;
    }
-   public function worksheet_reset_filename_and_remark()
-   {
-      $dataFileNewName = input('post.workname');
-      $remark = input('post.remark');
-      $fileOldName = input('post.fileOldName');
+   public function worksheetResetFilenameAndRemark(){
+      $get_ajax_new_filename = input('post.workname');
+      $get_ajax_remark = input('post.remark');
+      $get_ajax_old_filename = input('post.fileOldName');
      
-      if(!empty($dataFileNewName)){
-         $dataS['user'] = Session::get('username');
-         $dataS['file_name']  = $fileOldName;
-         Db::table('cbd_data_store_filename')->where($dataS)->update([
-            'file_name' => $dataFileNewName, 
-            'remark' => $remark
+      if(!empty($get_ajax_new_filename)){
+         $data_s['user'] = Session::get('s_username');
+         $data_s['file_name']  = $get_ajax_old_filename;
+         Db::table('cbd_data_store_filename')->where($data_s)->update([
+            'file_name' => $get_ajax_new_filename, 
+            'remark' => $gei_ajax_remark
             ]);
-         Db::table('cbd_datasource_name')->where($dataS)->update([
-            'file_name' => $dataFileNewName
+         Db::table('cbd_datasource_name')->where($data_s)->update([
+            'file_name' => $get_ajax_new_filename
             ]);
-         Db::table('cbd_datasource')->where($dataS)->update([
-            'file_name' => $dataFileNewName
+         Db::table('cbd_datasource')->where($data_s)->update([
+            'file_name' => $get_ajax_new_filename
             ]);
-         echo $dataFileNewName."/".$fileOldName."/".$dataS['user']."/";
+         
+         echo "success";
 
       }else{
          echo '名字不得为空';
       }
    }
-   public function delectFile()
-   {
+   public function delectFile(){
       $data['file_name'] = input('post.fileName');
-      $data['user'] = Session::get('username');
+      $data['user'] = Session::get('s_username');
       DB::table('cbd_data_store_filename')->where($data)->update(['status_del' => 0]);
       echo 'ok';
 
    }
-   public function out_login()
-   {
-       Session::delete('username'); 
+   public function outLogin(){
+       Session::delete('s_username'); 
        $this->redirect('/login');
    }
-   public function init_load()
-   {
-      $username = Session::get('username');
-      $this->assign('username', $username);
+   public function initLoad(){
+      $s_username = Session::get('s_username');
+      $this->assign('s_username', $s_username);
       
    }
-   public function confirmdata()
-   {    
+   public function confirmdata(){    
        
         return view();
    }
   	// lin添加
-   public function getdata()
-   { 
+   public function getdata(){ 
 
       return view();
    }
-   public function test()
-   {
+   public function test(){
       return view();
    }
    

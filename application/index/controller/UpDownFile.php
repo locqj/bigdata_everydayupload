@@ -132,7 +132,7 @@ class UpDownFile extends Common {
     {
       echo json_encode(Session::get('dataSource'));
     }
-    public function dist_file_name()
+    public function distFileName()
     {
       $getFilename = input('post.workname');
       $getFindReturnValue = Db::table('cbd_datasource_name')->where('file_name', $getFilename)->find();

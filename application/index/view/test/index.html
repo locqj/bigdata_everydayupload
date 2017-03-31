@@ -11,42 +11,37 @@
 </head>
 
 <body>
-     
-    <div class="view">
-        <ul class="nav nav-tabs" contenteditable="fasle">
-            <li class="active">
-                <a href="#">首页</a>
-            </li>
-            <li>
-                <a href="#">简介</a>
-            </li>
-            <li >
-                <a href="#">信息</a>
-            </li>
-            <li class="dropdown pull-right">
-                <a href="#" data-toggle="dropdown" class="dropdown-toggle">
-下拉 <b class="caret"></b>
-</a>
-                <ul class="dropdown-menu">
-                    <li>
-                        <a href="#">操作</a>
-                    </li>
-                    <li>
-                        <a href="#">设置栏目</a>
-                    </li>
-                    <li>
-                        <a href="#">更多设置</a>
-                    </li>
-                    <li class="divider"></li>
-                    <li>
-                        <a href="#">分割线</a>
-                    </li>
-                </ul>
-            </li>
-        </ul>
-    </div>
-   
+    <table>
+        <tbody>
+    {foreach item="vo" name="return_all_file"}
+        <tr>
+            <td>
+                <button id="{$vo.id}">{$vo.file_name}</button>
+            </td>
+        </tr>
+    {/foreach}
+        </tbody>
+    </table>
 </body>
+<script type="text/javascript">
+    $('button').click(function(event) {
+       // alert($(this).text());
+        $.ajax({
+            url: "{:url('Test/test')}",
+            type: 'post',
+           
+            data: {file_name: $(this).text()},
+        })
+        .done(function(data) {
+            alert(data);
+        })
+        .fail(function() {
+            console.log("error");
+        })
+        .always(function() {
+            console.log("complete");
+        });
+        
+    });
 </script>
-
 </html>
