@@ -9,6 +9,7 @@
     <link rel="stylesheet" type="text/css" href="./../../css/chartdetail.css">
     <link rel="stylesheet" type="text/css" href="./../../css/iconfont/iconfont.css">
     <link rel="stylesheet" type="text/css" href="./../../css/font2/iconfont.css">
+    <link rel="stylesheet" type="text/css" href="http://at.alicdn.com/t/font_rjc0gx3qcdz33di.css">
     <script src="./../../css/bootstrap/js/bootstrap.min.js"></script>
     <script type="text/javascript" src='./../../js/chartdetail.js'></script>
     <script type="text/javascript" src='./../../js/echarts.min.js'></script>
@@ -20,10 +21,25 @@
     <script type="text/javascript" src='http://gallery.echartsjs.com/dep/echarts/map/js/china.js'></script>
     <script>
     $(function() {
-        $('.fanhui').click(function() {
-            window.location.href = 'http://chogge.565tech.com/userAdmin.html';
+        $('.return i').click(function() {
+            var url =  location.search;
+            var s=url.indexOf("="); 
+            var t=url.substring(s+1);
+            
+            //     var myoption = myChart.getOption();
+            window.location.href = "{:url('/userAdmin')}?linum="+t;
         })
     })
+    </script>
+    <script>
+    // var charts = echarts.init(document.getElementById('chart1'));
+    //点击保存之后， 获取当前表的设置
+    // $('.getsetting').click(function(){
+    // var myoption = myChart.getOption();
+    // alert(myoption.series.length);
+    // charts.setOption(myoption);
+    // })
+    // charts.setOption(myoption);
     </script>
 </head>
 
@@ -49,11 +65,11 @@
                     <ul class="nav nav-pills">
                         <li class="active">
                             <a href="#" style="color:#222;">
-								工作表
-								<div class="right">
-									<i class="right iconfont icon-work-list"></i>
-								</div>
-							</a>
+                                工作表
+                                <div class="right">
+                                    <i class="right iconfont icon-work-list"></i>
+                                </div>
+                            </a>
                         </li>
                     </ul>
                     <!-- <div class="left">工作表</div> -->
@@ -69,48 +85,31 @@
                     <ul class="nav nav-pills">
                         <li class="active">
                             <a href="#" style="color:#222">
-								可选字段
-								<div class="right">
-									<i class="right iconfont icon-tubiao07-copy"></i>
-								</div>
-							</a>
+                                可选字段
+                                <div class="right">
+                                    <i class="right iconfont icon-tubiao07-copy"></i>
+                                </div>
+                            </a>
                         </li>
                     </ul>
                     <!-- <div class="left">可选字段</div>
-					<div class="right">
-						<i class="iconfont icon-tubiao07-copy"></i>
-					</div> -->
+                    <div class="right">
+                        <i class="iconfont icon-tubiao07-copy"></i>
+                    </div> -->
                 </div>
                 <div class="clear"></div>
                 <!-- 搜索 -->
                 <!-- <div class="field-search" contenteditable="true" style="outline: none">
-				</div> -->
+                </div> -->
                 <!-- <i class="iconfont icon-sousuo"></i> -->
                 <div class="field-content">
                     <ul>
-                        
                     </ul>
-                    <!-- <dl>
-                        <dt>2014年</dt>
-                        <dd>一号公寓</dd>
-                        <dd>二号公寓</dd>
-                        <dd>三号公寓</dd>
-                        <hr>
-                        <dt>2015年</dt>
-                        <dd>一号公寓</dd>
-                        <dd>二号公寓</dd>
-                        <dd>三号公寓</dd>
-                        <hr>
-                        <dt>2016年</dt>
-                        <dd>一号公寓</dd>
-                        <dd>二号公寓</dd>
-                        <dd>三号公寓</dd>
-                    </dl> -->
                 </div>
             </div>
         </div>
         <!-- =================中间的图表========================= -->
-        <div id="center">
+        <div id="center" style="position: relative">
             <!-- 选择表 -->
             <div class="choosechart">
                 <div class="choose-weidu">
@@ -125,108 +124,25 @@
                 </div>
             </div>
             <!-- 左侧设置“筛选器”和“颜色” -->
-            <div class="left shaixuan">
-                <!-- <div class="shaixuanqi">
-					<div class="shaixuanqi-title">筛选器</div>
-				</div> -->
-                <div class="yanse">
-                    <!-- 各个图表的图例颜色 -->
-                    <!-- 折线图、柱状图、散点图 -->
-                    <!-- 因为这三种图可以选择不同的线，所以要每根线自己设置显示与隐藏 -->
-                    <div class="yanse1-chose">
-                        <div class="yanse-title">颜色更改
-                            <i id="" class="iconfont right icon-refurbish" style="cursor: pointer"></i>
-                            <!-- <span class="refresh-color right"></span> -->
-                        </div>
-                        <div class="clear init_yanse"></div>
-                        <div class="1first cl" style="display:none">
-                            <input type="color" name="">2014-1号公寓
-                        </div>
-                        <div class="1second cl" style="display:none">
-                            <input type="color" name="">2014-2号公寓
-                        </div>
-                        <div class="1third cl" style="display:none">
-                            <input type="color" name="">2014-3号公寓
-                        </div>
-                        <div class="11first cl" style="display:none">
-                            <input type="color" name="">2015-1号公寓
-                        </div>
-                        <div class="12second cl" style="display:none">
-                            <input type="color" name="">2015-2号公寓
-                        </div>
-                        <div class="13third cl" style="display:none">
-                            <input type="color" name="">2015-3号公寓
-                        </div>
-                        <div class="111first cl" style="display:none">
-                            <input type="color" name="">2016-1号公寓
-                        </div>
-                        <div class="112second cl" style="display:none">
-                            <input type="color" name="">2016-2号公寓
-                        </div>
-                        <div class="113third cl" style="display:none">
-                            <input type="color" name="">2016-3号公寓
-                        </div>
-                        <span class="refresh" style="display: none">点击更新颜色</span>
-                    </div>
-                    <!-- 饼图 -->
-                    <div class="yanse2-chose" style="display:none">
-                        <div class="yanse-title">颜色
-                            <i id="" class="iconfont right icon-refurbish"></i>
-                            <!-- <span class="refresh-color right"></span> -->
-                        </div>
-                        <div class="clear"></div>
-                        <div class="2first cl">
-                            <input type="color" name="">准时</div>
-                        <div class="2second cl">
-                            <input type="color" name="">迟到</div>
-                        <div class="2third cl">
-                            <input type="color" name=""> 请假</div>
-                        <div class="2forth cl">
-                            <input type="color" name=""> 未到</div>
-                        <span class="refresh">点击更新颜色</span>
-                    </div>
-                    <!-- 关系图 -->
-                    <div class="yanse3-chose" style="display:none">
-                        <div class="yanse-title">颜色
-                            <i id="" class="iconfont right icon-refurbish"></i>
-                            <!-- <span class="refresh-color right"></span> -->
-                        </div>
-                        <div class="clear"></div>
-                        <div class="3first cl">
-                            <input type="color" name="">节点1</div>
-                        <div class="3second cl">
-                            <input type="color" name="">节点2</div>
-                        <div class="3third cl">
-                            <input type="color" name=""> 节点3</div>
-                        <div class="3forth cl">
-                            <input type="color" name=""> 节点4</div>
-                        <div class="3fifth cl">
-                            <input type="color" name=""> 节点5</div>
-                        <span class="refresh">点击更新颜色</span>
-                    </div>
-                    <!-- 漏斗图 -->
-                    <div class="yanse4-chose" style="display:none">
-                        <div class="yanse-title">颜色
-                            <i id="" class="iconfont right icon-refurbish"></i>
-                            <!-- <span class="refresh-color right"></span> -->
-                        </div>
-                        <div class="clear"></div>
-                        <div class="4first">
-                            <input type="color" name="">展现</div>
-                        <div class="4second">
-                            <input type="color" name="">点击</div>
-                        <div class="4third">
-                            <input type="color" name="">访问</div>
-                        <div class="4forth">
-                            <input type="color" name="">咨询</div>
-                        <div class="4fifth">
-                            <input type="color" name="">订单</div>
-                        <span class="refresh">点击更新颜色</span>
-                    </div>
+            <!-- <div class="left shaixuan">
+                <div class="shaixuanqi">
+                    <div class="shaixuanqi-title">筛选器</div>
                 </div>
-            </div>
+                <button class="getsetting">保存</button>
+                <div class="yanse">
+                    各个图表的图例颜色
+                    折线图、柱状图、散点图
+                    因为这三种图可以选择不同的线，所以要每根线自己设置显示与隐藏
+                   
+                </div>
+            </div> -->
             <!-- 右侧图表 -->
-            <div class="right" id="chart">
+            <div class="mchart">
+                <div id="chart"></div>
+                <div class="chartsm">当前图表无数据</div>
+                <div class="savechart">
+                    <input class="getsetting" type="button" value="保&nbsp;&nbsp;&nbsp;&nbsp;存">
+                </div>
             </div>
         </div>
         <!-- =================右边的选项栏======================= -->
@@ -237,17 +153,17 @@
                     <ul class="nav nav-pills">
                         <li class="active">
                             <a href="#" style="color:#222">
-								图表类型
-								<div class="right">
-									<i class="right iconfont  icon-tubiao-01"></i>
-								</div>
-							</a>
+                                图表类型
+                                <div class="right">
+                                    <i class="right iconfont  icon-tubiao-01"></i>
+                                </div>
+                            </a>
                         </li>
                     </ul>
                     <!-- 图表类型
-					<div class="right">
-						<i class="iconfont icon-tubiao-01"></i>
-					</div> -->
+                    <div class="right">
+                        <i class="iconfont icon-tubiao-01"></i>
+                    </div> -->
                 </div>
                 <div class="chart-type">
                     <div class="line" title="折线图:一个维度，多个数值">
@@ -256,11 +172,40 @@
                     <div class="bar" title="柱状图:一个维度，多个数值">
                         <i class="iconfont icon-62"></i>
                     </div>
+                    <!-- 新添加的  开始 -->
+                    <div class="duidie-bar" title="堆叠柱状图:一个维度，多个数值">
+                        <i class="iconfont icon-duidiezhuzhuangtu"></i>
+                    </div>
+                    <!-- <div class="duidie-percent-bar" title="百分比堆叠柱状图:一个维度，多个数值">
+                        <i class="iconfont icon-baifenbiduidiezhuzhuangtu"></i>
+                    </div> -->
+                    <div class="tiao" title="条形图:一个维度，多个数值">
+                        <i class="iconfont icon-tiaoxingtu"></i>
+                    </div>
+                    <div class="duidie-tiao" title="堆叠条形图:一个维度，多个数值">
+                        <i class="iconfont icon-iocnduijitiaoxingtu"></i>
+                    </div>
+                    <!--  <div class="duidie-percent-tiao" title="百分比堆叠条形图:一个维度，多个数值">
+                        <i class="iconfont icon-baifenbiduidietiaoxingtu"></i>
+                    </div> -->
+                    <div class="area" title="面积图:一个维度，多个数值">
+                        <i class="iconfont icon-icon-area-graph"></i>
+                    </div>
+                    <div class="duidie-area" title="堆叠面积图:一个维度，多个数值">
+                        <i class="iconfont icon-duidiemianjitu"></i>
+                    </div>
+                    <!-- <div class="duidie-percent-area" title="百分比堆叠面积图:一个维度，多个数值">
+                        <i class="iconfont icon-11111111"></i>
+                    </div> -->
+                    <!-- 新添加的  结束 -->
                     <div class="scatter" title="散点图:一个维度，多个数值">
                         <i class="iconfont icon-sandian"></i>
                     </div>
                     <div class="pie" title="饼图:一个维度，一个数值">
                         <i class="iconfont icon-7"></i>
+                    </div>
+                    <div class="funnel" title="漏斗图:一个维度，多个数值">
+                        <i class="iconfont icon-loudoutu"></i>
                     </div>
                     <div class="map" title="地图:一个维度">
                         <i class="iconfont icon-ditu"></i>
@@ -268,34 +213,30 @@
                     <div class="graph" title="关系图:一个维度，一个数值">
                         <i class="iconfont icon-guanxi"></i>
                     </div>
-                    <div class="funnel" title="漏斗图:一个维度，多个数值">
-                        <i class="iconfont icon-loudoutu"></i>
-                    </div>
                     <div class="gauge" title="仪表盘:一个维度，一个数值">
                         <i class="iconfont icon-yibiaopan"></i>
                     </div>
                 </div>
                 <div class="clear"></div>
             </div>
-
             <!-- 图表标题 -->
             <div class="chartname">
                 <div class="chartname-title">
                     <ul class="nav nav-pills">
                         <li class="active">
                             <a href="#" style="color:#222">
-								图表标题
-								<div class="right">
-									<i class="right iconfont icon-biaoti"></i>
-								</div>
-							</a>
+                                图表标题
+                                <div class="right">
+                                    <i class="right iconfont icon-biaoti"></i>
+                                </div>
+                            </a>
                         </li>
                     </ul>
                     <!-- 
-					图表标题
-					<div class="right">
-						<i class="iconfont icon-biaoti"></i>
-					</div> -->
+                    图表标题
+                    <div class="right">
+                        <i class="iconfont icon-biaoti"></i>
+                    </div> -->
                 </div>
             </div>
             <!-- <hr> -->
@@ -319,15 +260,15 @@
                 <div>
                     <span>位置:</span>
                     <select class="titleposition">
-                        <option value="left">居左</option>
                         <option value="center">居中</option>
+                        <option value="left">居左</option>
                         <option value="right">居右</option>
                     </select>
                     <!-- <input type="number" name='position'  class="titleleft"> -->
                 </div>
                 <span class="tianjia">
-					<input type="checkbox" name="title" class="add-title" style="margin-right: 10px">选中添加图表标题 
-				</span>
+                    <input type="checkbox" name="title" class="add-title" style="margin-right: 10px">选中添加图表标题 
+                </span>
             </div>
             <!-- 显示条目数 -->
             <div class="showlinenum">
@@ -335,11 +276,11 @@
                     <ul class="nav nav-pills">
                         <li class="active">
                             <a href="#" style="color:#222">
-								设置
-								<div class="right">
-									<i class="right iconfont icon-icon"></i>
-								</div>
-							</a>
+                                设置
+                                <div class="right">
+                                    <i class="right iconfont icon-icon"></i>
+                                </div>
+                            </a>
                         </li>
                     </ul>
                 </div>
@@ -362,14 +303,14 @@
         <div class="clear"></div>
     </div>
     <!-- 左侧的 添加字段 -->
-   <!--  <div class="alert add-ziduan" style="display:none">
+    <!--  <div class="alert add-ziduan" style="display:none">
        <div class="alert-content">
            <div class="alert-title">
                <span class="left">新字段</span>
                <a href="javascript:void(0)"><i class="iconfont icon-cha close right"></i></a>
                <div class="clear"></div>
            </div>
-           <form class="add-ziduans" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+   
            <label>
                <input type="checkbox" name="newziduan[]" value="新字段1">新字段1</label>
            <label>
@@ -396,10 +337,10 @@
             </div>
             <!-- 搜索 -->
             <!-- <div class="search">
-			<div class="alert-search" contenteditable="true" style="outline: none"></div>
-			<i class="iconfont icon-sousuo"></i>
-			 
-		</div> -->
+            <div class="alert-search" contenteditable="true" style="outline: none"></div>
+            <i class="iconfont icon-sousuo"></i>
+             
+        </div> -->
             <div class="clear"></div>
             <!-- 各个字段，用表单 -->
             <form class="ziduan">
@@ -432,16 +373,16 @@
             </div>
             <!-- 搜索 -->
             <!-- <div class="search">
-			<div class="alert-search" contenteditable="true" style="outline: none"></div>
-			<i class="iconfont icon-sousuo"></i>
-			 
-		</div> -->
+            <div class="alert-search" contenteditable="true" style="outline: none"></div>
+            <i class="iconfont icon-sousuo"></i>
+             
+        </div> -->
             <div class="clear"></div>
             <!-- 各个字段，用表单 -->
             <form class="ziduan">
                 <!-- 维度的选项值 -->
                 <div class="shuzhi_xuanxiang">
-                        <!-- <label value='1号公寓'>
+                    <!-- <label value='1号公寓'>
                         <input type="checkbox" name="shuzhi" value="0">1号公寓</label>
                     <label value='2号公寓'>
                         <input type="checkbox" name="shuzhi" value="1">2号公寓</label>

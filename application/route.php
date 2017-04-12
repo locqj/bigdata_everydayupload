@@ -36,5 +36,6 @@ return [
        'editchart' => 'index/admin/chartdetail2',//编辑图标
        'changepassword' => 'index/index/forget_pwd_send_yanma', //修改密码验证
        'change' => 'index/index/reset_pawd' //修改密码
+       
 
 ];

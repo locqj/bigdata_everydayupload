@@ -10,11 +10,14 @@
     <link rel="stylesheet" type="text/css" href="./../../css/index2.css">
     <link rel="stylesheet" type="text/css" href="./../../css/chartdetail.css">
     <link rel="stylesheet" type="text/css" href="./../../css/tanchuang.css">
+    <script type="text/javascript" src='./../../js/echarts.min.js'></script>
+    <script type="text/javascript" src='http://api.map.baidu.com/api?v=2.0&ak=ZUONbpqGBsYGXNIYHicvbAbM'></script>
+    <script type="text/javascript" src='http://gallery.echartsjs.com/dep/echarts/map/js/china.js'></script>
 </head>
 
 <body>
     <!-- 头部的导航栏 -->
-  {include file="public/admin/nav" /}
+    {include file="public/admin/nav" /}
     <!-- 具体内容 -->
     <div id="content">
         <!-- 左侧添加仪表盘和样式 -->
@@ -32,9 +35,9 @@
             </div>
             <div class="yangshi">
                 <ul>
-                    <li id="ulli" style="display:none;">
+                    <li class="ulli" style="display:none;">
                         <i class="iconfont icon-iconfontyuan"></i>
-                        <span style="width: 85%">biaoming</span>
+                        <span class="biaoname" style="width: 85%">biaoming</span>
                         <i class='iconfont icon-zhankai' id="test" value="0"></i>
                         <div class='biao_caozuo' style="z-index: 9999; display: none;">
                             <span class='biao_edit'><i class="iconfont icon-bianji"></i>编辑</span>
@@ -42,12 +45,19 @@
                         </div>
                     </li>
                 </ul>
+                <!-- <button class="look">查看列表的html</button> -->
             </div>
         </div>
         <!-- 右边具体显示图表的名字和表 -->
         <div id="showcharts" class="left">
-            <div class="charts">
-            </div>
+            <div id="chart1"></div>
+            <!-- <ul class="bigli">
+                左侧每新添一个图表，这里就新添一个li
+                <li class="achart" style="display:none">
+                    我是第一个图表
+                    
+                </li>
+            </ul> -->
         </div>
     </div>
     <!-- 点击加号，弹出的仪表盘添加的弹框 -->
@@ -105,33 +115,23 @@
     </div>
     <script type="text/javascript">
     $(function() {
+
+
+
+        /*        var myChart = echarts.init($(''));
+        // 判断是否有设置信息从编辑界面返回
+        if(s!=-1 && localStorage.getItem("temp"+t) != 'undefined'){
+            var option=JSON.parse(localStorage.getItem("temp"+t));
+            myChart.setOption(option);
+        }else{
+            alert('kong');
+         // localStorage.removeItem("temp2");   //移除
+        }*/
+
+
         //默认设置i第一个值为选中的值
         $('input:radio:first').attr('checked', true);
-        //添加图表之后，左侧会多出一行
-        $('.caozuo .sure').click(function() {
-            //获取被选中的radio的值,新建完图表之后，点击编辑，链接到编辑图表界面
-            var biaoming = $('input[name=sheet]:checked').val();
 
-            // var firstli = "<li><span>" + biaoming + "</span><a href='http://chogge.565tech.com/editchart.html'><i class='iconfont icon-weibiaoti1'></i></a></li>";  自行创建元素，失败；使用eq(0)
-            var $firstli = $('.yangshi ul li').eq(0);
-            var cloneli = $firstli.clone(true);
-            $(cloneli).css('display', 'block');
-            $(cloneli).children('span').text(biaoming); //cloneli为一个对象，可以直接放在$()里面
-            $('.yangshi ul').append(cloneli);
-
-            // $firstli.appendChild(first);
-
-            // var $firstli = $('.yangshi ul li').eq(0);
-            $.post("{:url('Admin/indexAddCharts')}", {
-                'get_ajax_filename': biaoming
-            }, function(data) {
-                if (data == 'ok') {
-
-                    // $('.yangshi ul').append($firstli.clone(true));
-                }
-            });
-
-        });
         $('.yangshi ul li .icon-zhankai').click(function() {
 
             var i_id = $(this).next('div').css('display');
@@ -145,12 +145,11 @@
             $(this).parents('li').siblings().find('.biao_caozuo').hide();
 
         });
-        
-        $("#ulli").children('*:not(#test)').click(function() {
+
+        $(".ulli").children('*:not(#test)').click(function() {
 
             $(".yangshi ul li div").css('display', 'none');
         });
-
 
 
 
@@ -159,22 +158,169 @@
         $.post("{:url('Admin/indexShowFilename')}", {}, function(data) {
             var data = eval("(" + data + ")");
             $.each(data, function(q, val) {
+                    var $firstli = $('.yangshi ul li').eq(0);
+                    var cloneli = $firstli.clone(true);
+                    $(cloneli).css('display', 'block');
+                    $(cloneli).children('span').text(val.file_name);
+                    $(cloneli).children('i').attr('id', val.id); //locqj添加
+                    $(cloneli).children('div').attr('id', val.file_name); //locqj添加
+
+                    //cloneli为一个对象，可以直接放在$()里面 
+                    $('.yangshi ul').append(cloneli);
+                })
+
+            /*------------------------------------------------------------------*/  
+                //添加图表之后，左侧会多出一行.并且右侧也会多一个chart表
+            $('.caozuo .sure').click(function() {
+                //获取被选中的radio的值,新建完图表之后，点击编辑，链接到编辑图表界面
+                var biaoming = $('input[name=sheet]:checked').val();
+
+                // var firstli = "<li><span>" + biaoming + "</span><a href='http://chogge.565tech.com/editchart.html'><i class='iconfont icon-weibiaoti1'></i></a></li>";  自行创建元素，失败；使用eq(0)
                 var $firstli = $('.yangshi ul li').eq(0);
                 var cloneli = $firstli.clone(true);
                 $(cloneli).css('display', 'block');
-                $(cloneli).children('span').text(val.file_name);
-                $(cloneli).children('i').attr('id', val.id); //locqj添加
-                $(cloneli).children('div').attr('id', val.id); //locqj添加
-                //cloneli为一个对象，可以直接放在$()里面 
-                $('.yangshi ul').append(cloneli);
+                $(cloneli).children('span').text(biaoming); //cloneli为一个对象，可以直接放在$()里面
+                if (biaoming == '' || biaoming == 'undefined') {
+
+                } else {
+                    $('.yangshi ul').append(cloneli);
+                } 
+                var $firstli = $('.yangshi ul li').eq(0);
+                $.post("{:url('Admin/indexAddCharts')}", {
+                    'get_ajax_filename': biaoming
+                }, function(data) {
+                    if (data == 'ok') {
+
+                        // $('.yangshi ul').append($firstli.clone(true));
+                    }
+                });
+
+            });
+
+
+
+             /*------------------------------------------------------------------*/   
+            // 点击编辑的时候，跳转到对应的页面.并且，对应的容器中，就多一个空的echart
+            $('.biao_edit').click(function() {
+                var getfilename = $(this).parent('.biao_caozuo').attr('id');
+                 $.ajax({
+                        url: "{:url('Test/test')}",
+                        type: 'post',
+           
+                        data: {file_name: getfilename},
+                    })
+                    .done(function(data) {
+                        alert(data);
+                    })
+                    .fail(function() {
+                        console.log("error");
+                    })
+                    .always(function() {
+                        console.log("complete");
+                    });
+                $(this).parents('li').css('background', '#fff');
+                $(this).parents('li').siblings().css('backgrPound', '#e8ebed');
+                var index = $(this).parent('div').attr('id'); 
+                 
+
+                var indexoption = myChart.getOption();
+
+
+                // 页面跳转，传递是编辑的第几个div
+                // // var biaoname = $(this).parents('#ulli').find('.biaoname').text();
+                window.location.href = 'http://cqj.iperson.cn/editchart.html?linum=' + index;
             })
+            /*------------------------------------------------------------------*/
+
+            // 获取地址栏
+            var url =  location.search;
+            var s=url.indexOf("="); 
+            var t=url.substring(s+1);
+            var myChart = echarts.init(document.getElementById('chart1'));
+            // 吐过链接中有是第几个li，那么久访问对应的json文件
+            if (s != -1) {
+                //如果有传递参数过来，将对应的左侧列表的背景色变成红色，表示选中
+                $('.yangshi ul li').eq(t).css('background', '#fff');
+                $('.yangshi ul li').eq(t).siblings().css('background', '#e8ebed');
+                var str ='./../../saveJson/' + t+'.json';
+                // 一开始页面加载的时候，如果传递过来
+                $.ajax({
+                    type: 'GET',
+                    url:str,
+                    data: {},
+                    dataType: "json",
+                    success: function(data) {
+                        myChart.setOption(data);
+                    },
+                    error: function(json) {
+                        myChart.clear();
+                        alert('您没有编辑图表');
+                    }
+                })
+            }
+
+            $('.look').click(function() {
+                var str ='./../../saveJson/' + t+'.json';
+                // alert(str);
+                $.ajax({
+                    type: 'GET',
+                    url:str,
+                    data: {},
+                    dataType: "json",
+                    success: function(data) {
+                       var myChart = echarts.init(document.getElementById('chart1'));
+                        myChart.setOption(data);
+                    },
+                    error: function(json) {
+                        alert('error');
+                    }
+                })
+            })
+            //列表的点击事件
+            $('.yangshi ul li').css('cursor','pointer');
+         /*------------------------------------------------------------------*/  
+            $('.yangshi ul li').click(function(){
+                // 修改样式
+                $(this).css('background','#fff');
+                // $(this).addClass('activeli');
+                // $(this).siblings().removeClass('activeli');
+                $(this).siblings().css('background','#e8ebed');
+
+
+
+                var liindex = $(this).children('div').attr('id'); //获取当前点击的是第几个列表
+                
+                var str ='./../../saveJson/' + liindex+'.json';
+                
+                $.ajax({
+                    type: 'GET',
+                    url:str,
+                    data: {},
+                    dataType: "json",
+                    success: function(data) {
+                        myChart.setOption(data);
+                    },
+                    error: function(json) {
+                        myChart.clear();
+                        alert('您没有编辑图表');
+                    }
+                })
+            });
+             /*------------------------------------------------------------------*/  
+/*            $('.yangshi ul li').hover(function(){
+                $(this).css('background','blue');
+
+            },function(){
+                if($(this).hasClass('activeli')){
+                    $(this).css('background','#fff');
+                }else{
+                    $(this).css('background','#e8ebed');
+                }
+
+            })*/
+
         })
     };
-
-    // $.get('./application/index/view/admin/header.html',function(data){
-    //     var tou = $(data).filter('div');
-    //     tou.appendTo('#tou');
-    // })
     </script>
 </body>
 

@@ -1,0 +1,27 @@
+<?php
+namespace app\index\controller;
+ use \think\View;
+ use \think\Db;
+ use \think\Session;
+ use \think\Controller;
+Class CommonAdminforcon extends Controller 
+{
+ 
+     protected $beforeActionList = [
+        'initialize',
+         
+    ];
+    public function initialize ()
+    {
+           
+              if(Session::get('s_managename') == null)
+        { 
+          $this->redirect('/manage');      
+            }
+          
+    }
+    function p($array){
+        dump($array,1,'<pre>',0);
+     }
+
+}

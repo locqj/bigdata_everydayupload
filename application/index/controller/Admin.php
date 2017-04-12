@@ -171,6 +171,21 @@ class admin extends CommonAdmin
    public function test(){
       return view();
    }
+   public function saveJson(){
+      $get_file_name = input('get.file_name');
+      $gat_option_data = input('get.data');
+      $myfile = fopen("./saveJson/${get_file_name}.json", "w") or die("Unable to open file!");
+
+      if(file_exists($get_file_name)){
+         echo 'exists';
+      }else{
+       
+         $txt = $gat_option_data;
+         fwrite($myfile, $txt);
+         fclose($myfile);
+         echo 'ok';  
+      }
+   }
    
 
 

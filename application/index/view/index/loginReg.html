@@ -114,7 +114,7 @@
      function dist_pwd(){
           $.post("{:url('index/login_suss_dis')}",{username:$('#username').val(),passwd:$('#passwd').val()},
               function(data){
-              	alert(data);
+              	
               if(data=='success')
               {  
                    window.location.href="{:url('/userAdmin')}"; 

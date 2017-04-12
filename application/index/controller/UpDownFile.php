@@ -30,7 +30,7 @@ class UpDownFile extends Common {
             
             
             $objPHPExcel = $objReader->load($file_name,$encode='utf-8');
-            $sheet = $objPHPExcel->getSheet(0);
+            $sheet = $objPHPExcel->getSheet(0); //默认读第一个sheet  
             $highestRow = $sheet->getHighestRow(); // 取得总行数
             $highestColumn = $sheet->getHighestColumn(); // 取得总列数
             $highestColumn =  $this->getalphnum($highestColumn);
@@ -67,7 +67,7 @@ class UpDownFile extends Common {
     public function getalphnum($char)
     {
             $array=array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z');
-           
+             
             $sum = 0;
             $index=array_search($char, $array);
             $sum+=($index+1);
@@ -89,7 +89,7 @@ class UpDownFile extends Common {
                       $dataName['column_name'] = $k;
                       $dataName['column_value'] = $val;
                       $dataName['file_name'] = $inputWorkName;
-                      $dataName['user'] = Session::get('username');
+                      $dataName['user'] = Session::get('s_username');
                       $dataName['status_del'] = '1';
                        Db::table('cbd_datasource_name')->insert($dataName);
                       } 
@@ -102,7 +102,7 @@ class UpDownFile extends Common {
                        $dataValue[$k] = $val; 
                        }
                        $dataValue['file_name'] = $inputWorkName;
-                       $dataValue['user'] = Session::get('username');
+                       $dataValue['user'] = Session::get('s_username');
                        $dataValue['status_del'] = '1';
                        Db::table('cbd_datasource')->insert($dataValue);
                        
@@ -113,11 +113,12 @@ class UpDownFile extends Common {
                  Db::table('cbd_data_store_filename')->insert([
                   'file_name' => $inputWorkName, 
                   'remark' => $inputReMark, 
-                  'user' => Session::get('username'),
+                  'user' => Session::get('s_username'),
                   'status_del' => '1'
                   ]);
-                 $fileName = Db::table('cbd_data_store_filename')->where('user', Session::get('username'))->select();
-                 $this->assign('username', Session::get('username'));
+
+                 $fileName = Db::table('cbd_data_store_filename')->where('user', Session::get('s_username'))->select();
+                 $this->assign('username', Session::get('s_username'));
                  $this->assign('fileName', $fileName);
                  Session::delete('dataSource');
                  $this->redirect('/worksheet');
@@ -135,7 +136,10 @@ class UpDownFile extends Common {
     public function distFileName()
     {
       $getFilename = input('post.workname');
-      $getFindReturnValue = Db::table('cbd_datasource_name')->where('file_name', $getFilename)->find();
+      $getFindReturnValue = Db::table('cbd_data_store_filename')->where([
+        'file_name' => $getFilename,
+        'status_del' => 1
+        ])->find();
       if($getFindReturnValue == null){
         echo "ok";
        
