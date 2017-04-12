@@ -1,0 +1,100 @@
+.tanchuang{
+		z-index:9999;
+		width: 100%;
+		height:100%;
+		position: absolute;
+		top:0;
+		background-color: rgba(213,217,220,0.94);
+}
+.tanchuang-info{
+	width:30%;
+	/*padding:5px 1%;*/
+	margin:10% auto;
+	border:1px solid #ccc;
+	background-color:#F5F5F5;
+	font-size:14px;
+}
+.tanchuang-info form>div{
+	margin:10px auto;
+	padding:0 2%;
+}
+.tanchuang-info .sheetinit>div{
+	width: 60%;
+	margin:10px auto;
+	padding:0 2%;
+}
+.tan-title{
+	background-color: #35A7FF;
+	padding:0 2%;
+	position: relative;
+}
+.tan-title span{
+	/*width: 93%;*/
+	display: inline-block;
+	font-size:16px;
+	color:#fff;
+	padding:4px 0;
+}
+.tan-title .icon-cha{
+	cursor: pointer;
+	color:#fff;
+	position: absolute;
+	right:3%;
+}
+.chosetype>span,
+.choseshet>span{
+	width: 100%;
+	font-size: 14px;
+	display: inline-block;
+}
+.chosetype input[type=checkbox],
+.choseshet input[type='radio']{
+	display: inline-block;
+	margin-left: 10%;
+	font-size:12px;
+}
+.caozuo{
+	/*width:60%;*/
+	
+}
+.caozuo input{
+	display: inline-block;
+	width:28%;
+	margin:0 10%;
+	padding:5px 0;
+	cursor: pointer;
+	 background-color: #99DADC;
+	 		color:#35A7FF; 
+		border:1px solid #eee;
+		background-color: #ddd;
+
+}
+.caozuo input:hover{
+	background-color: #35A7FF;
+	 color:#fff;
+	 
+}
+
+/*修改表名的弹窗*/
+.tan_editbiaoname form{
+	/*width:100%;*/
+	text-align: center;
+
+}
+.tan_editbiaoname form>div{
+	margin:5% 0;
+}
+.tan_editbiaoname form input[type=text]{
+	border-bottom: 1px solid #999;
+	padding-left: 2%;
+}
+.tan_editbiaoname form input[type=submit],
+.tan_editbiaoname form input[type=button]{
+	padding:3px 5px;
+	margin:0 5px;
+	cursor: pointer;
+	border:1px solid #ccc;
+	background: #46b0ff;
+	display: inline-block;
+	color:#fff;
+}

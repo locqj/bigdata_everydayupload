@@ -1,0 +1,173 @@
+        .main
+        {
+            width: 100%;
+            /*max-width: 69em;*/
+            margin: 80px auto 0;
+            overflow-x: hidden;
+            /*padding: 0 1.875em 3.125em 1.875em;*/
+        }
+      .bp-icon:after
+        {
+            font-family: 'bpicons';
+            speak: none;
+            font-style: normal;
+            font-weight: normal;
+            font-variant: normal;
+            text-transform: none;
+            text-align: center;
+            color: #47a3da;
+            -webkit-font-smoothing: antialiased;
+        }
+        .cbp_tmtimeline
+        {
+        	/*width: 95%;*/
+            margin: 30px auto 0;
+            padding: 0;
+            list-style: none;
+            position: relative;  
+        }
+        
+        /* The line */
+        .cbp_tmtimeline:before
+        {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 10px;
+            background: #afdcf8;
+            left: 15%;
+            margin-left: -10px;
+        }
+        
+        .cbp_tmtimeline > li
+        {
+        	width:75%;
+            position: relative;   
+        }
+        
+        /* The date/time */
+        .cbp_tmtimeline > li .cbp_tmtime
+        {
+            display: block;
+            width: 25%;
+            padding-right: 100px;
+            position: absolute;
+        }
+        
+        .cbp_tmtimeline > li .cbp_tmtime span
+        {
+            display: block;
+            text-align: right;
+        }
+        
+        .cbp_tmtimeline > li .cbp_tmtime span:first-child
+        {
+            font-size: 0.9em;
+            color: #bdd0db;
+        }
+        
+        .cbp_tmtimeline > li .cbp_tmtime span:last-child
+        {
+            font-size: 2.9em;
+            color: #3594cb;
+        }
+        
+        .cbp_tmtimeline > li:nth-child(odd) .cbp_tmtime span:last-child
+        {
+            color: #6cbfee;
+        }
+        
+        /* Right content */
+        .cbp_tmtimeline > li .cbp_tmlabel
+        {
+        	width:90%;
+            margin: 0 0 15px 25%;
+            background: #3594cb;
+            color: #fff;
+            padding: 2em;
+            font-size: 1.2em;
+            font-weight: 300;
+            line-height: 1.4;
+            position: relative;
+            border-radius: 5px;
+        }
+        
+        .cbp_tmtimeline > li:nth-child(odd) .cbp_tmlabel
+        {
+            background: #6cbfee;
+        }
+        
+        .cbp_tmtimeline > li .cbp_tmlabel>span
+        {
+            margin-top: 0px;
+            display: block;
+            padding: 0 0 10px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.8);
+        }
+        
+        /* The triangle */
+        .cbp_tmtimeline > li .cbp_tmlabel:after
+        {
+            right: 100%;
+            border: solid transparent;
+            content: " ";
+            height: 0;
+            width: 0;
+            position: absolute;
+            pointer-events: none;
+            border-right-color: #3594cb;
+            border-width: 10px;
+            top: 10px;
+        }
+        
+        .cbp_tmtimeline > li:nth-child(odd) .cbp_tmlabel:after
+        {
+            border-right-color: #6cbfee;
+        }
+
+        /* The icons */
+        .cbp_tmtimeline > li .cbp_tmicon
+        {
+            width: 40px;
+            height: 40px;
+            font-family: 'ecoico';
+            speak: none;
+            font-style: normal;
+            font-weight: normal;
+            font-variant: normal;
+            text-transform: none;
+            font-size: 1.4em;
+            line-height: 40px;
+            -webkit-font-smoothing: antialiased;
+            position: absolute;
+            color: #fff;
+            background: #46a4da;
+            border-radius: 50%;
+            box-shadow: 0 0 0 8px #afdcf8;
+            text-align: center;
+            left: 20%;
+            top: 0;
+            margin: 0 0 0 -25px;
+        }
+        .cbp_tmicon-mail{
+        	 box-shadow: 0 0 0 8px #fff;
+        }
+        .cbp_tmicon-phone:before
+        {
+            /*content: "\e000";*/
+            content: "1";
+        }
+        
+        .cbp_tmicon-screen:before
+        {
+            /*content: "\e001";*/
+             content: "2";
+        }
+        
+        .cbp_tmicon-mail:before
+        {
+            /*content: "\e002";*/
+             content: "3";
+        }
+ 

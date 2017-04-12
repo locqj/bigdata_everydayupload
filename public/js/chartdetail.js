@@ -1,8 +1,8 @@
 $(function(){
 	// 点击返回，回到首页
-	$('.return').click(function(){
-		window.location.href = 'http://chogge.565tech.com/userAdmin';
-	})
+	// $('.return').click(function(){
+	// 	window.location.href = 'http://chogge.565tech.com/userAdmin';
+	// })
 
 	// 设置所有输入框获取光标的时候，地下的边框变粗
 	$("input[type='text']").focus(function(){

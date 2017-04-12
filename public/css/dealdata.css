@@ -1,0 +1,134 @@
+/*上传文件时的+ 的样式*/
+i{
+  cursor: pointer;
+}
+.clear{
+  clear:both;
+}
+.andArea{
+      font-size: 18px;
+      text-align: center;
+      display: inline-block;
+      float: left;
+    }
+    .filePicker{
+      width:85px;
+      height:85px;
+      line-height: 85px;
+      margin-top:10px;
+
+      display: inline-block;
+      border: 2px dashed #ccc;
+      /*border: 2px dashed #ff7a7a;*/
+      border-radius: 3px;
+      cursor: pointer;
+      overflow: hidden;
+
+    }
+    .filePicker .icon-jiahao{
+      color:#ccc;
+      /*color:#ff7a7a;*/
+      font-size: 50px;
+      font-weight: normal;
+    }
+
+    #fileImage{
+      display: none;
+    }
+#fileName{
+  font-size:18px;
+  display: inline-block;
+  height:85px;
+  line-height: 85px;
+  margin-top: 10px;
+  margin-left: 20px;
+  float: left;
+}
+/*上传 按钮*/
+#uploadFile{
+  border:1px solid #666;
+  padding:5px 0px;
+  margin-top:10px;
+  display: inline-block;
+  width: 170px;
+  border-radius: 5px;
+  font-size:16px;
+  cursor: pointer;
+}
+
+/*工作表的设置*/
+.cbp_tmlabel form.setsheet{
+  width:50%;
+  margin:20px auto 0;
+  background-color:rgba(0,0,0,0.1);
+  /*padding:10px;*/
+  border-radius: 5px;
+  border:1px solid #eee;
+  text-align: center;
+}
+.cbp_tmlabel form.setsheet div{
+  width:100%;
+  padding:0;
+  margin:15px auto;
+  text-align: center;
+}
+.cbp_tmlabel form.setsheet span{
+  width:20%;
+  display: inline-block;
+}
+.cbp_tmlabel form.setsheet input[type=text]{
+  border-bottom: 1px solid #999;
+  width:50%;
+  display: inline-block;
+}
+.cbp_tmlabel form.setsheet input[type=submit]{
+  width: 45.3%;
+  border:1px solid #666;
+  padding:5px 10px;
+  cursor: pointer;
+}
+
+
+/*上传文件后显示的表格*/
+#yulan{
+  width:100%;
+  height:0px;
+  margin-top: 10px;
+  overflow:auto;
+  background:rgba(255,255,255,0.5); 
+}
+#yulan table{
+  
+}
+
+/*表单的验证样式*/
+#info{
+  color:red;
+  font-size: 14px;
+  width:100%;
+}
+
+
+
+
+
+/* 设置滚动条的样式 */
+
+#yula ::-webkit-scrollbar {   
+    width: 10px;
+}
+/* 滚动槽 */
+#yula ::-webkit-scrollbar-track {   
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);   
+    border-radius: 10px;
+}
+/* 滚动条滑块 */
+#yula ::-webkit-scrollbar-thumb {   
+    border-radius: 10px;   
+    background: red;
+    /*background: rgba(80,80,80,0.1);   */
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+}
+#yula ::-webkit-scrollbar-thumb:window-inactive {   
+    background: rgba(255,0,0,0.4);
+}

@@ -5,9 +5,9 @@ body,html{
  a{
 		color:#333;
 }
-
-
-
+#content #left{
+	overflow-y: auto;
+}
 .logo{
 	display: inline-block;
 	color:#fff;
@@ -48,38 +48,111 @@ body,html{
 	
 }
 
+/*返回箭头的样式*/
+#header .icon-fanhui{
+	font-size: 30px;
+	color:#fff;
+}
+#header .icon-fanhui:hover{ 
+	color:#ffb56a;
+}
+
+
+
 /*左侧的样式*/
 .yibiaopan{
 	height:35px;
 	line-height: 35px;
 	margin-top:10px;
+	border-bottom: 1px dashed #ccc;
 }
-.yibiaopan .left{
-
+.yibiaopan i.icon-jiahao{
+	cursor: pointer;
 }
 .yibiaopan i{
-	display: inline-block;
-	margin:0 3px;
+	cursor: pointer;
 }
 
-.yangshi span{
+/*.yangshi span{
 	height: 30px;
 	line-height: 30px;
+}*/
+.yangshi ul{
+	/*overflow-y: auto;*/
 }
 .yangshi ul li{
-	width: 92%;
+	width:95%;
 	display: inline-block;
-	padding-left:7%;
-	height: 20px;
+	/*margin:10px auto;*/
+	padding:5px 0 5px 5%;
 	margin:5px 0;
+	font-size:14px;
+	position: relative;
+	/*cursor: pointer;*/
 }
+.yangshi ul li:hover{
+	background: rgba(255,255,255,0.5);
+}
+.yangshi ul li .icon-zhankai{
+	cursor: pointer;
+	position: absolute;
+	right:2%;
+	display: inline-block;
+	
+}
+.yangshi ul li:hover .icon-zhankai{
+
+}
+
+.yangshi ul li>span{
+	display: inline-block;
+	/*width:80%;*/
+	margin-left: 0;
+}
+
+/*左侧表名，光标放上去后出现具体操作样式*/
+.yangshi  ul li .biao_caozuo{
+	width:80px;
+	position: absolute;
+	right:0;
+	background: #fff;
+	border:1px solid #eee;
+	text-align: center;
+	display: none;
+}
+.yangshi  ul li .biao_caozuo>span{
+	width:100%;
+	padding:3px 0;
+	display: inline-block;
+	cursor: pointer;
+}
+.yangshi .biao_edit:hover{
+	background: #b5dfff;
+}
+.yangshi .biao_delete:hover{
+	background: #b5dfff;
+}
+.yangshi .icon-iconfontyuan{
+	color:#00ff00;
+}
+.yangshi .icon-bianji,
+.yangshi .icon-shanchu{
+	margin-right: 3px;
+}
+
+
+
+
+
 
 
 /*右侧的样式*/
 #showcharts{
 	width: 80%;
-	padding:0 2%;
-	margin-top:10px;
+	height:100%;
+	padding:0 1.5%;
+	/*margin-top:10px;*/
+	display: inline-block;
 	/*border:1px solid red;*/
 }
 .charttitle .left{
@@ -90,19 +163,6 @@ body,html{
 	display: inline-block;
 }
 
-
-
-/*首页的教程*/
-#showcharts{
-	width:80%;
-	margin:65px auto 0;
-}
-/*#showcharts>b{
-	font-size: 30px;
-	margin-top: 20px;
-	margin-left: 5%;
-	display: inline-block;
-}*/
 .teach{
 	width:100%;
 	margin:0 auto;
@@ -112,7 +172,6 @@ body,html{
 	color: #fff;
 }
 .s1,
-.step2,
 .s3,
 .step4{
 	display: inline-block;
@@ -126,45 +185,28 @@ body,html{
 	position: relative;
 	color: #fff;
 }
-.s1:hover,
-.step2:hover,
-.s3:hover,
-.step4:hover{
-	/*border:#074A99 0px solid;*/
-	filter:progid:DXImageTransform.Microsoft.Shadow(color=#074A99,strength=4);/*ie*/
-	-moz-box-shadow: 0 0 20px #074A99;/*firefox*/
-	-webkit-box-shadow: 0 0 20px #074A99;/*safari或chrome*/
-	box-shadow: 0 0 10px #074A99;/*opera或ie9*/
+.upexcel{
+	text-align: center;
+}
+/* .step2{
+	display: inline-block;
+	width: 40%;
+	height:40%;
+	margin-left:20%;
+	margin:0 auto;
+	position: relative;
+	color: #fff;
+	text-align: center;
+}
+ */
+  
+.cbp_tmtimeline .cbp_tmlabel>span i{
+	font-size:22px;
+	color:#fff;display:inline-block;margin-right: 10px;
 }
 
 
-
-/* .step1,
-.step2{
-	display: inline-block;
-	width: 47%;
-	height:50%;
-	padding:140px 0;
-	height:200px;
-	margin:2% 1% 1%;
-	border:1px solid #ccc;
-	position: relative;
-	color: #fff;
-}
-.step3,
-.step4{
-	display: inline-block;
-	width: 47%;
-	height:50%;
-	padding:140px 0;
-	height:200px;
-	margin:2% 1%;
-	border:1px solid #ccc;
-	position: relative;
-	color: #fff;
-} */
 .step1 span,
-.step2 span,
 .step3 span,
 .step4 span{
 	width:100%;
@@ -177,19 +219,68 @@ body,html{
 	bottom: 0;
 	background-color: rgba(80,80,80,0.6);
 }
-
+.step span{
+	/*width:100%;*/
+	padding:5px 0;
+	font-size: 18px;
+	color: #fff;
+/*	text-align: center;*/
+	display: inline-block;
+ 
+	background-color: rgba(80,80,80,0.6);
+}
+.step2 form{
+	text-align: center;
+}
 .step2 form input[type='file']{
 	display: inline-block;
-	width:140px;
+	/*width:140px;*/
+	/*width:80%;*/
 	font-size: 14px;
 	margin-left: 20px;
+	cursor: pointer;
 
 }
 .step2 form input[type='submit']{
 	font-size: 14px;
 	color:#333;
+	/*width:60%;*/
 	border:1px solid #eee;
 	background-color: #ddd;
 	padding:2px 4px;
+	cursor: pointer;
+	margin-top: 10px;
+	display: inline-block;
 
 }
+.step2 form input[type='submit']:hover{
+	background-color: #35A7FF;
+	color:#fff;
+}
+ .step2 a{
+ 	border-radius: 4px;
+ 	border:1px solid #5182E4;padding:5px 10px;margin-top:15px;display: inline-block;
+    /*border:#074A99 0px solid;*/
+    filter:progid:DXImageTransform.Microsoft.Shadow(color=#074A99,strength=4);/*ie*/
+    -moz-box-shadow: 0 0 20px #074A99;/*firefox*/
+    -webkit-box-shadow: 0 0 20px #074A99;/*safari或chrome*/
+    box-shadow: 0 0 10px #074A99;/*opera或ie9*/
+}
+
+ 
+
+
+ /*首页的图表样式*/
+ #chart1{
+ 	width:80%;
+ 	height:80%;
+ 	margin:20px auto;
+ 	border:1px solid #cee2e3;
+ }
+
+
+ /*左侧被选中的li的央视*/
+ .activeli{
+ 	background: #fff;
+ }
+

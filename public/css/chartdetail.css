@@ -278,12 +278,13 @@ input[type='color']{
 	.choose-weidu>span,
 	.choose-shuzhi>span{ 
 		/*font-size:15px;*/
-		font-size: 15px;
+		font-size: 15px; 
 	}
 
 	#weidus,
 	#shuzhis{
-		padding-left: 5px;
+		width:90%;
+		height:100%; 
 	}
 	.newweidu,
 	.newshuzhi{
@@ -337,17 +338,45 @@ input[type='color']{
 	}
 
 	/*图表显示的样式*/
+	.mchart{
+		width:100%;
+		height:84.5%;
+		position: relative;
+	}
 	#chart{
 		display: inline-block;
 		width:80%;
-		height:80%;
+		height:85%;
 		margin-top:10px;
+		margin-left:10%;
+		border:1px solid #cee2e3;
 	}
 	#chart2{
 		display: inline-block;
 		width:80%;
-		height:80%;
+		height:73%;
 		margin-top:10px;
+		margin-left:10%;
+		border:1px solid #cee2e3;
+	}
+	.chartsm{
+		position: absolute;
+		top:40%;
+		left:45%;
+		color:#999;
+	}
+	.savechart{
+		width:80%;
+		margin:1.5% auto 0;
+		/*float: right;*/
+		text-align: center;
+
+	}
+	.savechart input[type=button]{
+		width:40%;
+		color:#333;
+		border-radius: 5px;
+		border:1px solid #cee2e3;
 	}
 	/*=======================================================================*/
 	/*右边的选项的样式===========================*/

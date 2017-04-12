@@ -1,10 +1,10 @@
 
 @font-face {font-family: "iconfont";
-  src: url('iconfont.eot?t=1483435415804'); /* IE9*/
-  src: url('iconfont.eot?t=1483435415804#iefix') format('embedded-opentype'), /* IE6-IE8 */
-  url('iconfont.woff?t=1483435415804') format('woff'), /* chrome, firefox */
-  url('iconfont.ttf?t=1483435415804') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
-  url('iconfont.svg?t=1483435415804#iconfont') format('svg'); /* iOS 4.1- */
+  src: url('iconfont.eot?t=1489904564736'); /* IE9*/
+  src: url('iconfont.eot?t=1489904564736#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url('iconfont.woff?t=1489904564736') format('woff'), /* chrome, firefox */
+  url('iconfont.ttf?t=1489904564736') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
+  url('iconfont.svg?t=1489904564736#iconfont') format('svg'); /* iOS 4.1- */
 }
 
 .iconfont {
@@ -15,9 +15,21 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-shezhi:before { content: "\e605"; }
+
+.icon-shanchu:before { content: "\e602"; }
+
 .icon-sousuo:before { content: "\e604"; }
 
+.icon-bianji:before { content: "\e65a"; }
+
+.icon-iconfontyuan:before { content: "\e674"; }
+
+.icon-moban:before { content: "\e63a"; }
+
 .icon-refurbish:before { content: "\e754"; }
+
+.icon-arrow121112:before { content: "\e60d"; }
 
 .icon-zhankai:before { content: "\e7cb"; }
 
@@ -25,7 +37,11 @@
 
 .icon-fanhui:before { content: "\e696"; }
 
+.icon-tables:before { content: "\e613"; }
+
 .icon-start:before { content: "\e601"; }
+
+.icon-shujuku:before { content: "\e638"; }
 
 .icon-jiahao:before { content: "\e685"; }
 
@@ -41,48 +57,25 @@
 
 .icon-zhexiantu:before { content: "\e66d"; }
 
+.icon-chahao:before { content: "\e6de"; }
+
 .icon-loudoutu:before { content: "\e64f"; }
 
 .icon-ditu:before { content: "\e61f"; }
 
+.icon-tubiao07-copy:before { content: "\e617"; }
+
+.icon-icon:before { content: "\e628"; }
+
+.icon-biaoti:before { content: "\e603"; }
+
 .icon-sandian:before { content: "\e61e"; }
+
+.icon-tubiao-01:before { content: "\e6cb"; }
 
 .icon-work-list:before { content: "\e68f"; }
 
 .icon-guanxi:before { content: "\e637"; }
 
-/*添加的图表样式*/
-.icon-fanhui{
-  font-size:30px;
-  margin-right:20px;
-  color:#fff;
-}
-.icon-start{
-  font-size:18px;
-}
-.icon-iconfontcolor56,
-.icon-62,
-.icon-sandian,
-.icon-7{
-  font-size:38px;
-  margin:15px;
-  color: #35A7FF;
-}
-.icon-guanxi,
-.icon-loudoutu,
-.icon-ditu,
-.icon-yibiaopan{
-  font-size:38px;
-  margin:15px;
-  color: #35A7FF;
-}
-.icon-sousuo{
-  font-size:14px;
-}
-.icon-cha{
-  font-size: 20px;
-  color:#333;
-}
-.icon-weibiaoti1{
-  color:#35A7FF;
-}
+.icon-excel:before { content: "\e631"; }
+
